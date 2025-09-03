@@ -1,0 +1,123 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('../../assets/fonts/Roboto-Regular.ttf');
+}
+
+.nav-bar{
+    width: 80px;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    background: #306BAC;
+    min-height: 500px;
+
+    .logo{
+        display: block;
+        padding: 10px 0px;
+        margin-top: 50px;
+        img{
+            display: block;
+            margin: 20px auto;
+            width: 42px;
+            height: auto;
+        }
+    }
+
+    nav{
+        display: block;
+        text-align: center;
+        position: absolute;
+        height: 40vh;
+        top: 50%;
+        margin-top: -120px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        // align-items: center;
+        justify-content: space-evenly;
+        a{  
+            display: block;
+            font-size: 32px;
+            color: #b30059;
+            line-height: 51px;
+            height: 51px;
+            position: relative;
+            text-decoration: none;
+            i{
+                transition: all 0.3s ease-out;
+            }
+
+            &:hover{
+                color: #000000;
+                svg {
+                 opacity: 0;
+                //  color: #b30059;
+                }
+                &::after{
+                    opacity: 1;
+                }
+            }
+
+            &::after{
+                content: '';
+                font-size: 10px;
+                font-family: roboto;
+                letter-spacing: 3px;
+                position: absolute;
+                bottom: 0;
+                display: block;
+                width: 100%;
+                text-align: justify;
+                opacity: 0;
+                transition: all 0.3s ease-out;
+            }
+            &:first-child{
+                &::after{
+                    content: 'Home';
+                }
+            }
+        }
+
+        a.about-link{
+            &::after{
+                content: 'About';
+            }
+        }
+        a.contact-link{
+            &::after{
+                content: 'Contact';
+            }
+        }
+
+        a.active{
+            svg{
+                color: #0E1116;
+            }
+        }
+    }
+    ul{
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        display: block;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+        margin: 0;
+        li {
+            a{
+                padding: 7px 0;
+                display: block;
+                font-size: 18px;
+                line-height: 16px;
+                color: #0E1116;
+                &:hover{
+                    color: #9E7B9B;
+                }
+            }
+
+        }
+    }
+    
+}
