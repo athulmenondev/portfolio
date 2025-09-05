@@ -1,0 +1,22 @@
+import './index.scss';
+import logo from '../../../assets/img/l_logo.svg';
+
+const Logo = ()=>{
+    return (
+        <div className='logo-container'>
+            <div className='solid-logo'>
+                <img src={logo} alt='llogo'/>
+            </div>
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="210mm" 
+                height="297mm" 
+                viewBox="0 0 210 297"
+            >
+                <text xml:space="preserve" x="44.472" y="207.298" style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:215.748px;font-family:IPAPGothic;-inkscape-font-specification:IPAPGothic;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000;fill-opacity:1;stroke-width:17.979" transform="translate(-83.823 -87.512) scale(1.67971)"><tspan x="44.472" y="207.298" style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:215.748px;font-family:&quot;Tlwg Typewriter&quot;;-inkscape-font-specification:&quot;Tlwg Typewriter, Bold&quot;;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000;fill-opacity:1;stroke-width:17.979">L</tspan></text><text xml:space="preserve" x="50.045" y="199.497" style="font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:215.748px;font-family:IPAPGothic;-inkscape-font-specification:IPAPGothic;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#0000e6;fill-opacity:1;stroke-width:17.979" transform="translate(-83.823 -87.512) scale(1.67971)"><tspan x="50.045" y="199.497" style="font-style:normal;font-variant:normal;font-weight:700;font-stretch:normal;font-size:215.748px;font-family:&quot;Tlwg Typewriter&quot;;-inkscape-font-specification:&quot;Tlwg Typewriter, Bold&quot;;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#0000e6;fill-opacity:1;stroke-width:17.979">L</tspan></text>
+            </svg>
+        </div>
+    );
+}
+
+export default Logo;
