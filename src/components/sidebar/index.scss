@@ -5,13 +5,13 @@
 
 .nav-bar{
     width: 80px;
-    height: 100vh;
+    height: 100%;
     position: absolute;
     top: 0;
     z-index: 3;
     background: #306BAC;
     min-height: 500px;
-
+    position: fixed;
     .logo{
         display: block;
         padding: 10px 0px;
@@ -92,7 +92,7 @@
 
         a.active{
             svg{
-                color: #0E1116;
+                color: #151d2b;
             }
         }
     }

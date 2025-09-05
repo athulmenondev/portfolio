@@ -1,0 +1,38 @@
+.about-page{
+    .text-zone{
+        position: absolute;
+        left: 5%;
+        top: 25%;
+        text-align: justify;
+        width: 40%;
+        display: table-cell;
+        h1 {
+            font-size: 56px;
+            margin: 25px;
+            color: #98B9F2;
+        }
+        p{
+            display: inline-block;
+            font-size: 16px;
+            margin: 25px;
+            color: white;
+            letter-spacing: 1px;
+            animation: pulse 1s;
+            transition: all ease-in 0.2s;
+
+            &:nth-of-type(1){
+                animation-delay: 1.3s;
+            }
+            &:nth-of-type(2){
+                animation-delay: 1.4s;
+            }
+            &:nth-of-type(3){
+                animation-delay: 1.5s;
+            }
+            &:hover{
+                scale: 1.01;
+                color: #98B9F2;
+            }
+        }
+    }
+}
