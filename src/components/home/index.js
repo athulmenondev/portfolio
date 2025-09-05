@@ -3,7 +3,6 @@ import logo from '../../assets/img/logo.svg'
 import { Link } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import AnimatedLetters from '../AnimattedLetters';
-import Logo from './Logo';
 
 const Home=()=>{
     const [letterClass, setLetterClass] = useState('text_animate');
@@ -52,7 +51,6 @@ const Home=()=>{
                 </h1>
                 <h2>FrontEnd developer</h2>
                 <Link to=' /contact' className='flat-button' >Contact Me</Link>
-                <Logo/>
             </div>
         </div>
     );
