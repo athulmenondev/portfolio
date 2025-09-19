@@ -1,6 +1,9 @@
 import './index.scss';
 import AnimatedLetters from '../AnimattedLetters';
 import { useState ,useEffect} from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCss3, faGit, faHtml5, faLinux, faPython, faReact } from '@fortawesome/free-brands-svg-icons';
+// import { faGift } from '@fortawesome/free-solid-svg-icons';
 
 const About = ()=>{
     const [letterClass, setLetterClass] = useState('text_animate');
@@ -38,6 +41,28 @@ const About = ()=>{
                     eager learner, ready to adapt to new challenges and technologies to help drive 
                     successful outcomes.
                 </p>
+            </div>
+            <div className='stage-cube-cont'>
+                <div className='cube-spinner'>
+                    <div className='face1'>
+                        <FontAwesomeIcon icon={faHtml5} color='#FF0000'/>
+                    </div>
+                    <div className='face2'>
+                        <FontAwesomeIcon icon={faCss3} color='#FF0000'/>
+                    </div>
+                    <div className='face3'>
+                        <FontAwesomeIcon icon={faReact} color='#FF0000'/>
+                    </div>
+                    <div className='face4'>
+                        <FontAwesomeIcon icon={faLinux} color='#FF0000'/>
+                    </div>
+                    <div className='face5'>
+                        <FontAwesomeIcon icon={faGit} color='#FF0000'/>
+                    </div>
+                    <div className='face6'>
+                        <FontAwesomeIcon icon={faPython} color='#FF0000'/>
+                    </div>
+                </div>
             </div>
         </div>
     );
