@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# Personal Portfolio - Athul Menon
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Available Scripts
+A modern, responsive portfolio website built with React to showcase my skills, experience, and the projects I've worked on.
 
-In the project directory, you can run:
+![Screenshot of the portfolio homepage](https://github.com/athulmenondev/portfolio/blob/master/screenshots/ss1.png)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Live Demo
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**[View the live site here](https://athulmenondev.github.io/portfolio/)**
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🌟 About The Project
 
-### `npm run build`
+This project serves as my personal digital space. I built it from the ground up to create a central hub for my work, share my journey as a developer, and connect with other professionals.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+While the primary goal is to showcase my projects, this version establishes the foundation. The project is currently in active development, with a full project showcase section planned as the next major feature.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ✨ Features
 
-### `npm run eject`
+### ✅ Current Features
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+-   **About Me Section:** A brief introduction to who I am and my passion for development.
+-   **Contact & Social Links:** Direct links to my professional profiles like GitHub and LinkedIn.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🚀 Future Features (Roadmap)
+-   **[ ]Skills Showcase:** A dedicated section listing my technical skills and proficiencies.
+-   **[ ] Project Showcase Section:** The highest priority feature. This will be a filterable gallery of my projects, each with its own description, tech stack, and links to the live version and source code.
+-   **[ ] Functional Contact Form:** An integrated form using a service like EmailJS or Netlify Forms to allow visitors to send me a message directly.
+-   **[ ] Blog Integration:** A section for writing and sharing articles on technical topics.
+-   **[ ] Dark/Light Mode Toggle:** A user-controlled theme switcher for better accessibility and user experience.
+-   **[ ] Fully Responsive Design:** Adapts seamlessly to all screen sizes, from mobile phones to desktop monitors.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 💻 Built With
 
-## Learn More
+This project was built using the following technologies:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* **[React.js]**: A JavaScript library for building user interfaces.
+* **[SCSS]**: For styling and layout.
+* **[GitHub Pages]**: For deployment.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 📬 Get in Touch
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Athul S Menon**
 
-### Analyzing the Bundle Size
+Connect with me on social media or send me an email.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<p align="left">
+  <a href="https://www.linkedin.com/in/your-linkedin-username" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+  </a>
+  <a href="mailto:your.email@example.com">
+    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"/>
+  </a>
+</p>
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+**Project Link:** [https://github.com/athulmenondev/portfolio](https://github.com/athulmenondev/portfolio)
