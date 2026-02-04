@@ -2,23 +2,49 @@
 
 .top-navbar {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: $spacing-4;
+    left: $spacing-4;
+    right: $spacing-4;
     z-index: $z-sticky;
-    box-shadow: var(--elevation-2);
+    height: 70px;
+    
+    // Material UI squircle shape
+    border-radius: 28px;
+    
+    // Backdrop blur for glass effect
+    background: hsla(var(--surface-hsl), 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    
+    // Borders and shadows
+    border: 1px solid hsla(0, 0%, 100%, 0.1);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        0 0 0 1px hsla(0, 0%, 100%, 0.05) inset,
+        var(--elevation-2);
+    
+    // Noise texture overlay
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: $noise-texture;
+        opacity: 0.15;
+        border-radius: 28px;
+        pointer-events: none;
+    }
 
     .navbar-content {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 80px;
-        padding: 0 $spacing-8;
-        max-width: 1600px;
-        margin: 0 auto;
+        height: 100%;
+        padding: 0 $spacing-6;
+        position: relative;
+        z-index: 1;
 
-        @include respond(md) {
-            padding: 0 $spacing-12;
+        @media (min-width: $breakpoint-md) {
+            padding: 0 $spacing-8;
         }
     }
 
@@ -26,11 +52,10 @@
         display: flex;
         align-items: center;
         text-decoration: none;
-        z-index: 2;
 
         img {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             transition: transform $duration-fast $ease-smooth;
 
             &:hover {
@@ -41,10 +66,9 @@
 
     .navbar-links {
         display: none;
-        gap: $spacing-2;
-        z-index: 2;
+        gap: $spacing-1;
 
-        @include respond(md) {
+        @media (min-width: $breakpoint-md) {
             display: flex;
         }
 
@@ -52,18 +76,18 @@
             display: flex;
             align-items: center;
             gap: $spacing-2;
-            padding: $spacing-3 $spacing-5;
-            border-radius: $radius-md;
+            padding: $spacing-2 $spacing-4;
+            border-radius: $radius-lg;
             color: var(--text-primary);
             text-decoration: none;
-            font-size: $text-base;
+            font-size: $text-sm;
             font-weight: $font-medium;
             transition: all $duration-fast $ease-smooth;
             position: relative;
             overflow: hidden;
 
             svg {
-                font-size: $text-lg;
+                font-size: $text-base;
             }
 
             span {
@@ -77,13 +101,13 @@
                 background: $gradient-primary;
                 opacity: 0;
                 transition: opacity $duration-fast $ease-smooth;
-                border-radius: $radius-md;
+                border-radius: $radius-lg;
             }
 
             &:hover {
-                background: hsla(0, 0%, 100%, 0.08);
+                background: hsla(0, 0%, 100%, 0.1);
                 color: $brand-primary;
-                transform: translateY(-2px);
+                transform: translateY(-1px);
 
                 &::before {
                     opacity: 0.15;
@@ -91,12 +115,14 @@
             }
 
             &.active {
-                background: hsla(250, 75%, 65%, 0.15);
+                background: hsla(250, 75%, 65%, 0.2);
                 color: $brand-primary;
-                box-shadow: 0 0 20px rgba(150, 100, 255, 0.3);
+                box-shadow: 
+                    0 0 20px rgba(150, 100, 255, 0.3),
+                    0 0 0 1px hsla(250, 75%, 65%, 0.3) inset;
 
                 &::before {
-                    opacity: 0.2;
+                    opacity: 0.25;
                 }
             }
         }
@@ -104,28 +130,27 @@
 
     .navbar-social {
         display: flex;
-        gap: $spacing-3;
-        z-index: 2;
+        gap: $spacing-2;
 
         a {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-secondary);
-            font-size: $text-xl;
-            border-radius: $radius-md;
-            background: hsla(0, 0%, 100%, 0.03);
-            border: 1px solid var(--glass-border);
+            font-size: $text-lg;
+            border-radius: $radius-lg;
+            background: hsla(0, 0%, 100%, 0.05);
+            border: 1px solid hsla(0, 0%, 100%, 0.08);
             transition: all $duration-fast $ease-smooth;
 
             &:hover {
                 color: $brand-primary;
-                background: hsla(250, 75%, 65%, 0.1);
+                background: hsla(250, 75%, 65%, 0.15);
                 border-color: $brand-primary;
                 transform: translateY(-2px) scale(1.05);
-                box-shadow: 0 4px 12px rgba(150, 100, 255, 0.3);
+                box-shadow: 0 4px 12px rgba(150, 100, 255, 0.4);
             }
         }
 
@@ -135,16 +160,38 @@
     }
 }
 
-// Mobile - hide navbar text, show only icons
+// Mobile adjustments
 @media (max-width: $breakpoint-md) {
     .top-navbar {
+        height: 64px;
+        border-radius: 24px;
+        top: $spacing-3;
+        left: $spacing-3;
+        right: $spacing-3;
+
         .navbar-content {
             padding: 0 $spacing-4;
         }
 
         .navbar-logo img {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
         }
     }
 }
+
+// Small mobile
+@media (max-width: $breakpoint-sm) {
+    .top-navbar {
+        height: 60px;
+        border-radius: 20px;
+        top: $spacing-2;
+        left: $spacing-2;
+        right: $spacing-2;
+
+        .navbar-content {
+            padding: 0 $spacing-3;
+        }
+    }
+}
+

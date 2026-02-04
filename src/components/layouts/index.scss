@@ -3,29 +3,40 @@
 .page {
     width: 100%;
     min-height: 100vh;
-    padding-top: 80px; // Height of navbar
+    // Navbar height (70px) + top margin (16px) + bottom spacing (16px)
+    padding-top: 102px;
+
+    @media (max-width: $breakpoint-md) {
+        // Navbar height (64px) + top margin (12px) + bottom spacing (12px)
+        padding-top: 88px;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+        // Navbar height (60px) + top margin (8px) + bottom spacing (8px)
+        padding-top: 76px;
+    }
 }
 
 .container {
     width: 100%;
     will-change: contents;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 102px);
     position: relative;
     opacity: 0;
     margin: 0 auto;
-    padding: $spacing-8 $spacing-6;
+    padding: $spacing-6 $spacing-6;
     z-index: 1;
     transform-style: preserve-3d;
     animation: fadeIn 1s forwards;
     animation-delay: 0.5s;
     max-width: 1600px;
     
-    @include respond(md) {
-        padding: $spacing-12 $spacing-8;
+    @media (min-width: $breakpoint-md) {
+        padding: $spacing-8 $spacing-8;
     }
 
-    @include respond(lg) {
-        padding: $spacing-16 $spacing-12;
+    @media (min-width: $breakpoint-lg) {
+        padding: $spacing-12 $spacing-12;
     }
 }
 

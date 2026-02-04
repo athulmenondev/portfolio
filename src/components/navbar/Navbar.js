@@ -4,23 +4,10 @@ import Logo from '../../assets/img/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUser, faBriefcase, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faSquareLinkedin, faSquareGithub, faSquareInstagram } from '@fortawesome/free-brands-svg-icons';
-import GlassSurface from '../ui/GlassSurface';
 
 const Navbar = () => {
     return (
-        <GlassSurface
-            className="top-navbar"
-            height={80}
-            borderRadius={0}
-            displace={0.3}
-            distortionScale={-100}
-            redOffset={0}
-            greenOffset={0}
-            blueOffset={0}
-            brightness={60}
-            opacity={0.95}
-            mixBlendMode="normal"
-        >
+        <div className="top-navbar">
             <div className="navbar-content">
                 <NavLink className='navbar-logo' to="/">
                     <img src={Logo} alt='Logo' />
@@ -57,7 +44,7 @@ const Navbar = () => {
                     </a>
                 </div>
             </div>
-        </GlassSurface>
+        </div>
     );
 };
 
