@@ -1,53 +1,266 @@
-.about-page{
-    display: flex;
-    justify-content: center;
-    .text-zone{
-        position: absolute;
-        left: 5%;
-        top: 25%;
-        text-align: justify;
-        width: 40%;
-        display: table-cell;
-        h1 {
-            font-size: 56px;
-            margin: 25px;
-            color: #98B9F2;
-        }
-        p{
-            display: inline-block;
-            font-size: 16px;
-            margin: 25px;
-            color: white;
-            letter-spacing: 1px;
-            animation: pulse 1s;
-            transition: all ease-in 0.2s;
+@import '../../styles/designTokens.scss';
 
-            &:nth-of-type(1){
-                animation-delay: 1.3s;
+.about-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-12;
+    padding: $spacing-8;
+    min-height: 100vh;
+    align-items: center;
+
+    .text-zone {
+        max-width: 600px;
+
+        h1 {
+            font-size: $text-5xl;
+            font-family: $font-family-display;
+            font-weight: $font-bold;
+            color: var(--text-primary);
+            margin-bottom: $spacing-8;
+
+            @include respond(md) {
+                font-size: $text-6xl;
             }
-            &:nth-of-type(2){
-                animation-delay: 1.4s;
+        }
+    }
+
+    .about-glass-card {
+        padding: $spacing-8;
+
+        @include respond(md) {
+            padding: $spacing-10;
+        }
+    }
+
+    // BlurText paragraph styling
+    .about-paragraph {
+        font-size: $text-base;
+        color: var(--text-secondary);
+        line-height: $leading-relaxed;
+        margin-bottom: $spacing-6;
+
+        @include respond(md) {
+            font-size: $text-lg;
+        }
+    }
+
+    .stage-cube-cont {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        .cube-glass-wrapper {
+            padding: $spacing-8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .cube-spinner {
+            animation: spin 12s linear infinite;
+            transform-style: preserve-3d;
+            width: 300px;
+            height: 300px;
+            position: relative;
+
+            div {
+                position: absolute;
+                width: 300px;
+                height: 300px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: hsla(0, 0%, 100%, 0.03);
+                backdrop-filter: blur($blur-sm);
+                border: 1px solid var(--glass-border);
+                box-shadow: var(--elevation-2);
+                font-size: 100px;
+                transition: all $duration-normal $ease-smooth;
+
+                svg {
+                    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+                }
             }
-            &:nth-of-type(3){
-                animation-delay: 1.5s;
+
+            .face1 {
+                transform: translateZ(150px);
             }
-            &:hover{
-                scale: 1.01;
-                color: #98B9F2;
+
+            .face2 {
+                transform: rotateY(90deg) translateZ(150px);
+            }
+
+            .face3 {
+                transform: rotateY(90deg) rotateX(90deg) translateZ(150px);
+            }
+
+            .face4 {
+                transform: rotateY(180deg) rotateZ(90deg) translateZ(150px);
+            }
+
+            .face5 {
+                transform: rotateY(-90deg) rotateZ(90deg) translateZ(150px);
+            }
+
+            .face6 {
+                transform: rotateX(-90deg) translateZ(150px);
+            }
+
+            &:hover {
+                div {
+                    background: hsla(0, 0%, 100%, 0.06);
+                    border-color: $brand-primary;
+                }
             }
         }
     }
 }
 
-.stage-cube-cont{
-    width: 40%;
-    height: 100%;
-    top: 0;
-    padding-top: 18px;
-    margin-left: 0;
-    position: absolute;
-    right: 0;
-    overflow: hidden;
-    background: white;
-    margin: 10px;
+@keyframes spin {
+    from {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+    to {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+// Mobile responsiveness improvements
+@media (max-width: $breakpoint-lg) {
+    .about-page {
+        grid-template-columns: 1fr;
+        padding: $spacing-6;
+        gap: $spacing-8;
+
+        .text-zone {
+            max-width: 100%;
+
+            h1 {
+                font-size: $text-4xl !important;
+                margin-bottom: $spacing-6;
+            }
+        }
+
+        .about-glass-card {
+            padding: $spacing-6;
+        }
+
+        .about-paragraph {
+            font-size: $text-base;
+            margin-bottom: $spacing-5;
+        }
+
+        .stage-cube-cont {
+            .cube-glass-wrapper {
+                min-height: 300px;
+                padding: $spacing-6;
+            }
+
+            .cube-spinner {
+                width: 250px;
+                height: 250px;
+
+                div {
+                    width: 250px;
+                    height: 250px;
+                    font-size: 80px;
+                }
+
+                .face1 {
+                    transform: translateZ(125px);
+                }
+
+                .face2 {
+                    transform: rotateY(90deg) translateZ(125px);
+                }
+
+                .face3 {
+                    transform: rotateY(90deg) rotateX(90deg) translateZ(125px);
+                }
+
+                .face4 {
+                    transform: rotateY(180deg) rotateZ(90deg) translateZ(125px);
+                }
+
+                .face5 {
+                    transform: rotateY(-90deg) rotateZ(90deg) translateZ(125px);
+                }
+
+                .face6 {
+                    transform: rotateX(-90deg) translateZ(125px);
+                }
+            }
+        }
+    }
+}
+
+// Small screens
+@media (max-width: $breakpoint-md) {
+    .about-page {
+        padding: $spacing-4;
+        gap: $spacing-6;
+
+        .text-zone h1 {
+            font-size: $text-3xl !important;
+        }
+
+        .about-glass-card {
+            padding: $spacing-5;
+        }
+
+        .about-paragraph {
+            font-size: $text-sm;
+        }
+
+        .stage-cube-cont {
+            .cube-glass-wrapper {
+                min-height: 250px;
+            }
+
+            .cube-spinner {
+                width: 200px;
+                height: 200px;
+
+                div {
+                    width: 200px;
+                    height: 200px;
+                    font-size: 60px;
+                }
+
+                .face1,
+                .face2,
+                .face3,
+                .face4,
+                .face5,
+                .face6 {
+                    transform: translateZ(100px);
+                }
+
+                .face2 {
+                    transform: rotateY(90deg) translateZ(100px);
+                }
+
+                .face3 {
+                    transform: rotateY(90deg) rotateX(90deg) translateZ(100px);
+                }
+
+                .face4 {
+                    transform: rotateY(180deg) rotateZ(90deg) translateZ(100px);
+                }
+
+                .face5 {
+                    transform: rotateY(-90deg) rotateZ(90deg) translateZ(100px);
+                }
+
+                .face6 {
+                    transform: rotateX(-90deg) translateZ(100px);
+                }
+            }
+        }
+    }
 }

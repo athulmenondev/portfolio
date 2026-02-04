@@ -2,26 +2,27 @@ import { Link, NavLink } from 'react-router-dom';
 import './index.scss';
 import Logo from '../../assets/img/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse,faUser,faEnvelope} from '@fortawesome/free-solid-svg-icons';
-import { faSquareLinkedin,faSquareGithub,faSquareInstagram} from '@fortawesome/free-brands-svg-icons';
+import { faHouse, faUser, faEnvelope, faBriefcase } from '@fortawesome/free-solid-svg-icons';
+import { faSquareLinkedin, faSquareGithub, faSquareInstagram } from '@fortawesome/free-brands-svg-icons';
 
-
-const Sidebar=()=>{
+const Sidebar = () => {
     return (
         <div className='nav-bar'>
             <Link className='logo' to="/">
-                <img src={Logo} alt='' />
-
+                <img src={Logo} alt='Logo' />
             </Link>
             <nav>
                 <NavLink exact="true" activeclassname="active" to="/">
-                    <FontAwesomeIcon icon={faHouse}  color='#141B41'/>
+                    <FontAwesomeIcon icon={faHouse} />
                 </NavLink>
                 <NavLink exact="true" activeclassname="active" className="about-link" to="/about">
-                    <FontAwesomeIcon icon={faUser} color='#141B41'/>
+                    <FontAwesomeIcon icon={faUser} />
+                </NavLink>
+                <NavLink exact="true" activeclassname="active" className="projects-link" to="/projects">
+                    <FontAwesomeIcon icon={faBriefcase} />
                 </NavLink>
                 <NavLink exact="true" activeclassname="active" className="contact-link" to="/contact">
-                    <FontAwesomeIcon icon={faEnvelope} color='#141B41'/>
+                    <FontAwesomeIcon icon={faEnvelope} />
                 </NavLink>
             </nav>
             <ul>
@@ -42,7 +43,7 @@ const Sidebar=()=>{
                 </li>
             </ul>
         </div>
-    )
-}
+    );
+};
 
 export default Sidebar;

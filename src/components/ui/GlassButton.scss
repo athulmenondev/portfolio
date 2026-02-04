@@ -1,0 +1,110 @@
+@import '../../styles/designTokens.scss';
+
+.glass-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--glass-border);
+  border-radius: $radius-xl;
+  font-family: $font-family-primary;
+  font-weight: $font-semibold;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  backdrop-filter: blur($blur-md);
+  -webkit-backdrop-filter: blur($blur-md);
+  transition: all $duration-fast $ease-smooth;
+  @include gpu-accelerated;
+
+  &__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  &__ripple {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: $radius-full;
+    background: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+  }
+
+  &__glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $gradient-primary;
+    opacity: 0;
+    transition: opacity $duration-normal $ease-smooth;
+    z-index: 1;
+  }
+
+  // Size variants
+  &--sm {
+    padding: $spacing-2 $spacing-4;
+    font-size: $text-sm;
+  }
+
+  &--md {
+    padding: $spacing-3 $spacing-6;
+    font-size: $text-base;
+  }
+
+  &--lg {
+    padding: $spacing-4 $spacing-8;
+    font-size: $text-lg;
+  }
+
+  // Variant styles
+  &--primary {
+    background: hsla(250, 75%, 65%, 0.1);
+    color: $brand-primary;
+    border-color: $brand-primary;
+
+    &:hover {
+      box-shadow: $glow-primary, var(--elevation-2);
+      border-color: $brand-primary;
+    }
+
+    &:hover .glass-button__glow {
+      opacity: 0.15;
+    }
+  }
+
+  &--secondary {
+    background: hsla(0, 0%, 100%, 0.05);
+    color: var(--text-primary);
+
+    &:hover {
+      box-shadow: var(--elevation-2);
+      background: hsla(0, 0%, 100%, 0.1);
+    }
+
+    &:hover .glass-button__glow {
+      opacity: 0.1;
+    }
+  }
+
+  &--accent {
+    background: hsla(280, 70%, 70%, 0.1);
+    color: $brand-accent;
+    border-color: $brand-accent;
+
+    &:hover {
+      box-shadow: $glow-accent, var(--elevation-2);
+    }
+
+    &:hover .glass-button__glow {
+      opacity: 0.15;
+    }
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

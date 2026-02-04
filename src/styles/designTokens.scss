@@ -1,0 +1,278 @@
+// ============================================
+// DESIGN TOKENS
+// Unified system for dark and light modes
+// ============================================
+
+// ============================================
+// COLOR SYSTEM (HSL for smooth transitions)
+// ============================================
+
+// Light Mode Colors
+$light-bg-primary: hsl(220, 15%, 98%);
+$light-bg-secondary: hsl(220, 15%, 95%);
+$light-surface: hsla(220, 15%, 100%, 0.7);
+$light-text-primary: hsl(220, 20%, 15%);
+$light-text-secondary: hsl(220, 15%, 40%);
+$light-text-tertiary: hsl(220, 10%, 60%);
+
+// Dark Mode Colors
+$dark-bg-primary: hsl(220, 25%, 8%);
+$dark-bg-secondary: hsl(220, 20%, 12%);
+$dark-surface: hsla(220, 20%, 15%, 0.7);
+$dark-text-primary: hsl(220, 15%, 95%);
+$dark-text-secondary: hsl(220, 10%, 75%);
+$dark-text-tertiary: hsl(220, 8%, 55%);
+
+// Brand Colors (Same for both modes, used in gradients and accents)
+$brand-primary: hsl(250, 75%, 65%);
+$brand-secondary: hsl(210, 80%, 60%);
+$brand-accent: hsl(280, 70%, 70%);
+$brand-success: hsl(150, 60%, 50%);
+$brand-warning: hsl(40, 90%, 55%);
+$brand-error: hsl(0, 70%, 60%);
+
+// Gradient Combinations
+$gradient-primary: linear-gradient(
+  135deg,
+  #{$brand-primary},
+  #{$brand-secondary}
+);
+$gradient-accent: linear-gradient(135deg, #{$brand-accent}, #{$brand-primary});
+$gradient-mesh:
+  radial-gradient(at 40% 20%, #{$brand-primary}22 0px, transparent 50%),
+  radial-gradient(at 80% 0%, #{$brand-secondary}22 0px, transparent 50%),
+  radial-gradient(at 0% 50%, #{$brand-accent}15 0px, transparent 50%);
+
+// ============================================
+// GLASS MORPHISM TOKENS
+// ============================================
+
+// Blur amounts
+$blur-sm: 8px;
+$blur-md: 16px;
+$blur-lg: 24px;
+$blur-xl: 32px;
+
+// Glass Opacity
+$glass-opacity-subtle: 0.05;
+$glass-opacity-light: 0.1;
+$glass-opacity-medium: 0.15;
+$glass-opacity-heavy: 0.25;
+
+// Noise Texture (SVG data URI for subtle grain)
+$noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+
+// Border Highlights
+$glass-border-light: hsla(0, 0%, 100%, 0.2);
+$glass-border-dark: hsla(0, 0%, 0%, 0.1);
+
+// ============================================
+// MATERIAL ELEVATION (Box Shadows)
+// ============================================
+
+// Light Mode Shadows
+$elevation-1-light:
+  0 1px 3px hsla(220, 20%, 15%, 0.08),
+  0 1px 2px hsla(220, 20%, 15%, 0.12);
+$elevation-2-light:
+  0 3px 6px hsla(220, 20%, 15%, 0.1),
+  0 2px 4px hsla(220, 20%, 15%, 0.12);
+$elevation-3-light:
+  0 10px 20px hsla(220, 20%, 15%, 0.12),
+  0 3px 6px hsla(220, 20%, 15%, 0.1);
+$elevation-4-light:
+  0 15px 30px hsla(220, 20%, 15%, 0.15),
+  0 5px 10px hsla(220, 20%, 15%, 0.12);
+
+// Dark Mode Shadows (lighter for visibility)
+$elevation-1-dark:
+  0 1px 3px hsla(0, 0%, 0%, 0.3),
+  0 1px 2px hsla(0, 0%, 0%, 0.4);
+$elevation-2-dark:
+  0 3px 6px hsla(0, 0%, 0%, 0.35),
+  0 2px 4px hsla(0, 0%, 0%, 0.4);
+$elevation-3-dark:
+  0 10px 20px hsla(0, 0%, 0%, 0.4),
+  0 3px 6px hsla(0, 0%, 0%, 0.35);
+$elevation-4-dark:
+  0 15px 30px hsla(0, 0%, 0%, 0.5),
+  0 5px 10px hsla(0, 0%, 0%, 0.4);
+
+// Glow Effects (for interactive elements)
+$glow-primary:
+  0 0 20px hsla(250, 75%, 65%, 0.3),
+  0 0 40px hsla(250, 75%, 65%, 0.15);
+$glow-accent:
+  0 0 20px hsla(280, 70%, 70%, 0.3),
+  0 0 40px hsla(280, 70%, 70%, 0.15);
+
+// ============================================
+// SPACING SCALE (4px base grid)
+// ============================================
+
+$spacing-1: 0.4rem; // 4px
+$spacing-2: 0.8rem; // 8px
+$spacing-3: 1.2rem; // 12px
+$spacing-4: 1.6rem; // 16px
+$spacing-5: 2rem; // 20px
+$spacing-6: 2.4rem; // 24px
+$spacing-8: 3.2rem; // 32px
+$spacing-10: 4rem; // 40px
+$spacing-12: 4.8rem; // 48px
+$spacing-16: 6.4rem; // 64px
+$spacing-24: 9.6rem; // 96px
+$spacing-32: 12.8rem; // 128px
+
+// ============================================
+// TYPOGRAPHY SCALE
+// ============================================
+
+$font-family-primary:
+  'Inter',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  'Roboto',
+  'Oxygen',
+  sans-serif;
+$font-family-display: 'Outfit', 'Inter', sans-serif;
+$font-family-mono: 'Fira Code', 'Consolas', monospace;
+
+// Font Sizes
+$text-xs: 1.2rem; // 12px
+$text-sm: 1.4rem; // 14px
+$text-base: 1.6rem; // 16px
+$text-lg: 1.8rem; // 18px
+$text-xl: 2rem; // 20px
+$text-2xl: 2.4rem; // 24px
+$text-3xl: 3rem; // 30px
+$text-4xl: 3.6rem; // 36px
+$text-5xl: 4.8rem; // 48px
+$text-6xl: 6rem; // 60px
+$text-7xl: 7.2rem; // 72px
+$text-8xl: 9.6rem; // 96px
+
+// Font Weights
+$font-light: 300;
+$font-regular: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+$font-black: 900;
+
+// Line Heights
+$leading-tight: 1.2;
+$leading-normal: 1.5;
+$leading-relaxed: 1.75;
+
+// ============================================
+// BORDER RADIUS
+// ============================================
+
+$radius-sm: 0.8rem; // 8px
+$radius-md: 1.2rem; // 12px
+$radius-lg: 1.6rem; // 16px
+$radius-xl: 2.4rem; // 24px
+$radius-full: 9999px;
+
+// ============================================
+// ANIMATION DURATIONS
+// ============================================
+
+$duration-instant: 150ms;
+$duration-fast: 250ms;
+$duration-normal: 400ms;
+$duration-slow: 600ms;
+$duration-slower: 800ms;
+
+// Easing Functions
+$ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+$ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+// ============================================
+// Z-INDEX SCALE
+// ============================================
+
+$z-background: -1;
+$z-base: 0;
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;
+$z-cursor: 9999;
+
+// ============================================
+// BREAKPOINTS
+// ============================================
+
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// ============================================
+// MIXINS
+// ============================================
+
+// Glass Card Mixin
+@mixin glass-card($opacity: $glass-opacity-medium, $blur: $blur-md) {
+  background: hsla(0, 0%, 100%, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid $glass-border-light;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $noise-texture;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+// Responsive Mixin
+@mixin respond($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) {
+      @content;
+    }
+  }
+  @if $breakpoint == md {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  }
+  @if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  }
+  @if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+  @if $breakpoint == 2xl {
+    @media (min-width: $breakpoint-2xl) {
+      @content;
+    }
+  }
+}
+
+// GPU Acceleration
+@mixin gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}

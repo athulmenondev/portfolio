@@ -1,0 +1,329 @@
+@import '../../styles/designTokens.scss';
+
+.contact-page {
+    padding: $spacing-8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .contact-header {
+        text-align: center;
+        margin-bottom: $spacing-12;
+        max-width: 800px;
+
+        h1 {
+            font-size: $text-5xl;
+            font-family: $font-family-display;
+            font-weight: $font-bold;
+            color: var(--text-primary);
+            margin: $spacing-16 0 $spacing-4 0;
+
+            @include respond(md) {
+                font-size: $text-6xl;
+            }
+        }
+
+        .contact-subtitle {
+            font-size: $text-lg;
+            color: var(--text-secondary);
+            font-weight: $font-regular;
+            line-height: $leading-relaxed;
+
+            @include respond(md) {
+                font-size: $text-xl;
+            }
+        }
+    }
+
+    .contact-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: $spacing-8;
+        width: 100%;
+        max-width: 1200px;
+
+        @include respond(lg) {
+            grid-template-columns: 1.5fr 1fr;
+        }
+    }
+
+    // Form Styles
+    .contact-form-card {
+        padding: $spacing-8;
+
+        @include respond(md) {
+            padding: $spacing-12;
+        }
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-6;
+
+        .form-group {
+            position: relative;
+
+            .form-input {
+                width: 100%;
+                padding: $spacing-4 $spacing-4;
+                background: hsla(0, 0%, 100%, 0.03);
+                border: 2px solid var(--glass-border);
+                border-radius: $radius-md;
+                font-size: $text-base;
+                font-family: $font-family-primary;
+                color: var(--text-primary);
+                outline: none;
+                transition: all $duration-fast $ease-smooth;
+
+                &::placeholder {
+                    color: transparent;
+                }
+
+                &:focus,
+                &:not(:placeholder-shown) {
+                    border-color: $brand-primary;
+                    background: hsla(0, 0%, 100%, 0.05);
+
+                    ~ .form-label {
+                        top: -10px;
+                        font-size: $text-sm;
+                        color: $brand-primary;
+                        background: var(--bg-primary);
+                        padding: 0 $spacing-2;
+                    }
+                }
+            }
+
+            .form-textarea {
+                resize: vertical;
+                min-height: 120px;
+            }
+
+            .form-label {
+                position: absolute;
+                left: $spacing-4;
+                top: $spacing-4;
+                color: var(--text-tertiary);
+                font-size: $text-base;
+                pointer-events: none;
+                transition: all $duration-fast $ease-smooth;
+            }
+        }
+
+        .submit-button {
+            width: 100%;
+            margin-top: $spacing-4;
+
+            &:disabled {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    // Contact Info Styles
+    .contact-info-container {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-6;
+    }
+
+    .contact-info-card {
+        padding: $spacing-8;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-6;
+
+        .info-item {
+            display: flex;
+            gap: $spacing-4;
+            align-items: flex-start;
+
+            .info-icon {
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: hsla(250, 75%, 65%, 0.1);
+                border-radius: $radius-md;
+                color: $brand-primary;
+                font-size: $text-2xl;
+                flex-shrink: 0;
+            }
+
+            .info-content {
+                h3 {
+                    font-size: $text-lg;
+                    font-weight: $font-semibold;
+                    color: var(--text-primary);
+                    margin: 0 0 $spacing-1 0;
+                }
+
+                p {
+                    font-size: $text-base;
+                    color: var(--text-secondary);
+                    margin: 0;
+                }
+            }
+        }
+
+        .social-links {
+            padding-top: $spacing-6;
+            border-top: 1px solid var(--glass-border);
+
+            h3 {
+                font-size: $text-lg;
+                font-weight: $font-semibold;
+                color: var(--text-primary);
+                margin: 0 0 $spacing-4 0;
+            }
+
+            .social-icons {
+                display: flex;
+                gap: $spacing-3;
+
+                a {
+                    width: 50px;
+                    height: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: hsla(0, 0%, 100%, 0.05);
+                    border: 1px solid var(--glass-border);
+                    border-radius: $radius-md;
+                    color: var(--text-secondary);
+                    font-size: $text-xl;
+                    transition: all $duration-fast $ease-smooth;
+
+                    &:hover {
+                        background: hsla(250, 75%, 65%, 0.1);
+                        border-color: $brand-primary;
+                        color: $brand-primary;
+                        transform: translateY(-4px);
+                        box-shadow: var(--elevation-2);
+                    }
+                }
+            }
+        }
+    }
+
+    .availability-badge {
+        display: flex;
+        align-items: center;
+        gap: $spacing-3;
+        padding: $spacing-4 $spacing-6;
+        background: hsla(150, 60%, 50%, 0.1);
+        border: 1px solid hsla(150, 60%, 50%, 0.3);
+        border-radius: $radius-full;
+        color: $brand-success;
+        font-size: $text-base;
+        font-weight: $font-medium;
+        justify-content: center;
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: $brand-success;
+            border-radius: $radius-full;
+            animation: pulse 2s infinite;
+        }
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+// Mobile responsiveness
+@media (max-width: $breakpoint-lg) {
+    .contact-page {
+        .contact-content {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-md) {
+    .contact-page {
+        padding: $spacing-4;
+
+        .contact-header {
+            margin-bottom: $spacing-8;
+
+            h1 {
+                font-size: $text-4xl;
+                margin: $spacing-12 0 $spacing-3 0;
+            }
+
+            .contact-subtitle {
+                font-size: $text-base;
+            }
+        }
+
+        .contact-form-card {
+            padding: $spacing-6;
+        }
+
+        .contact-info-card {
+            padding: $spacing-6;
+
+            .info-item {
+                .info-icon {
+                    width: 40px;
+                    height: 40px;
+                    font-size: $text-xl;
+                }
+            }
+
+            .social-links {
+                .social-icons a {
+                    width: 45px;
+                    height: 45px;
+                    font-size: $text-lg;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: $breakpoint-sm) {
+    .contact-page {
+        .contact-header h1 {
+            font-size: $text-3xl;
+        }
+
+        .contact-form-card {
+            padding: $spacing-5;
+        }
+
+        .contact-form {
+            gap: $spacing-5;
+
+            .form-group {
+                .form-input {
+                    padding: $spacing-3;
+                    font-size: $text-sm;
+                }
+
+                .form-label {
+                    font-size: $text-sm;
+                }
+            }
+        }
+
+        .availability-badge {
+            font-size: $text-sm;
+            padding: $spacing-3 $spacing-5;
+        }
+    }
+}

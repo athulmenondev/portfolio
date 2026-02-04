@@ -1,0 +1,50 @@
+@import '../../styles/designTokens.scss';
+
+.target-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: $z-cursor;
+    color: $brand-primary;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+
+    .target-ring {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        filter: drop-shadow(0 0 8px rgba(150, 100, 255, 0.5));
+    }
+
+    .target-dot {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 6px;
+        height: 6px;
+        background: $brand-primary;
+        border-radius: $radius-full;
+        box-shadow: 0 0 10px rgba(150, 100, 255, 0.8);
+    }
+}
+
+.hide-default-cursor {
+    * {
+        cursor: none !important;
+    }
+}
+
+// Hide on mobile/tablet
+@media (max-width: $breakpoint-lg) {
+    .target-cursor {
+        display: none;
+    }
+
+    .hide-default-cursor * {
+        cursor: auto !important;
+    }
+}

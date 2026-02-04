@@ -1,0 +1,36 @@
+@import '../../styles/designTokens.scss';
+
+.glass-surface {
+    position: relative;
+    background: var(--surface);
+    backdrop-filter: blur($blur-md);
+    -webkit-backdrop-filter: blur($blur-md);
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+    transition: all $duration-normal $ease-smooth;
+
+    // Noise texture overlay
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: $noise-texture;
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
+    .glass-surface-filter {
+        position: absolute;
+        width: 0;
+        height: 0;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .glass-surface-content {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+    }
+}

@@ -1,0 +1,21 @@
+@import '../../styles/designTokens.scss';
+
+.custom-cursor {
+  position: fixed;
+  border-radius: $radius-full;
+  pointer-events: none;
+  z-index: $z-cursor;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  
+  // Hide default cursor when custom cursor is active
+  body:has(&) {
+    cursor: none;
+    
+    a, button, .project-card, .glass-card {
+      cursor: none;
+    }
+  }
+}

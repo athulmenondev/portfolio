@@ -1,0 +1,175 @@
+@import '../../styles/designTokens.scss';
+
+.mobile-menu-button {
+    display: none;
+    position: fixed;
+    bottom: $spacing-8;
+    right: $spacing-6;
+    width: 60px;
+    height: 60px;
+    border-radius: $radius-full;
+    background: var(--surface);
+    backdrop-filter: blur($blur-lg);
+    -webkit-backdrop-filter: blur($blur-lg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--elevation-3), $glow-primary;
+    color: $brand-primary;
+    font-size: $text-2xl;
+    cursor: pointer;
+    z-index: $z-fixed + 10;
+    transition: all $duration-fast $ease-smooth;
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: var(--elevation-4), $glow-primary;
+    }
+
+    // Show on smaller tablets and mobile
+    @media (max-width: $breakpoint-md) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.mobile-menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: $z-modal-backdrop;
+    backdrop-filter: blur(4px);
+}
+
+.mobile-menu-panel {
+    position: fixed;
+    top: $spacing-6;
+    left: $spacing-6;
+    bottom: $spacing-6;
+    width: calc(100% - #{$spacing-12});
+    max-width: 320px;
+    background: var(--surface);
+    backdrop-filter: blur($blur-xl);
+    -webkit-backdrop-filter: blur($blur-xl);
+    border: 1px solid var(--glass-border);
+    border-radius: $radius-xl;
+    box-shadow: var(--elevation-4);
+    z-index: $z-modal;
+    padding: $spacing-8;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    @media (max-width: $breakpoint-sm) {
+        top: $spacing-4;
+        left: $spacing-4;
+        bottom: $spacing-4;
+        width: calc(100% - #{$spacing-8});
+        max-width: none;
+        padding: $spacing-6;
+    }
+
+    // Noise texture
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: $noise-texture;
+        opacity: 0.3;
+        pointer-events: none;
+        border-radius: $radius-xl;
+    }
+
+    .close-button {
+        position: absolute;
+        top: $spacing-4;
+        right: $spacing-4;
+        width: 44px;
+        height: 44px;
+        border-radius: $radius-md;
+        background: hsla(0, 0%, 100%, 0.05);
+        border: 1px solid var(--glass-border);
+        color: var(--text-primary);
+        font-size: $text-xl;
+        cursor: pointer;
+        transition: all $duration-fast $ease-smooth;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            background: hsla(0, 0%, 100%, 0.1);
+            color: $brand-primary;
+            transform: rotate(90deg);
+        }
+    }
+
+    .mobile-nav {
+        margin-top: $spacing-16;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-4;
+
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            gap: $spacing-4;
+            padding: $spacing-4 $spacing-6;
+            background: hsla(0, 0%, 100%, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: $radius-md;
+            color: var(--text-primary);
+            font-size: $text-lg;
+            font-weight: $font-medium;
+            text-decoration: none;
+            transition: all $duration-fast $ease-smooth;
+            position: relative;
+            overflow: hidden;
+
+            &::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: $gradient-primary;
+                opacity: 0;
+                transition: opacity $duration-fast $ease-smooth;
+            }
+
+            svg {
+                font-size: $text-xl;
+                z-index: 1;
+            }
+
+            span {
+                z-index: 1;
+            }
+
+            &:hover {
+                background: hsla(0, 0%, 100%, 0.08);
+                border-color: $brand-primary;
+                color: $brand-primary;
+                transform: translateX(8px);
+
+                &::before {
+                    opacity: 0.1;
+                }
+            }
+
+            &.active {
+                background: hsla(250, 75%, 65%, 0.15);
+                border-color: $brand-primary;
+                color: $brand-primary;
+
+                &::before {
+                    opacity: 0.2;
+                }
+            }
+        }
+    }
+}
+
+// Hide desktop sidebar on mobile
+@media (max-width: $breakpoint-md) {
+    .nav-bar {
+        display: none;
+    }
+}

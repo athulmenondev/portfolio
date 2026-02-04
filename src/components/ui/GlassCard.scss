@@ -1,0 +1,106 @@
+@import '../../styles/designTokens.scss';
+
+.glass-card {
+  position: relative;
+  border-radius: $radius-lg;
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+  transition: all $duration-normal $ease-smooth;
+  @include gpu-accelerated;
+  
+  // Noise texture overlay
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $noise-texture;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  // Content wrapper
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  // Blur variants
+  &--blur-sm {
+    backdrop-filter: blur($blur-sm);
+    -webkit-backdrop-filter: blur($blur-sm);
+  }
+
+  &--blur-md {
+    backdrop-filter: blur($blur-md);
+    -webkit-backdrop-filter: blur($blur-md);
+  }
+
+  &--blur-lg {
+    backdrop-filter: blur($blur-lg);
+    -webkit-backdrop-filter: blur($blur-lg);
+  }
+
+  &--blur-xl {
+    backdrop-filter: blur($blur-xl);
+    -webkit-backdrop-filter: blur($blur-xl);
+  }
+
+  // Opacity variants
+  &--opacity-subtle {
+    background: hsla(0, 0%, 100%, $glass-opacity-subtle);
+    
+    [data-theme='dark'] & {
+      background: hsla(0, 0%, 100%, calc(#{$glass-opacity-subtle} * 0.7));
+    }
+  }
+
+  &--opacity-light {
+    background: hsla(0, 0%, 100%, $glass-opacity-light);
+    
+    [data-theme='dark'] & {
+      background: hsla(0, 0%, 100%, calc(#{$glass-opacity-light} * 0.7));
+    }
+  }
+
+  &--opacity-medium {
+    background: hsla(0, 0%, 100%, $glass-opacity-medium);
+    
+    [data-theme='dark'] & {
+      background: hsla(0, 0%, 100%, calc(#{$glass-opacity-medium} * 0.7));
+    }
+  }
+
+  &--opacity-heavy {
+    background: hsla(0, 0%, 100%, $glass-opacity-heavy);
+    
+    [data-theme='dark'] & {
+      background: hsla(0, 0%, 100%, calc(#{$glass-opacity-heavy} * 0.7));
+    }
+  }
+
+  // Elevation variants
+  &--elevation-1 {
+    box-shadow: var(--elevation-1);
+  }
+
+  &--elevation-2 {
+    box-shadow: var(--elevation-2);
+  }
+
+  &--elevation-3 {
+    box-shadow: var(--elevation-3);
+  }
+
+  &--elevation-4 {
+    box-shadow: var(--elevation-4);
+  }
+
+  // Hover state enhancement
+  &:hover {
+    border-color: rgba(150, 100, 255, 0.3);
+  }
+}
