@@ -58,12 +58,6 @@ const Projects = () => {
 
     return (
         <>
-            <TargetCursor
-                spinDuration={2}
-                hideDefaultCursor
-                parallaxOn
-                hoverDuration={0.2}
-            />
             <div className='container projects-page'>
                 <div className='projects-header'>
                     <h1>
@@ -77,7 +71,6 @@ const Projects = () => {
                     >
                         Crafted experiences that blend creativity with technology
                     </motion.p>
-                    <button className='cursor-target btn btn-primary'>View All Projects</button>
                 </div>
 
                 {loading ? (
