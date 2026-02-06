@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Papa from 'papaparse';
 import AnimatedLetters from '../AnimattedLetters';
 import GlassCard from '../ui/GlassCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCode } from '@fortawesome/free-solid-svg-icons';
-import TargetCursor from '../ui/TargetCursor';
+import TargetCursor from '../../styles/Cursor';
 import './index.scss';
 
 const Projects = () => {
@@ -24,25 +23,15 @@ const Projects = () => {
     }, []);
 
     useEffect(() => {
-        // Fetch and parse CSV data
-        fetch('/data.csv')
-            .then(response => response.text())
-            .then(csvText => {
-                Papa.parse(csvText, {
-                    header: true,
-                    skipEmptyLines: true,
-                    complete: (results) => {
-                        setProjects(results.data);
-                        setLoading(false);
-                    },
-                    error: (error) => {
-                        console.error('Error parsing CSV:', error);
-                        setLoading(false);
-                    }
-                });
+        // Fetch JSON data
+        fetch(`${process.env.PUBLIC_URL}/data.json`)
+            .then(response => response.json())
+            .then(data => {
+                setProjects(data);
+                setLoading(false);
             })
             .catch(error => {
-                console.error('Error loading CSV:', error);
+                console.error('Error loading data:', error);
                 setLoading(false);
             });
     }, []);
@@ -70,7 +59,7 @@ const Projects = () => {
     return (
         <>
             <TargetCursor
-                spinDuration={5}
+                spinDuration={2}
                 hideDefaultCursor
                 parallaxOn
                 hoverDuration={0.2}
@@ -88,6 +77,7 @@ const Projects = () => {
                     >
                         Crafted experiences that blend creativity with technology
                     </motion.p>
+                    <button className='cursor-target btn btn-primary'>View All Projects</button>
                 </div>
 
                 {loading ? (
@@ -106,12 +96,12 @@ const Projects = () => {
                         animate='visible'
                     >
                         {projects.map((project, index) => (
-                            <motion.div key={index} variants={cardVariants}>
-                                <GlassCard className='project-card cursor-target' blur='md' opacity='medium'>
+                            <motion.div key={index} variants={cardVariants} className='cursor-target'>
+                                <GlassCard className='project-card' blur='md' opacity='medium'>
                                     {project.image && (
                                         <div className='project-image'>
                                             <img 
-                                                src={project.image} 
+                                                src={`${process.env.PUBLIC_URL}${project.image}`} 
                                                 alt={project.title}
                                                 onError={(e) => {
                                                     e.target.style.display = 'none';

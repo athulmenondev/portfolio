@@ -1,5 +1,0 @@
-title,description,technologies,link,image
-Portfolio Website,"A premium interactive portfolio featuring Apple's Liquid Glass design merged with Google's Material UI principles. Includes dark/light themes with smooth transitions.","React, Framer Motion, GSAP, SCSS",https://github.com/athulmenondev/portfolio,/assets/portfolio.jpg
-Solasta Event Website,"A dynamic event management website for the annual tech fest organized by the Computer Science department. Features event registration and real-time updates.","React, Next.js, Tailwind CSS",https://github.com/athulmenondev,/assets/solasta.jpg
-School Website,"A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.","HTML, CSS, JavaScript",,/assets/school.jpg
-Web Development Projects,"Collection of interactive web applications showcasing modern frontend development techniques and creative problem-solving.","HTML, CSS, JavaScript, React",,/assets/webdev.jpg

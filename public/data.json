@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Solasta Event Website",
+    "description": "A dynamic event management website for the annual tech fest organized by the Computer Science department. Features event registration and real-time updates.",
+    "technologies": "React, Next.js, Tailwind CSS",
+    "link": "https://github.com/athulmenondev",
+    "image": "/assets/solasta.jpg"
+  },
+  {
+    "title": "School Website",
+    "description": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
+    "technologies": "HTML, CSS, JavaScript",
+    "link": "",
+    "image": "/assets/school.jpg"
+  },
+  {
+    "title": "Web Development Projects",
+    "description": "Collection of interactive web applications showcasing modern frontend development techniques and creative problem-solving.",
+    "technologies": "HTML, CSS, JavaScript, React",
+    "link": "",
+    "image": "/assets/webdev.jpg"
+  },
+  {
+    "title": "Web Development Projects",
+    "description": "Collection of interactive web applications showcasing modern frontend development techniques and creative problem-solving.",
+    "technologies": "HTML, CSS, JavaScript, React",
+    "link": "",
+    "image": "/assets/webdev.jpg"
+  }
+]
