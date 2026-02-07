@@ -117,17 +117,30 @@ const Projects = () => {
                                         )}
 
                                         {project.link && (
+                                         <div className="project-link-buttons">
                                             <div className='project-links'>
                                                 <a 
-                                                    href={project.link} 
+                                                    href={project.linkdemo}
                                                     target='_blank' 
                                                     rel='noreferrer'
                                                     className='project-link cursor-target'
                                                 >
                                                     <FontAwesomeIcon icon={faCode} />
-                                                    <span>View Code</span>
+                                                    <span>Click to view</span>
                                                 </a>
                                             </div>
+                                            <div className='project-links'>
+                                                <a
+                                                     href={project.link}
+                                                     target='_blank'
+                                                     rel='noreferrer'
+                                                     className='project-link cursor-target'
+                                                     >
+                                                        <FontAwesomeIcon icon={faCode} />
+                                                            <span>View Code</span>
+                                                     </a>
+                                            </div>
+                                         </div>
                                         )}
                                     </div>
                                 </GlassCard>
