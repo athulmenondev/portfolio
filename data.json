@@ -1,0 +1,50 @@
+[
+  {
+    "title": "Solasta Event Website",
+    "description": "A dynamic event management website for the annual tech fest organized by the Computer Science department. Features event registration and real-time updates.",
+    "technologies": "React, Next.js, Tailwind CSS",
+    "link": "https://github.com/athulmenondev/solasta",
+    "linkdemo":"https://solastadev.vercel.app/",
+    "image": "/assets/solasta.jpg"
+  },
+  {
+    "title": "School Website",
+    "description": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
+    "technologies": "HTML, CSS, JavaScript",
+    "link": "https://github.com/hxri-nxrxyxn/national-web",
+    "linkdemo":"https://nationalhss.in/",
+    "image": "/assets/school.jpg"
+  },
+  {
+    "title": "AIKudumbam",
+    "description": "AI Kudumbam is a delightfully web application that lovingly simulates a classic Keralite family gathering in the digital age.",
+    "technologies": "HTML, CSS, JavaScript, React",
+    "link": "https://github.com/athulmenondev/AIKudumbam",
+    "linkdemo":"",
+    "image": "/assets/aikudumbam.jpg"
+  },
+  {
+    "title": "Praganya Website",
+    "description": "Collection of interactive web applications showcasing modern frontend development techniques and creative problem-solving.",
+    "technologies": "HTML, CSS, JavaScript, React",
+    "link": "https://github.com/athulmenondev/praganya",
+    "linkdemo":"",
+    "image": "/assets/praganya.jpg"
+  },
+  {
+    "title": "RevUp Website",
+    "description": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
+    "technologies": "HTML, CSS, JavaScript",
+    "link": "https://github.com/athulmenondev/RevUp",
+    "linkdemo":"https://praganya.vercel.app/",
+    "image": "/assets/revup.jpg"
+  },
+  {
+    "title": "HackNova",
+    "description": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
+    "technologies": "HTML, CSS, JavaScript",
+    "link": "https://github.com/athulmenondev/HackNova",
+    "linkdemo":"https://hack-nova.vercel.app/",
+    "image": "/assets/hacknova.jpg"
+  }
+]
