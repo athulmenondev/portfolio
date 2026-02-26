@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.9dd8fd8f.css",
-    "main.js": "/portfolio/static/js/main.de46bde2.js",
-    "static/media/Roboto-Regular.ttf": "/portfolio/static/media/Roboto-Regular.5dd918926d41224c8142.ttf",
-    "static/media/Semyon-Soviet.ttf": "/portfolio/static/media/Semyon-Soviet.0ead80cdaae032c2d19f.ttf",
-    "static/media/logo.svg": "/portfolio/static/media/logo.dd4d62e6e78f586d4b1b4c251225bd8b.svg",
-    "index.html": "/portfolio/index.html",
-    "main.9dd8fd8f.css.map": "/portfolio/static/css/main.9dd8fd8f.css.map",
-    "main.de46bde2.js.map": "/portfolio/static/js/main.de46bde2.js.map"
+    "main.css": "/static/css/main.66ec727e.css",
+    "main.js": "/static/js/main.2fe54a7f.js",
+    "static/media/Roboto-Regular.ttf": "/static/media/Roboto-Regular.5dd918926d41224c8142.ttf",
+    "static/media/Semyon-Soviet.ttf": "/static/media/Semyon-Soviet.0ead80cdaae032c2d19f.ttf",
+    "static/media/logo.svg": "/static/media/logo.dd4d62e6e78f586d4b1b4c251225bd8b.svg",
+    "index.html": "/index.html",
+    "main.66ec727e.css.map": "/static/css/main.66ec727e.css.map",
+    "main.2fe54a7f.js.map": "/static/js/main.2fe54a7f.js.map"
   },
   "entrypoints": [
-    "static/css/main.9dd8fd8f.css",
-    "static/js/main.de46bde2.js"
+    "static/css/main.66ec727e.css",
+    "static/js/main.2fe54a7f.js"
   ]
 }
