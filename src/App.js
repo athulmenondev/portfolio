@@ -1,28 +1,49 @@
+// ─── App.js ───────────────────────────────────────────────────────────────────
+
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import './App.scss';
-import 'animate.css';
+import Lenis from 'lenis';
 import { ThemeProvider } from './contexts/ThemeContext';
+import Cursor from './styles/Cursor';
 import Layout from './components/layouts';
 import Home from './components/home';
 import About from './components/about';
 import Projects from './components/projects';
 import Contact from './components/contact';
-import CustomCursor from './components/ui/CustomCursor';
-import ThemeToggle from './components/ui/ThemeToggle';
-import MobileMenu from './components/ui/MobileMenu';
 
 function App() {
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <ThemeProvider>
-      <CustomCursor />
-      <ThemeToggle />
-      <MobileMenu />
+      <Cursor />
       <Routes>
-        <Route path='/' element={<Layout/>}>
-          <Route index element={<Home/>}></Route>
-          <Route path='about' element={<About/>}></Route>
-          <Route path='projects' element={<Projects/>}></Route>
-          <Route path='contact' element={<Contact/>}></Route>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path='about' element={<About />} />
+          <Route path='projects' element={<Projects />} />
+          <Route path='contact' element={<Contact />} />
         </Route>
       </Routes>
     </ThemeProvider>

@@ -1,51 +1,73 @@
+// ─── src/components/navbar/index.js ──────────────────────────────────────────
+
+import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useTheme } from '../../contexts/ThemeContext';
 import './Navbar.scss';
-import Logo from '../../assets/img/logo.svg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faUser, faBriefcase, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faSquareLinkedin, faSquareGithub, faSquareInstagram } from '@fortawesome/free-brands-svg-icons';
+
+const NAV_LINKS = [
+  { to: '/about',    label: 'About',   num: '01' },
+  { to: '/projects', label: 'Works',   num: '02' },
+  { to: '/contact',  label: 'Contact', num: '03' },
+];
 
 const Navbar = () => {
-    return (
-        <div className="top-navbar">
-            <div className="navbar-content">
-                <NavLink className='navbar-logo' to="/">
-                    <img src={Logo} alt='Logo' />
-                </NavLink>
-                
-                <nav className="navbar-links">
-                    <NavLink exact="true" to="/" className={({ isActive }) => isActive ? 'active' : ''}>
-                        <FontAwesomeIcon icon={faHouse} />
-                        <span>Home</span>
-                    </NavLink>
-                    <NavLink exact="true" to="/about" className={({ isActive }) => isActive ? 'active' : ''}>
-                        <FontAwesomeIcon icon={faUser} />
-                        <span>About</span>
-                    </NavLink>
-                    <NavLink exact="true" to="/projects" className={({ isActive }) => isActive ? 'active' : ''}>
-                        <FontAwesomeIcon icon={faBriefcase} />
-                        <span>Projects</span>
-                    </NavLink>
-                    <NavLink exact="true" to="/contact" className={({ isActive }) => isActive ? 'active' : ''}>
-                        <FontAwesomeIcon icon={faEnvelope} />
-                        <span>Contact</span>
-                    </NavLink>
-                </nav>
+  const { theme, toggleTheme } = useTheme();
+  const [scrolled, setScrolled]   = useState(false);
+  const [mounted, setMounted]     = useState(false);
+  const headerRef = useRef(null);
 
-                <div className="navbar-social">
-                    <a target='_blank' rel="noreferrer" href='https://www.linkedin.com/in/athul-s-menon-a22857296/'>
-                        <FontAwesomeIcon icon={faSquareLinkedin} />
-                    </a>
-                    <a target='_blank' rel="noreferrer" href='https://github.com/athulmenondev'>
-                        <FontAwesomeIcon icon={faSquareGithub} />
-                    </a>
-                    <a target='_blank' rel="noreferrer" href='https://www.instagram.com/linuxid_/'>
-                        <FontAwesomeIcon icon={faSquareInstagram} />
-                    </a>
-                </div>
-            </div>
-        </div>
-    );
+  // Reveal on mount
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 80);
+    return () => clearTimeout(t);
+  }, []);
+
+  // Border appears on scroll
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <header
+      ref={headerRef}
+      className={`navbar ${scrolled ? 'navbar--scrolled' : ''} ${mounted ? 'navbar--visible' : ''}`}
+    >
+      {/* ── Brand ── */}
+      <NavLink to="/" className="navbar__brand">
+        <span className="navbar__brand-text">~$ am</span>
+        <span className="navbar__brand-cursor" aria-hidden="true">▋</span>
+      </NavLink>
+
+      {/* ── Nav links ── */}
+      <nav className="navbar__nav" aria-label="Primary navigation">
+        {NAV_LINKS.map(({ to, label, num }) => (
+          <NavLink
+            key={to}
+            to={to}
+            className={({ isActive }) =>
+              `navbar__link ${isActive ? 'navbar__link--active' : ''}`
+            }
+          >
+            <span className="navbar__link-num">{num}.</span>
+            <span className="navbar__link-label">{label}</span>
+            <span className="navbar__link-underline" aria-hidden="true" />
+          </NavLink>
+        ))}
+      </nav>
+
+      {/* ── Theme toggle ── */}
+      <button
+        className="navbar__theme-toggle"
+        onClick={toggleTheme}
+        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      >
+        [ {theme === 'dark' ? 'light' : 'dark'} ]
+      </button>
+    </header>
+  );
 };
 
 export default Navbar;

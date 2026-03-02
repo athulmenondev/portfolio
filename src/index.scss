@@ -1,167 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Outfit:wght@300;400;500;600;700;900&display=swap');
-@import './styles/designTokens.scss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @font-face {
   font-family: 'Roboto';
   src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
 }
 
-// ============================================
-// RESET & BASE STYLES
-// ============================================
-
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 62.5%; // 1rem = 10px for easier calculations
-  scroll-behavior: smooth;
-}
-
-// ============================================
-// THEME CSS CUSTOM PROPERTIES
-// ============================================
-
-:root {
-  // Default to light theme
-  --bg-primary: #{$light-bg-primary};
-  --bg-secondary: #{$light-bg-secondary};
-  --surface: #{$light-surface};
-  --text-primary: #{$light-text-primary};
-  --text-secondary: #{$light-text-secondary};
-  --text-tertiary: #{$light-text-tertiary};
-  
-  --glass-border: #{$glass-border-light};
-  --elevation-1: #{$elevation-1-light};
-  --elevation-2: #{$elevation-2-light};
-  --elevation-3: #{$elevation-3-light};
-  --elevation-4: #{$elevation-4-light};
-}
-
-[data-theme='dark'] {
-  --bg-primary: #{$dark-bg-primary};
-  --bg-secondary: #{$dark-bg-secondary};
-  --surface: #{$dark-surface};
-  --text-primary: #{$dark-text-primary};
-  --text-secondary: #{$dark-text-secondary};
-  --text-tertiary: #{$dark-text-tertiary};
-  
-  --glass-border: #{$glass-border-dark};
-  --elevation-1: #{$elevation-1-dark};
-  --elevation-2: #{$elevation-2-dark};
-  --elevation-3: #{$elevation-3-dark};
-  --elevation-4: #{$elevation-4-dark};
-}
-
-// ============================================
-// BODY STYLES
-// ============================================
-
-body {
-  margin: 0;
-  font-family: $font-family-primary;
-  font-size: $text-base;
-  font-weight: $font-regular;
-  line-height: $leading-normal;
-  color: var(--text-primary);
-  background: var(--bg-primary);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  
-  // Smooth theme transition
-  transition: background-color $duration-normal $ease-smooth,
-              color $duration-normal $ease-smooth;
-  
-  // Background gradient mesh (subtle)
-  position: relative;
-  
-  &::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: $gradient-mesh;
-    opacity: 0.4;
-    pointer-events: none;
-    z-index: $z-background;
+@layer base {
+  :root {
+    /* "The Architect" (Light Mode) */
+    --color-bg: #f9f7f2;
+    --color-primary: #1a1a1b;
+    --color-accent: #5e5e5e;
+    --color-highlight: #c5a059;
   }
-}
 
-// ============================================
-// SCROLLBAR STYLING
-// ============================================
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--text-tertiary);
-  border-radius: $radius-full;
-  
-  &:hover {
-    background: var(--text-secondary);
+  [data-theme='dark'] {
+    /* "The Midnight Journal" (Dark Mode) */
+    --color-bg: #0d0d0e;
+    --color-primary: #e4e4e4;
+    --color-accent: #2d2d2d;
+    --color-highlight: #8e9aaf;
   }
-}
 
-// ============================================
-// REDUCED MOTION SUPPORT
-// ============================================
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-primary);
+    /* Smooth font rendering is mandatory for editorial design */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  /* Lenis basic setup */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
     scroll-behavior: auto !important;
   }
-}
 
-// ============================================
-// UTILITY CLASSES
-// ============================================
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
 
-.glass-card {
-  @include glass-card;
-}
-
-.gpu-accelerated {
-  @include gpu-accelerated;
-}
-
-// Text Gradients
-.text-gradient-primary {
-  background: $gradient-primary;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-accent {
-  background: $gradient-accent;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-// Hide on mobile/tablet (for custom cursor)
-.hide-mobile {
-  @media (max-width: $breakpoint-md) {
-    display: none !important;
+  .lenis.lenis-stopped {
+    overflow: hidden;
   }
 }
-

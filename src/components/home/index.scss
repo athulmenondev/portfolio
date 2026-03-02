@@ -28,7 +28,7 @@
         padding: $spacing-12;
         
         @include respond(md) {
-            padding: spacing-16;
+            padding: $spacing-16;
         }
     }
     
