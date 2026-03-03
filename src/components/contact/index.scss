@@ -42,11 +42,11 @@
 // ═══════════════════════════════════════════════════
 
 .contact__header {
-  padding:       var(--s7) var(--s5) var(--s5);
+  padding:       calc(64px + var(--s5)) var(--s5) var(--s5);
   border-bottom: 1px solid var(--rule);
 
   @include respond(md) {
-    padding: var(--s7) var(--s6) var(--s5);
+    padding: calc(64px + var(--s5)) var(--s6) var(--s5);
   }
 }
 

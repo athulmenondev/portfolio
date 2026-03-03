@@ -1,50 +1,269 @@
-[
-  {
-    "title": "Solasta Event Website",
-    "description": "A dynamic event management website for the annual tech fest organized by the Computer Science department. Features event registration and real-time updates.",
-    "technologies": "React, Next.js, Tailwind CSS",
-    "link": "https://github.com/athulmenondev/solasta",
-    "linkdemo":"https://solastadev.vercel.app/",
-    "image": "/assets/solasta.jpg"
+{
+  "nav": {
+    "prompt": "~$",
+    "name": "athul_menon",
+    "links": [
+      { "id": "work", "num": "01.", "label": "Work" },
+      { "id": "about", "num": "02.", "label": "About" },
+      { "id": "services", "num": "03.", "label": "Services" },
+      { "id": "contact", "num": "04.", "label": "Contact" }
+    ],
+    "hireMe": "Hire Me →"
   },
-  {
-    "title": "School Website",
-    "description": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
-    "technologies": "HTML, CSS, JavaScript",
-    "link": "https://github.com/hxri-nxrxyxn/national-web",
-    "linkdemo":"https://nationalhss.in/",
-    "image": "/assets/school.jpg"
+  "hero": {
+    "badge": "available for opportunities",
+    "titleParts": [
+      "I build,   ",
+      "I break,   ",
+      "I fix,",
+      "Repeat."
+    ],
+    "tagline": {
+      "comment": "// Fullstack Developer · Kerala, India",
+      "codeLine1": "const stack = [\"MongoDB\", \"Express\", \"React\", \"Node.js\"];",
+      "codeLine2": "buildThingsThat(\"scale\" + \"delight\" + \"solves\" + \"problems\");"
+    },
+    "buttons": [
+      { "label": "View Works", "target": "work", "primary": true },
+      { "label": "Get in Touch", "target": "contact", "primary": false }
+    ],
+    "stack": [
+      "React", "Node", "JavaScript", "HTML/CSS", "Tailwind", "Git", "Linux"
+    ],
+    "codeWindow": {
+      "title": "portfolio.json",
+      "lines": [
+        "// about me",
+        "const Athul = () => {",
+        "  return (",
+        "    <Developer",
+        "      role=\"Fullstack\"",
+        "      based=\"Kerala, IN\"",
+        "      loves=\"Linux\"",
+        "      open=\"to work\"",
+        "    />",
+        "  );",
+        "};",
+        "",
+        "export default Athul;"
+      ]
+    }
   },
-  {
-    "title": "AIKudumbam",
-    "description": "AI Kudumbam is a delightfully web application that lovingly simulates a classic Keralite family gathering in the digital age.",
-    "technologies": "HTML, CSS, JavaScript, React",
-    "link": "https://github.com/athulmenondev/AIKudumbam",
-    "linkdemo":"",
-    "image": "/assets/aikudumbam.jpg"
+  "marquee": [
+    "JavaScript", "Python", "Java", "C++", "HTML", "CSS", "React", "Next.js", "Git", "Linux", "TailwindCSS"
+  ],
+  "activity": {
+    "eyebrow": "GitHub Activity",
+    "heading": "Shipping <em style=\"font-style:italic;color:var(--ink-muted)\">daily.</em>",
+    "link": {
+      "label": "github.com/athulmenondev ↗",
+      "url": "https://github.com/athulmenondev"
+    },
+    "stats": [
+      { "num": "150+", "label": "Contributions" },
+      { "num": "20", "label": "Repos" },
+      { "num": "-", "label": "Experience Yrs" }
+    ]
   },
-  {
-    "title": "Praganya Website",
-    "description": "Collection of interactive web applications showcasing modern frontend development techniques and creative problem-solving.",
-    "technologies": "HTML, CSS, JavaScript, React",
-    "link": "https://github.com/athulmenondev/praganya",
-    "linkdemo":"",
-    "image": "/assets/praganya.jpg"
+  "work": {
+    "eyebrow": "Selected Work",
+    "heading": "Featured Projects",
+    "dateRange": "2023 – Present",
+    "featured": {
+      "label": "⭐ Featured Project · 2024",
+      "title": "Solasta Event Website",
+      "desc": "A dynamic event management website for the annual tech fest organized by the Computer Science department. Features event registration and real-time updates.",
+      "stats": [
+        { "num": "100%", "label": "Responsive" },
+        { "num": "Fast", "label": "Load Time" },
+        { "num": "0", "label": "Errors" },
+        { "num": "99.9%", "label": "Uptime" }
+      ],
+      "tech": ["React", "Next.js", "Tailwind CSS"],
+      "links": [
+        { "label": "Live Demo ↗", "url": "https://solastadev.live/", "primary": true },
+        { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/solasta", "primary": false }
+      ],
+      "image": "/assets/solasta.jpg",
+      "urlName": "solastadev.live"
+    },
+    "projects": [
+      {
+        "num": "02",
+        "tag": "Web App",
+        "tagColors": "amber",
+        "year": "2024",
+        "title": "AIKudumbam",
+        "desc": "AI Kudumbam is a delightfully web application that lovingly simulates a classic Keralite family gathering in the digital age.",
+        "tech": ["HTML", "CSS", "JavaScript", "React"],
+        "links": [
+          { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/AIKudumbam", "primary": true }
+        ]
+      },
+      {
+        "num": "03",
+        "tag": "Frontend",
+        "tagColors": "green",
+        "year": "2024",
+        "title": "Praganya Website",
+        "desc": "Collection of interactive web applications showcasing modern frontend development techniques and creative problem-solving.",
+        "tech": ["HTML", "CSS", "JavaScript", "React"],
+        "links": [
+          { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/praganya", "primary": true }
+        ]
+      },
+      {
+        "num": "04",
+        "tag": "Static Site",
+        "tagColors": "",
+        "year": "2023",
+        "title": "School Website",
+        "desc": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
+        "tech": ["HTML", "CSS", "JavaScript"],
+        "links": [
+          { "label": "Live ↗", "url": "https://nationalhss.in/", "primary": true },
+          { "label": "GitHub ↗", "url": "https://github.com/hxri-nxrxyxn/national-web", "primary": false }
+        ]
+      },
+      {
+        "num": "05",
+        "tag": "Web App",
+        "tagColors": "green",
+        "year": "2024",
+        "title": "RevUp Website",
+        "desc": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
+        "tech": ["HTML", "CSS", "JavaScript"],
+        "links": [
+          { "label": "Live ↗", "url": "https://praganya.vercel.app/", "primary": true },
+          { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/RevUp", "primary": false }
+        ]
+      },
+      {
+        "num": "06",
+        "tag": "Web App",
+        "tagColors": "amber",
+        "year": "2024",
+        "title": "HackNova",
+        "desc": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
+        "tech": ["HTML", "CSS", "JavaScript"],
+        "links": [
+          { "label": "Live ↗", "url": "https://hack-nova.vercel.app/", "primary": true },
+          { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/HackNova", "primary": false }
+        ]
+      }
+    ]
   },
-  {
-    "title": "RevUp Website",
-    "description": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
-    "technologies": "HTML, CSS, JavaScript",
-    "link": "https://github.com/athulmenondev/RevUp",
-    "linkdemo":"https://praganya.vercel.app/",
-    "image": "/assets/revup.jpg"
+  "services": {
+    "eyebrow": "What I Do",
+    "heading": "Engineering <em style=\"font-style:italic;color:var(--ink-muted)\">solutions.</em>",
+    "items": [
+      {
+        "icon": "Code2",
+        "title": "Frontend Engineering",
+        "desc": "Building fast, interactive, and fully responsive user interfaces using modern web technologies.",
+        "skills": ["React & Next.js", "TypeScript / JavaScript", "Tailwind CSS & SCSS"]
+      },
+      {
+        "icon": "PenTool",
+        "title": "UI/UX Development",
+        "desc": "Translating complex design requirements into pixel-perfect, accessible, and smooth digital experiences.",
+        "skills": ["Figma to Code", "Framer Motion", "Accessible Components"]
+      },
+      {
+        "icon": "Zap",
+        "title": "Web Performance",
+        "desc": "Optimizing web applications for speed, SEO, and seamless interactivity across all devices.",
+        "skills": ["Lighthouse Audits", "Core Web Vitals", "Asset Optimization"]
+      }
+    ]
   },
-  {
-    "title": "HackNova",
-    "description": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
-    "technologies": "HTML, CSS, JavaScript",
-    "link": "https://github.com/athulmenondev/HackNova",
-    "linkdemo":"https://hack-nova.vercel.app/",
-    "image": "/assets/hacknova.jpg"
+  "about": {
+    "profile": {
+      "initials": "AM",
+      "name": "Athul Menon",
+      "handle": "@athulmenondev",
+      "status": "open to work ✦",
+      "bio": "CS Undergraduate who writes React for fun and JavaScript for work. Believes software should be fast, correct, and — occasionally — beautiful."
+    },
+    "info": [
+      { "key": "Location", "val": "Kerala, India" },
+      { "key": "OS", "val": "<span class=\"hl\">Linux</span> / Debian" },
+      { "key": "Editor", "val": "<span class=\"hl\">VS Code</span>" },
+      { "key": "College", "val": "NSS College of Engineering" },
+      { "key": "CGPA", "val": "8.5 / 10.0" }
+    ],
+    "eyebrow": "About the Engineer",
+    "quote": "\"Crafting digital experiences that feel tangible — one component at a time.\"",
+    "paragraphs": [
+      "I'm a dedicated Computer Science undergraduate at NSS College of Engineering with an 8.5 CGPA and a genuine passion for building interfaces that are as thoughtful as they are functional.",
+      "My coursework has given me a solid grounding in <code>Java</code>, <code>Python</code>, and <code>C++</code>, alongside web technologies like <code>HTML</code>, <code>CSS</code>, and <code>JavaScript</code>.",
+      "My practical work spans collaborative projects — from building the Solasta tech-fest platform to designing static sites for schools. I bring strong problem-solving instincts, an eye for detail, and the kind of curiosity that keeps me reaching for the terminal long after the workday ends.",
+      "I'm a quick learner who thrives in teams, adapts to new challenges fast, and is always looking for the next thing to build. Currently open to freelance work and internship opportunities."
+    ],
+    "skills": {
+      "title": "skills.sh",
+      "lines": [
+        { "cmd": "cat languages.txt", "out": "  JavaScript · Python · Java · C++ · HTML · CSS" },
+        { "cmd": "cat tools.txt", "out": "  React · Next.js · Git · Linux · Tailwind" },
+        { "cmd": "whoami", "out": "  athulmenondev" }
+      ]
+    },
+    "experience": [
+      {
+        "date": "2024",
+        "role": "Frontend Developer",
+        "company": "Solasta — Tech Fest Website",
+        "desc": "Built the annual CS department tech-fest platform with event registration and real-time updates.",
+        "active": true
+      },
+      {
+        "date": "2023",
+        "role": "Web Developer",
+        "company": "National Higher Secondary School",
+        "desc": "Designed and developed a static website providing easy access to school information and resources.",
+        "active": false
+      },
+      {
+        "date": "2023",
+        "role": "CS Undergraduate",
+        "company": "NSS College of Engineering",
+        "desc": "Pursuing Computer Science with a strong foundation in algorithms, systems, and web technologies.",
+        "active": false
+      }
+    ]
+  },
+  "contact": {
+    "heading": "Let's Ship<br><em>Something</em><br>Great.",
+    "sub": {
+      "comment1": "// Currently open to full-time & freelance",
+      "func": "sendEmail(\"athulmenon@example.com\");",
+      "comment2": "// Response time: < 24h"
+    },
+    "email": "athulmenon@example.com",
+    "links": [
+      {
+        "title": "GitHub",
+        "meta": "@athulmenondev",
+        "url": "https://github.com/athulmenondev",
+        "arrow": "↗"
+      },
+      {
+        "title": "LinkedIn",
+        "meta": "athul-s-menon",
+        "url": "https://www.linkedin.com/in/athul-s-menon-a22857296/",
+        "arrow": "↗"
+      },
+      {
+        "title": "Instagram",
+        "meta": "@linuxid_",
+        "url": "https://www.instagram.com/linuxid_/",
+        "arrow": "↗"
+      }
+    ]
+  },
+  "footer": {
+    "name": "© 2026 Athul Menon",
+    "builtWith": "Built with <span>React</span>",
+    "location": "Kerala, IN · UTC<span>+5:30</span>"
   }
-]
+}

@@ -13,17 +13,14 @@ const NAV_LINKS = [
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
-  const [scrolled, setScrolled]   = useState(false);
-  const [mounted, setMounted]     = useState(false);
-  const headerRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [mounted,  setMounted]  = useState(false);
 
-  // Reveal on mount
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 80);
     return () => clearTimeout(t);
   }, []);
 
-  // Border appears on scroll
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -31,15 +28,10 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header
-      ref={headerRef}
-      className={`navbar ${scrolled ? 'navbar--scrolled' : ''} ${mounted ? 'navbar--visible' : ''}`}
-    >
-      {/* ── Brand ── */}
-      <NavLink to="/" className="navbar__brand">
-        <span className="navbar__brand-text">~$ am</span>
-        <span className="navbar__brand-cursor" aria-hidden="true">▋</span>
-      </NavLink>
+    <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''} ${mounted ? 'navbar--visible' : ''}`}>
+
+      {/* Spacer that matches sidebar width on desktop — keeps nav links centered */}
+      <div className="navbar__sidebar-spacer" aria-hidden="true" />
 
       {/* ── Nav links ── */}
       <nav className="navbar__nav" aria-label="Primary navigation">

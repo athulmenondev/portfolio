@@ -1,32 +1,28 @@
 // ─── src/components/layouts/Layout.scss ──────────────────────────────────────
 @use '../../styles/designTokens' as *;
 
-// ── Base shell ────────────────────────────────────────────────────────────────
-
 .layout {
-  position:         relative;
-  width:            100%;
-  min-height:       100vh;
-  background:       var(--bg);
-  color:            var(--ink);
+  position:   relative;
+  width:      100%;
+  min-height: 100vh;
+  background: var(--bg);
+  color:      var(--ink);
 
-  // Text selection colors
   ::selection {
     background: var(--accent);
     color:      var(--bg);
   }
 }
 
-// ── Main content area ─────────────────────────────────────────────────────────
-// Offset left by sidebar width (56px) on desktop
-// Offset top by navbar height (≈64px) on all sizes
-
+// Main content area:
+// - Desktop (>768px): pushed right by sidebar width (56px + 1px border = 57px)
+// - Mobile: full width, sidebar is hidden
+// Each page component handles its own top padding to clear the fixed navbar (~64px)
 .layout__main {
   width:      100%;
   min-height: 100vh;
 
-  // Sidebar offset — desktop only
-  @include respond(md) {
-    padding-left: 56px;
+  @media (min-width: 769px) {
+    padding-left: 57px;
   }
 }
