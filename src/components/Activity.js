@@ -69,7 +69,11 @@ const styles = `
     display: flex;
     flex-direction: column;
     gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
+  .heatmap-panel::-webkit-scrollbar { display: none; }
 
   /* The actual heatmap: 52 columns of 7 square cells each */
   .hm-grid {
@@ -77,6 +81,7 @@ const styles = `
     flex-direction: row;
     gap: 3px;
     width: 100%;
+    min-width: 600px;
   }
 
   .hm-col {

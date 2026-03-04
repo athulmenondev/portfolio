@@ -807,7 +807,7 @@ nav {
   width: 120px;
   height: 120px;
   perspective: 1000px;
-  margin: 2rem auto;
+  margin: 0 auto;
 }
 .cube {
   width: 100%;
@@ -852,15 +852,20 @@ nav {
 }
 
 .about-body-row {
-  display: grid;
-  grid-template-columns: 1fr 200px;
-  gap: 3rem;
-  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 4rem;
+}
+.about-text-col {
+  flex: 1 1 300px;
+  max-width: 60ch;
 }
 .about-cube-col {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
 }
 
 .about-left {
@@ -1140,10 +1145,10 @@ nav {
 #contact {
   padding: var(--s7) var(--s5);
   border-top: 1px solid var(--rule);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--s6);
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 .contact-heading {
   font-family: var(--serif);
@@ -1269,15 +1274,22 @@ footer {
   .about-cube-col { margin: var(--s4) auto; }
   .about-left { position:relative; top:0; border-right:none; border-bottom:1px solid var(--rule); }
   .timeline::before { display:none; }
-  #contact { grid-template-columns:1fr; gap:var(--s5); }
   .services-grid { grid-template-columns: 1fr; }
-  .nav-links { display:none; }
-  nav { top: 1rem; width: 95%; max-width: none; padding: .6rem 1rem; gap: 1rem; justify-content: space-between; }
-  .nav-brand { border-right: none; }
-  .nav-right { flex: 1; justify-content: flex-end; }
+  .nav-links { 
+    display: flex; 
+    overflow-x: auto; 
+    gap: 1rem; 
+    padding-bottom: 4px;
+    font-size: 0.75rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-name { display: none; }
+  nav { top: 1rem; width: 95%; max-width: none; padding: .6rem 1rem; gap: 1rem; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+  .nav-brand { border-right: none; padding-right: 0;}
+  .nav-right { flex: 0; }
 }
 @media(max-width:600px){
   .services-grid { grid-template-columns:1fr; }
-  .proj-row { grid-template-columns:40px 1fr; }
-  .proj-links { display:none; }
 }
