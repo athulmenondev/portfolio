@@ -192,7 +192,7 @@
       { "key": "CGPA", "val": "8.5 / 10.0" }
     ],
     "eyebrow": "About the Engineer",
-    "quote": "\"Crafting digital experiences that feel tangible — one component at a time.\"",
+    "quote": "\"From frontend interactions to backend architecture — I design systems, not just interfaces\"",
     "paragraphs": [
       "I'm a dedicated Computer Science undergraduate at NSS College of Engineering with an 8.5 CGPA and a genuine passion for building interfaces that are as thoughtful as they are functional.",
       "My coursework has given me a solid grounding in <code>Java</code>, <code>Python</code>, and <code>C++</code>, alongside web technologies like <code>HTML</code>, <code>CSS</code>, and <code>JavaScript</code>.",
@@ -204,7 +204,7 @@
       "lines": [
         { "cmd": "cat languages.txt", "out": "  JavaScript · Python · Java · C++ · HTML · CSS" },
         { "cmd": "cat tools.txt", "out": "  React · Next.js · Git · Linux · Tailwind" },
-        { "cmd": "whoami", "out": "  athulmenondev" }
+        { "cmd": "whoami", "out": "  Athul S Menon" }
       ]
     },
     "experience": [
@@ -235,10 +235,10 @@
     "heading": "Let's Ship<br><em>Something</em><br>Great.",
     "sub": {
       "comment1": "// Currently open to full-time & freelance",
-      "func": "sendEmail(\"athulmenon@example.com\");",
+      "func": "sendEmail(\"athulmenon@gmail.com\");",
       "comment2": "// Response time: < 24h"
     },
-    "email": "athulmenon@example.com",
+    "email": "athulmenon@gmail.com",
     "links": [
       {
         "title": "GitHub",
@@ -262,7 +262,7 @@
   },
   "footer": {
     "name": "© 2026 Athul Menon",
-    "builtWith": "Built with <span>React</span>",
-    "location": "Kerala, IN · UTC<span>+5:30</span>"
+    "builtWith": "Built with <span>React,js, Tailwind CSS</span>",
+    "location": "Thrissur, IN · UTC<span>+5:30</span>"
   }
 }

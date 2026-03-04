@@ -1008,6 +1008,7 @@ nav.scrolled .nav-name {
   margin-top: var(--s2);
   padding-top: var(--s2);
   border-top: 1px solid var(--rule);
+  text-align: justify;
 }
 
 .status-row {
@@ -1301,11 +1302,12 @@ footer {
 }
 .footer-col a:hover { color: #6B4CFF; }
 .footer-bottom { 
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
   padding-top: 2rem; border-top: 1px solid #1E1E21;
   font-family: var(--mono); font-size: .75rem; color: #8A8A8F;
 }
 .footer-bottom span { color: #6B4CFF; }
+.fb-divider { margin: 0 .5rem; color: #3A3A40 !important;}
 
 /* ═══════════════════════════════════════════════════════
    SCROLL REVEAL

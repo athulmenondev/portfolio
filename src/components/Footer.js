@@ -23,14 +23,17 @@ const Footer = ({ data }) => {
           <div className="footer-col">
             <h4>Contact</h4>
             <ul>
-              <li><a href="mailto:athulmenon@example.com">Email Me</a></li>
+              <li><a href="mailto:athulmenon@gmail.com">Email Me</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div className="footer-bottom">
-        <div>{data.name}</div>
-        <div dangerouslySetInnerHTML={{ __html: data.location }}></div>
+        <div className="fb-left">
+          {data.name} <span className="fb-divider">|</span> All rights reserved.
+        </div>
+        <div className="fb-center" dangerouslySetInnerHTML={{ __html: data.builtWith }}></div>
+        <div className="fb-right" dangerouslySetInnerHTML={{ __html: data.location }}></div>
       </div>
     </footer>
   );
