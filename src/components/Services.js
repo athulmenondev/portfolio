@@ -1,9 +1,9 @@
-import { Code2, PenTool, Zap } from 'lucide-react';
+import { Globe, Server, Cpu } from 'lucide-react';
 
 const ICONS = {
-  'Code2': <Code2 size={24} />,
-  'PenTool': <PenTool size={24} />,
-  'Zap': <Zap size={24} />
+  'Globe': <Globe size={24} />,
+  'Server': <Server size={24} />,
+  'Cpu': <Cpu size={24} />
 };
 
 const Services = ({ data }) => {

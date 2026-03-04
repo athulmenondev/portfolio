@@ -48,6 +48,15 @@ const About = ({ data }) => {
                 <div className="cube-face bottom">Git</div>
               </div>
             </div>
+            
+            <div className="cube-decor">
+              <div className="cd-title">Tech Stack</div>
+              <div className="cd-badges">
+                <div className="cd-badge">Frontend</div>
+                <div className="cd-badge">Backend</div>
+                <div className="cd-badge">Systems</div>
+              </div>
+            </div>
           </div>
         </div>
 

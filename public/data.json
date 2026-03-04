@@ -154,41 +154,40 @@
     ]
   },
   "services": {
-    "eyebrow": "What I Do",
-    "heading": "Engineering <em style=\"font-style:italic;color:var(--ink-muted)\">solutions.</em>",
-    "items": [
-      {
-        "icon": "Code2",
-        "title": "Frontend Engineering",
-        "desc": "Building fast, interactive, and fully responsive user interfaces using modern web technologies.",
-        "skills": ["React & Next.js", "TypeScript / JavaScript", "Tailwind CSS & SCSS"]
-      },
-      {
-        "icon": "PenTool",
-        "title": "UI/UX Development",
-        "desc": "Translating complex design requirements into pixel-perfect, accessible, and smooth digital experiences.",
-        "skills": ["Figma to Code", "Framer Motion", "Accessible Components"]
-      },
-      {
-        "icon": "Zap",
-        "title": "Web Performance",
-        "desc": "Optimizing web applications for speed, SEO, and seamless interactivity across all devices.",
-        "skills": ["Lighthouse Audits", "Core Web Vitals", "Asset Optimization"]
-      }
-    ]
-  },
+  "eyebrow": "What I Do",
+  "heading": "Engineering <em style=\"font-style:italic;color:var(--ink-muted)\">secure & scalable systems.</em>",
+  "items": [
+    {
+      "icon": "Globe",
+      "title": "Full-Stack Development",
+      "desc": "Designing and building complete web applications from frontend to backend with clean architecture and production-ready standards.",
+      "skills": ["React & Modern JavaScript", "Node.js & Express", "MongoDB / MariaDB / PostgreSQL"]
+    },
+    {
+      "icon": "Server",
+      "title": "Backend & API Engineering",
+      "desc": "Architecting secure, scalable backend systems with robust authentication, structured databases, and clean RESTful APIs.",
+      "skills": ["JWT Authentication", "REST API Design", "Database Modeling (SQL & NoSQL)"]
+    },
+    {
+      "icon": "Cpu",
+      "title": "System Design & Optimization",
+      "desc": "Improving performance, structuring scalable backends, and building efficient data-driven applications.",
+      "skills": ["Database Design (DBMS)", "API Architecture", "Performance Optimization"]
+    }
+  ]
+},
   "about": {
     "profile": {
-      "initials": "AM",
       "name": "Athul Menon",
       "handle": "@athulmenondev",
-      "status": "open to work ✦",
-      "bio": "CS Undergraduate who writes React for fun and JavaScript for work. Believes software should be fast, correct, and — occasionally — beautiful."
+      "status": "open to works ✦",
+      "bio": "CS undergraduate building full-stack systems with a focus on security, performance, and clean architecture. Writes React for clarity, engineers backends for scale, and believes software should be fast, correct — and occasionally beautiful."
     },
     "info": [
-      { "key": "Location", "val": "Kerala, India" },
+      { "key": "Location", "val": "Thrissur,Kerala, India" },
       { "key": "OS", "val": "<span class=\"hl\">Linux</span> / Debian" },
-      { "key": "Editor", "val": "<span class=\"hl\">VS Code</span>" },
+      { "key": "Editor", "val": "<span class=\"hl\">Antigravity</span> / VS Code" },
       { "key": "College", "val": "NSS College of Engineering" },
       { "key": "CGPA", "val": "8.5 / 10.0" }
     ],
