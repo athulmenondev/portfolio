@@ -1,278 +1,296 @@
-// ============================================
-// DESIGN TOKENS
-// Unified system for dark and light modes
-// ============================================
+// ─── src/styles/designTokens.scss ────────────────────────────────────────────
+// Design token foundation for the entire portfolio.
+// Import into every component scss via: @use '../../styles/designTokens' as *;
+// ─────────────────────────────────────────────────────────────────────────────
 
 // ============================================
-// COLOR SYSTEM (HSL for smooth transitions)
+// GOOGLE FONTS
 // ============================================
 
-// Light Mode Colors
-$light-bg-primary: hsl(220, 15%, 98%);
-$light-bg-secondary: hsl(220, 15%, 95%);
-$light-surface: hsla(220, 15%, 100%, 0.7);
-$light-text-primary: hsl(220, 20%, 15%);
-$light-text-secondary: hsl(220, 15%, 40%);
-$light-text-tertiary: hsl(220, 10%, 60%);
-
-// Dark Mode Colors
-$dark-bg-primary: hsl(220, 25%, 8%);
-$dark-bg-secondary: hsl(220, 20%, 12%);
-$dark-surface: hsla(220, 20%, 15%, 0.7);
-$dark-text-primary: hsl(220, 15%, 95%);
-$dark-text-secondary: hsl(220, 10%, 75%);
-$dark-text-tertiary: hsl(220, 8%, 55%);
-
-// Brand Colors (Same for both modes, used in gradients and accents)
-$brand-primary: hsl(250, 75%, 65%);
-$brand-secondary: hsl(210, 80%, 60%);
-$brand-accent: hsl(280, 70%, 70%);
-$brand-success: hsl(150, 60%, 50%);
-$brand-warning: hsl(40, 90%, 55%);
-$brand-error: hsl(0, 70%, 60%);
-
-// Gradient Combinations
-$gradient-primary: linear-gradient(
-  135deg,
-  #{$brand-primary},
-  #{$brand-secondary}
-);
-$gradient-accent: linear-gradient(135deg, #{$brand-accent}, #{$brand-primary});
-$gradient-mesh:
-  radial-gradient(at 40% 20%, #{$brand-primary}22 0px, transparent 50%),
-  radial-gradient(at 80% 0%, #{$brand-secondary}22 0px, transparent 50%),
-  radial-gradient(at 0% 50%, #{$brand-accent}15 0px, transparent 50%);
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 // ============================================
-// GLASS MORPHISM TOKENS
+// CSS CUSTOM PROPERTIES (on :root)
 // ============================================
 
-// Blur amounts
-$blur-sm: 8px;
-$blur-md: 16px;
-$blur-lg: 24px;
-$blur-xl: 32px;
+:root {
+  // ── Dark Mode (default) ──────────────────
+  --bg:           #0D0D0E;
+  --bg-2:         #111113;
+  --bg-3:         #171719;
+  --bg-4:         #1E1E21;
+  --ink:          #E4E2DD;
+  --ink-muted:    #8A8A8F;
+  --ink-faint:    #3A3A3E;
+  --accent:       #5B8AF0;
+  --accent-dim:   #1A2340;
+  --green:        #4ADE80;
+  --amber:        #F5A623;
+  --red:          #FF5F57;
+  --rule:         #252528;
 
-// Glass Opacity
-$glass-opacity-subtle: 0.05;
-$glass-opacity-light: 0.1;
-$glass-opacity-medium: 0.15;
-$glass-opacity-heavy: 0.25;
+  // ── Typography ──────────────────────────
+  --serif:        'Playfair Display', Georgia, serif;
+  --sans:         'Plus Jakarta Sans', system-ui, sans-serif;
+  --mono:         'JetBrains Mono', 'Fira Code', monospace;
 
-// Noise Texture (SVG data URI for subtle grain)
-$noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  // ── Spacing ─────────────────────────────
+  --s1:  0.5rem;
+  --s2:  1rem;
+  --s3:  1.5rem;
+  --s4:  2rem;
+  --s5:  3rem;
+  --s6:  5rem;
+  --s7:  8rem;
 
-// Border Highlights
-$glass-border-light: hsla(0, 0%, 100%, 0.2);
-$glass-border-dark: hsla(0, 0%, 0%, 0.1);
+  // ── Easing ──────────────────────────────
+  --ease:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease2: cubic-bezier(0.87, 0, 0.13, 1);
 
-// ============================================
-// MATERIAL ELEVATION (Box Shadows)
-// ============================================
+  // ── Z-Index Scale ────────────────────────
+  --z-base:     0;
+  --z-sticky:   1020;
+  --z-fixed:    1030;
+  --z-modal:    1050;
+  --z-cursor:   9999;
+}
 
-// Light Mode Shadows
-$elevation-1-light:
-  0 1px 3px hsla(220, 20%, 15%, 0.08),
-  0 1px 2px hsla(220, 20%, 15%, 0.12);
-$elevation-2-light:
-  0 3px 6px hsla(220, 20%, 15%, 0.1),
-  0 2px 4px hsla(220, 20%, 15%, 0.12);
-$elevation-3-light:
-  0 10px 20px hsla(220, 20%, 15%, 0.12),
-  0 3px 6px hsla(220, 20%, 15%, 0.1);
-$elevation-4-light:
-  0 15px 30px hsla(220, 20%, 15%, 0.15),
-  0 5px 10px hsla(220, 20%, 15%, 0.12);
-
-// Dark Mode Shadows (lighter for visibility)
-$elevation-1-dark:
-  0 1px 3px hsla(0, 0%, 0%, 0.3),
-  0 1px 2px hsla(0, 0%, 0%, 0.4);
-$elevation-2-dark:
-  0 3px 6px hsla(0, 0%, 0%, 0.35),
-  0 2px 4px hsla(0, 0%, 0%, 0.4);
-$elevation-3-dark:
-  0 10px 20px hsla(0, 0%, 0%, 0.4),
-  0 3px 6px hsla(0, 0%, 0%, 0.35);
-$elevation-4-dark:
-  0 15px 30px hsla(0, 0%, 0%, 0.5),
-  0 5px 10px hsla(0, 0%, 0%, 0.4);
-
-// Glow Effects (for interactive elements)
-$glow-primary:
-  0 0 20px hsla(250, 75%, 65%, 0.3),
-  0 0 40px hsla(250, 75%, 65%, 0.15);
-$glow-accent:
-  0 0 20px hsla(280, 70%, 70%, 0.3),
-  0 0 40px hsla(280, 70%, 70%, 0.15);
-
-// ============================================
-// SPACING SCALE (4px base grid)
-// ============================================
-
-$spacing-1: 0.4rem; // 4px
-$spacing-2: 0.8rem; // 8px
-$spacing-3: 1.2rem; // 12px
-$spacing-4: 1.6rem; // 16px
-$spacing-5: 2rem; // 20px
-$spacing-6: 2.4rem; // 24px
-$spacing-8: 3.2rem; // 32px
-$spacing-10: 4rem; // 40px
-$spacing-12: 4.8rem; // 48px
-$spacing-16: 6.4rem; // 64px
-$spacing-24: 9.6rem; // 96px
-$spacing-32: 12.8rem; // 128px
+// ── Light Mode Override ──────────────────────
+[data-theme="light"] {
+  --bg:           #F8F7F3;
+  --bg-2:         #F1EFE9;
+  --bg-3:         #E9E6DE;
+  --bg-4:         #E0DDD4;
+  --ink:          #18181A;
+  --ink-muted:    #5C5C62;
+  --ink-faint:    #BFBDB6;
+  --accent:       #2563EB;
+  --accent-dim:   #DBEAFE;
+  --green:        #16A34A;
+  --amber:        #D97706;
+  --red:          #DC2626;
+  --rule:         #DDD9CF;
+}
 
 // ============================================
-// TYPOGRAPHY SCALE
+// SCSS VARIABLES (for use in calculations)
 // ============================================
 
-$font-family-primary:
-  'Inter',
-  -apple-system,
-  BlinkMacSystemFont,
-  'Segoe UI',
-  'Roboto',
-  'Oxygen',
-  sans-serif;
-$font-family-display: 'Outfit', 'Inter', sans-serif;
-$font-family-mono: 'Fira Code', 'Consolas', monospace;
+// Breakpoints
+$bp-sm:  640px;
+$bp-md:  768px;
+$bp-lg:  1024px;
+$bp-xl:  1280px;
+$bp-2xl: 1536px;
 
-// Font Sizes
-$text-xs: 1.2rem; // 12px
-$text-sm: 1.4rem; // 14px
-$text-base: 1.6rem; // 16px
-$text-lg: 1.8rem; // 18px
-$text-xl: 2rem; // 20px
-$text-2xl: 2.4rem; // 24px
-$text-3xl: 3rem; // 30px
-$text-4xl: 3.6rem; // 36px
-$text-5xl: 4.8rem; // 48px
-$text-6xl: 6rem; // 60px
-$text-7xl: 7.2rem; // 72px
-$text-8xl: 9.6rem; // 96px
+$breakpoint-sm: $bp-sm;
+$breakpoint-md: $bp-md;
+$breakpoint-lg: $bp-lg;
 
-// Font Weights
-$font-light: 300;
-$font-regular: 400;
+// Spacing
+$spacing-2: 0.5rem;
+$spacing-3: 0.75rem;
+$spacing-4: 1rem;
+$spacing-6: 1.5rem;
+$spacing-8: 2rem;
+$spacing-12: 3rem;
+$spacing-16: 4rem;
+
+// Text sizes
+$text-xs: 0.75rem;
+$text-sm: 0.875rem;
+$text-base: 1rem;
+$text-lg: 1.125rem;
+$text-xl: 1.25rem;
+$text-2xl: 1.5rem;
+$text-3xl: 1.875rem;
+$text-4xl: 2.25rem;
+$text-5xl: 3rem;
+$text-6xl: 3.75rem;
+$text-7xl: 4.5rem;
+
+// Fonts
+$font-family-display: var(--serif);
+$font-family-primary: var(--sans);
 $font-medium: 500;
 $font-semibold: 600;
-$font-bold: 700;
 $font-black: 900;
 
-// Line Heights
-$leading-tight: 1.2;
-$leading-normal: 1.5;
-$leading-relaxed: 1.75;
+// Leading
+$leading-tight: 1.15;
 
-// ============================================
-// BORDER RADIUS
-// ============================================
-
-$radius-sm: 0.8rem; // 8px
-$radius-md: 1.2rem; // 12px
-$radius-lg: 1.6rem; // 16px
-$radius-xl: 2.4rem; // 24px
+// Radius
+$radius-sm: 0.25rem;
+$radius-md: 0.375rem;
+$radius-lg: 0.5rem;
+$radius-xl: 0.75rem;
 $radius-full: 9999px;
 
-// ============================================
-// ANIMATION DURATIONS
-// ============================================
+// Gradients
+$gradient-primary: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+$gradient-accent: linear-gradient(135deg, var(--green) 0%, #3b82f6 100%);
 
-$duration-instant: 150ms;
-$duration-fast: 250ms;
-$duration-normal: 400ms;
-$duration-slow: 600ms;
-$duration-slower: 800ms;
+// Stagger delays (scroll reveal)
+$d1: 0.08s;
+$d2: 0.16s;
+$d3: 0.24s;
+$d4: 0.32s;
+$d5: 0.40s;
 
-// Easing Functions
-$ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-$ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-$ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-// ============================================
-// Z-INDEX SCALE
-// ============================================
-
-$z-background: -1;
-$z-base: 0;
-$z-dropdown: 1000;
-$z-sticky: 1020;
-$z-fixed: 1030;
-$z-modal-backdrop: 1040;
-$z-modal: 1050;
-$z-popover: 1060;
-$z-tooltip: 1070;
-$z-cursor: 9999;
-
-// ============================================
-// BREAKPOINTS
-// ============================================
-
-$breakpoint-sm: 640px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 1024px;
-$breakpoint-xl: 1280px;
-$breakpoint-2xl: 1536px;
+// Syntax highlight colors (terminal / code blocks)
+$syn-keyword:  #BB9AF7;
+$syn-function: #7AA2F7;
+$syn-string:   #9ECE6A;
+$syn-number:   #E0AF68;
+$syn-property: #2AC3DE;
+$syn-class:    #F7768E;
 
 // ============================================
 // MIXINS
 // ============================================
 
-// Glass Card Mixin
-@mixin glass-card($opacity: $glass-opacity-medium, $blur: $blur-md) {
-  background: hsla(0, 0%, 100%, $opacity);
-  backdrop-filter: blur($blur);
-  -webkit-backdrop-filter: blur($blur);
-  border: 1px solid $glass-border-light;
+// ── Responsive ───────────────────────────────
+@mixin respond($bp) {
+  @if $bp == sm  { @media (min-width: $bp-sm)  { @content; } }
+  @if $bp == md  { @media (min-width: $bp-md)  { @content; } }
+  @if $bp == lg  { @media (min-width: $bp-lg)  { @content; } }
+  @if $bp == xl  { @media (min-width: $bp-xl)  { @content; } }
+  @if $bp == 2xl { @media (min-width: $bp-2xl) { @content; } }
+}
+
+// ── GPU Acceleration ─────────────────────────
+@mixin gpu {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+// ── Section Eyebrow ──────────────────────────
+// The mono label above every section heading
+@mixin eyebrow {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+// ── Section Heading ──────────────────────────
+@mixin section-heading {
+  font-family: var(--serif);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+// ── Card Base ────────────────────────────────
+@mixin card {
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  transition: border-color 0.3s var(--ease);
+
+  &:hover {
+    border-color: var(--accent);
+  }
+}
+
+// ── Scroll Reveal Base ───────────────────────
+// Apply to elements that will be revealed on scroll
+@mixin reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+
+@mixin reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+// ── Mono UI Chrome ───────────────────────────
+// For nav links, badges, labels, buttons
+@mixin mono-ui($size: 0.75rem, $weight: 500) {
+  font-family: var(--mono);
+  font-size: $size;
+  font-weight: $weight;
+  letter-spacing: 0.01em;
+}
+
+// ── Section Divider ──────────────────────────
+@mixin section-rule {
+  border-top: 1px solid var(--rule);
+}
+
+// ── Button: Primary (accent fill) ────────────
+@mixin btn-primary {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  padding: 0.6rem 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #0D0D0E;
+  background: var(--accent);
+  border: none;
+  border-radius: 4px;
+  cursor: none;
   overflow: hidden;
+  transition: color 0.3s var(--ease);
 
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: $noise-texture;
-    opacity: 0.5;
-    pointer-events: none;
+    inset: 0;
+    background: #fff;
+    opacity: 0.12;
+    transform: translateX(-101%);
+    transition: transform 0.35s var(--ease);
+  }
+
+  &:hover::before {
+    transform: translateX(0);
   }
 }
 
-// Responsive Mixin
-@mixin respond($breakpoint) {
-  @if $breakpoint == sm {
-    @media (min-width: $breakpoint-sm) {
-      @content;
-    }
-  }
-  @if $breakpoint == md {
-    @media (min-width: $breakpoint-md) {
-      @content;
-    }
-  }
-  @if $breakpoint == lg {
-    @media (min-width: $breakpoint-lg) {
-      @content;
-    }
-  }
-  @if $breakpoint == xl {
-    @media (min-width: $breakpoint-xl) {
-      @content;
-    }
-  }
-  @if $breakpoint == 2xl {
-    @media (min-width: $breakpoint-2xl) {
-      @content;
-    }
+// ── Button: Ghost (outlined) ─────────────────
+@mixin btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  padding: 0.6rem 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  cursor: none;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
   }
 }
 
-// GPU Acceleration
-@mixin gpu-accelerated {
-  transform: translateZ(0);
-  will-change: transform;
-  backface-visibility: hidden;
+// ── Tag / Badge ───────────────────────────────
+@mixin tag($color: var(--accent)) {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color;
+  background: transparent;
+  border: 1px solid $color;
+  border-radius: 2px;
+  padding: 0.2rem 0.5rem;
 }

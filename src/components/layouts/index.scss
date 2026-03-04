@@ -1,52 +1,28 @@
-@import '../../styles/designTokens.scss';
+// ─── src/components/layouts/Layout.scss ──────────────────────────────────────
+@use '../../styles/designTokens' as *;
 
-.page {
-    width: 100%;
-    min-height: 100vh;
-    // Navbar height (70px) + top margin (16px) + bottom spacing (16px)
-    padding-top: 102px;
+.layout {
+  position:   relative;
+  width:      100%;
+  min-height: 100vh;
+  background: var(--bg);
+  color:      var(--ink);
 
-    @media (max-width: $breakpoint-md) {
-        // Navbar height (64px) + top margin (12px) + bottom spacing (12px)
-        padding-top: 88px;
-    }
-
-    @media (max-width: $breakpoint-sm) {
-        // Navbar height (60px) + top margin (8px) + bottom spacing (8px)
-        padding-top: 76px;
-    }
+  ::selection {
+    background: var(--accent);
+    color:      var(--bg);
+  }
 }
 
-.container {
-    width: 100%;
-    will-change: contents;
-    min-height: calc(100vh - 102px);
-    position: relative;
-    opacity: 0;
-    margin: 0 auto;
-    padding: $spacing-6 $spacing-6;
-    z-index: 1;
-    transform-style: preserve-3d;
-    animation: fadeIn 1s forwards;
-    animation-delay: 0.5s;
-    max-width: 1600px;
-    
-    @media (min-width: $breakpoint-md) {
-        padding: $spacing-8 $spacing-8;
-    }
+// Main content area:
+// - Desktop (>768px): pushed right by sidebar width (56px + 1px border = 57px)
+// - Mobile: full width, sidebar is hidden
+// Each page component handles its own top padding to clear the fixed navbar (~64px)
+.layout__main {
+  width:      100%;
+  min-height: 100vh;
 
-    @media (min-width: $breakpoint-lg) {
-        padding: $spacing-12 $spacing-12;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  @media (min-width: 769px) {
+    padding-left: 57px;
+  }
 }

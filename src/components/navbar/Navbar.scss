@@ -1,197 +1,138 @@
-@import '../../styles/designTokens.scss';
+// ─── src/components/navbar/Navbar.scss ───────────────────────────────────────
+@use '../../styles/designTokens' as *;
 
-.top-navbar {
-    position: fixed;
-    top: $spacing-4;
-    left: $spacing-4;
-    right: $spacing-4;
-    z-index: $z-sticky;
-    height: 70px;
-    
-    // Material UI squircle shape
-    border-radius: 28px;
-    
-    // Backdrop blur for glass effect
-    background: hsla(var(--surface-hsl), 0.7);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    
-    // Borders and shadows
-    border: 1px solid hsla(0, 0%, 100%, 0.1);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.1),
-        0 0 0 1px hsla(0, 0%, 100%, 0.05) inset,
-        var(--elevation-2);
-    
-    // Noise texture overlay
-    &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: $noise-texture;
-        opacity: 0.15;
-        border-radius: 28px;
-        pointer-events: none;
-    }
-
-    .navbar-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 100%;
-        padding: 0 $spacing-6;
-        position: relative;
-        z-index: 1;
-
-        @media (min-width: $breakpoint-md) {
-            padding: 0 $spacing-8;
-        }
-    }
-
-    .navbar-logo {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-
-        img {
-            width: 45px;
-            height: 45px;
-            transition: transform $duration-fast $ease-smooth;
-
-            &:hover {
-                transform: scale(1.1) rotate(5deg);
-            }
-        }
-    }
-
-    .navbar-links {
-        display: none;
-        gap: $spacing-1;
-
-        @media (min-width: $breakpoint-md) {
-            display: flex;
-        }
-
-        a {
-            display: flex;
-            align-items: center;
-            gap: $spacing-2;
-            padding: $spacing-2 $spacing-4;
-            border-radius: $radius-lg;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: $text-sm;
-            font-weight: $font-medium;
-            transition: all $duration-fast $ease-smooth;
-            position: relative;
-            overflow: hidden;
-
-            svg {
-                font-size: $text-base;
-            }
-
-            span {
-                font-family: $font-family-display;
-            }
-
-            &::before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background: $gradient-primary;
-                opacity: 0;
-                transition: opacity $duration-fast $ease-smooth;
-                border-radius: $radius-lg;
-            }
-
-            &:hover {
-                background: hsla(0, 0%, 100%, 0.1);
-                color: $brand-primary;
-                transform: translateY(-1px);
-
-                &::before {
-                    opacity: 0.15;
-                }
-            }
-
-            &.active {
-                background: hsla(250, 75%, 65%, 0.2);
-                color: $brand-primary;
-                box-shadow: 
-                    0 0 20px rgba(150, 100, 255, 0.3),
-                    0 0 0 1px hsla(250, 75%, 65%, 0.3) inset;
-
-                &::before {
-                    opacity: 0.25;
-                }
-            }
-        }
-    }
-
-    .navbar-social {
-        display: flex;
-        gap: $spacing-2;
-
-        a {
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            font-size: $text-lg;
-            border-radius: $radius-lg;
-            background: hsla(0, 0%, 100%, 0.05);
-            border: 1px solid hsla(0, 0%, 100%, 0.08);
-            transition: all $duration-fast $ease-smooth;
-
-            &:hover {
-                color: $brand-primary;
-                background: hsla(250, 75%, 65%, 0.15);
-                border-color: $brand-primary;
-                transform: translateY(-2px) scale(1.05);
-                box-shadow: 0 4px 12px rgba(150, 100, 255, 0.4);
-            }
-        }
-
-        @media (max-width: $breakpoint-sm) {
-            display: none;
-        }
-    }
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
 
-// Mobile adjustments
-@media (max-width: $breakpoint-md) {
-    .top-navbar {
-        height: 64px;
-        border-radius: 24px;
-        top: $spacing-3;
-        left: $spacing-3;
-        right: $spacing-3;
+// ── Base ─────────────────────────────────────────────────────────────────────
 
-        .navbar-content {
-            padding: 0 $spacing-4;
-        }
+.navbar {
+  position:        fixed;
+  top:             0;
+  left:            0;
+  width:           100%;
+  z-index:         var(--z-fixed);
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  padding:         0 var(--s4);
+  height:          64px;
+  background:      transparent;
+  backdrop-filter: blur(0px);
+  border-bottom:   1px solid transparent;
 
-        .navbar-logo img {
-            width: 38px;
-            height: 38px;
-        }
+  opacity:         0;
+  transform:       translateY(-8px);
+  transition:
+    opacity         0.6s var(--ease),
+    transform       0.6s var(--ease),
+    background      0.4s var(--ease),
+    backdrop-filter 0.4s var(--ease),
+    border-color    0.4s var(--ease);
+
+  &--scrolled {
+    background:      rgba(13, 13, 14, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom-color: var(--rule);
+
+    [data-theme='light'] & {
+      background: rgba(248, 247, 243, 0.8);
     }
+  }
+
+  &--visible {
+    opacity:   1;
+    transform: translateY(0);
+  }
 }
 
-// Small mobile
-@media (max-width: $breakpoint-sm) {
-    .top-navbar {
-        height: 60px;
-        border-radius: 20px;
-        top: $spacing-2;
-        left: $spacing-2;
-        right: $spacing-2;
+// ── Sidebar spacer ────────────────────────────────────────────────────────────
+// Pushes nav links to the right of the sidebar rail on desktop
 
-        .navbar-content {
-            padding: 0 $spacing-3;
-        }
-    }
+.navbar__sidebar-spacer {
+  width:      57px; // matches sidebar width + border
+  flex-shrink: 0;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
+// ── Nav ───────────────────────────────────────────────────────────────────────
+
+.navbar__nav {
+  display:     flex;
+  align-items: center;
+  gap:         var(--s4);
+  margin-right: auto;
+  padding-left: var(--s3);
+}
+
+// ── Link ─────────────────────────────────────────────────────────────────────
+
+.navbar__link {
+  position:        relative;
+  display:         inline-flex;
+  align-items:     baseline;
+  gap:             0.35em;
+  font-family:     var(--mono);
+  font-size:       0.72rem;
+  font-weight:     500;
+  letter-spacing:  0.04em;
+  color:           var(--ink-muted);
+  text-decoration: none;
+  cursor:          none;
+  transition:      color 0.3s var(--ease);
+
+  &:hover,
+  &--active {
+    color: var(--ink);
+  }
+}
+
+.navbar__link-num {
+  color:     var(--accent);
+  font-size: 0.62rem;
+  opacity:   0.8;
+}
+
+.navbar__link-underline {
+  position:   absolute;
+  bottom:     -3px;
+  left:       0;
+  width:      0;
+  height:     1px;
+  background: var(--accent);
+  transition: width 0.35s var(--ease);
+}
+
+.navbar__link:hover .navbar__link-underline,
+.navbar__link--active .navbar__link-underline {
+  width: 100%;
+}
+
+// ── Theme Toggle ─────────────────────────────────────────────────────────────
+
+.navbar__theme-toggle {
+  font-family:    var(--mono);
+  font-size:      0.68rem;
+  font-weight:    500;
+  letter-spacing: 0.06em;
+  color:          var(--ink-muted);
+  background:     transparent;
+  border:         1px solid var(--rule);
+  border-radius:  2px;
+  padding:        0.3rem 0.65rem;
+  cursor:         none;
+  transition:
+    color        0.3s var(--ease),
+    border-color 0.3s var(--ease);
+
+  &:hover {
+    color:        var(--accent);
+    border-color: var(--accent);
+  }
+}
