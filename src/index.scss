@@ -260,35 +260,111 @@ nav.scrolled .nav-name {
 .btn-nav:hover { background:var(--accent); color:var(--bg); box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 40%, transparent); transform: translateY(-1px); }
 
 /* ═══════════════════════════════════════════════════════
-   HERO
+   HERO  (3-D cinematic)
    ═══════════════════════════════════════════════════════ */
 #hero {
   min-height: calc(100vh - 6rem);
   margin-top: 6rem;
-  display: grid;
-  grid-template-columns: 55% 45%;
   position: relative;
   overflow: hidden;
+  /* grid lives in .hero-inner-grid now */
 }
 
-/* Subtle grid background */
+/* subtle dot-grid background behind canvas */
 #hero::before {
   content: '';
-  position: absolute; inset:0;
+  position: absolute; inset: 0;
   background-image:
-    linear-gradient(var(--rule) 1px, transparent 1px),
-    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: .35;
+    radial-gradient(circle, color-mix(in srgb, var(--accent) 18%, transparent) 1px, transparent 1px);
+  background-size: 36px 36px;
+  opacity: .28;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* deep vignette to anchor content */
+#hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 70% at 48% 50%, transparent 35%, var(--bg) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Canvas wrapper fills the section ── */
+.hero-canvas-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   pointer-events: none;
 }
 
-/* Gradient fade over grid */
-#hero::after {
-  content: '';
-  position: absolute; inset:0;
-  background: radial-gradient(ellipse 70% 70% at 30% 60%, transparent 40%, var(--bg) 100%);
-  pointer-events: none;
+/* CRT scanlines */
+.hero-scanlines {
+  position: absolute; inset: 0;
+  z-index: 2; pointer-events: none;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,.08) 3px,
+    rgba(0,0,0,.08) 4px
+  );
+}
+
+/* edge vignette */
+.hero-vignette {
+  position: absolute; inset: 0;
+  z-index: 2; pointer-events: none;
+  background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 55%, rgba(11,11,12,.92) 100%);
+}
+
+/* ── Two-column inner grid ── */
+.hero-inner-grid {
+  position: relative;
+  z-index: 2;
+  min-height: calc(100vh - 6rem);
+  display: grid;
+  grid-template-columns: 55% 45%;
+}
+
+/* ── GSAP Glitch typewriter block ── */
+.hero-glitch-block {
+  font-family: var(--mono);
+  font-size: .78rem;
+  line-height: 1.85;
+  color: var(--green);
+  margin-bottom: var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: .1rem;
+  letter-spacing: .04em;
+  min-height: 4.8rem; /* reserve space to avoid layout shift */
+}
+
+.hero-glitch-line {
+  display: block;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.hero-glitch-line::after {
+  content: '█';
+  display: inline-block;
+  color: var(--green);
+  animation: blink .7s step-end infinite;
+  opacity: .7;
+  font-size: .6em;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+/* Only keep cursor on the last visible line */
+.hero-glitch-line:not(:last-child)::after {
+  display: none;
 }
 
 .hero-left {
@@ -1339,9 +1415,13 @@ footer {
    RESPONSIVE
    ═══════════════════════════════════════════════════════ */
 @media(max-width:960px){
-  #hero { grid-template-columns:1fr; }
+  /* hero grid */
+  .hero-inner-grid { grid-template-columns:1fr; }
   .hero-right { display:none; }
   .hero-left { padding:var(--s6) var(--s4) var(--s5); min-height:100vh; justify-content:center; }
+  /* reduce canvas opacity on tablet to save GPU */
+  .hero-canvas-wrap { opacity: 0.75; }
+  /* rest */
   .proj-featured-body { grid-template-columns: 1fr; padding: var(--s4); gap: var(--s4); }
   .proj-featured-img { padding: var(--s2) var(--s2) 0 var(--s2); aspect-ratio: auto; min-height: 250px; }
   .browser-mockup { width: 100%; border-radius: 4px 4px 0 0; }
@@ -1363,4 +1443,8 @@ footer {
 }
 @media(max-width:600px){
   .services-grid { grid-template-columns:1fr; }
+  /* on very small screens hide the canvas entirely – too heavy */
+  .hero-canvas-wrap { display: none; }
+  /* restore dot background on the section itself */
+  #hero::before { display: block; }
 }
