@@ -70,23 +70,23 @@
     "heading": "Featured Projects",
     "dateRange": "2023 – Present",
     "featured": {
-      "label": "⭐ Featured Project · 2024",
-      "title": "Solasta Event Website",
-      "desc": "A dynamic event management website for the annual tech fest organized by the Computer Science department. Features event registration and real-time updates.",
-      "stats": [
-        { "num": "100%", "label": "Responsive" },
-        { "num": "Fast", "label": "Load Time" },
-        { "num": "0", "label": "Errors" },
-        { "num": "99.9%", "label": "Uptime" }
-      ],
-      "tech": ["React", "Next.js", "Tailwind CSS"],
-      "links": [
-        { "label": "Live Demo ↗", "url": "https://solastadev.live/", "primary": true },
-        { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/solasta", "primary": false }
-      ],
-      "image": "/assets/solasta.jpg",
-      "urlName": "solastadev.live"
-    },
+  "label": "⭐ Featured Project · 2026",
+  "title": "Mini-CTF Platform",
+  "desc": "A premium, high-performance event platform for conducting CTF competitions. Features a 'cyber-elite' interactive UI, automated CTF single registration site.",
+  "stats": [
+    { "num": "100%", "label": "Responsive" },
+    { "num": "Fast", "label": "Load Time" },
+    { "num": "0", "label": "Errors" },
+    { "num": "99.9%", "label": "Uptime" }
+  ],
+  "tech": ["React", "Node.js", "MongoDB Atlas", "Tailwind CSS"],
+  "links": [
+    { "label": "Live Demo ↗", "url": "introtoctf.vercel.app", "primary": true },
+    { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/solasta", "primary": false }
+  ],
+  "image": "/assets/solasta.jpg",
+  "urlName": "solastadev.live"
+},
     "projects": [
       {
         "num": "02",
@@ -149,6 +149,18 @@
         "links": [
           { "label": "Live ↗", "url": "https://hack-nova.vercel.app/", "primary": true },
           { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/HackNova", "primary": false }
+        ]
+      },
+      {
+        "num": "07",
+        "tag": "Frontend",
+        "tagColors": "green",
+        "year": "2026",
+        "title": "Solasta Website",
+        "desc": "website for the annual tech fest organized by the Computer Science department. Features event registration and real-time updates.",
+        "tech": ["HTML", "CSS", "JavaScript", "React"],
+        "links": [
+          { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/solasta", "primary": true }
         ]
       }
     ]
