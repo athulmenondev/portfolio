@@ -925,6 +925,7 @@ nav.scrolled .nav-name {
   flex: 1;
   display: -webkit-box;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1447,8 +1448,160 @@ nav.scrolled .nav-name {
   margin: var(--s2) 0;
 }
 
+/* ─────────────────────────────────────────────────────────
+   ABOUT — GSAP CINEMATIC REVEALS
+───────────────────────────────────────────────────────── */
+
+/* Heading reveal wrapper (clip-path mask) */
+.about-heading-wrap {
+  overflow: hidden;
+  margin: var(--s4) 0 var(--s2);
+}
+
+.about-gsap-heading {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1;
+  color: var(--ink);
+  /* initial state set by GSAP, but also hide in CSS so it doesn't flash */
+  opacity: 0;
+}
+
+/* Intro paragraph */
+.about-gsap-para {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--ink-muted);
+  font-weight: 300;
+  max-width: 58ch;
+  margin-bottom: var(--s5);
+  opacity: 0; /* GSAP sets to 1 */
+}
+
+/* ── Stack section ── */
+.about-stack-section {
+  margin-bottom: var(--s5);
+}
+
+.about-stack-label {
+  font-family: var(--mono);
+  font-size: .62rem;
+  color: var(--accent);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: var(--s3);
+}
+
+/* Grid auto-fills with minimum 180px columns, max 3-col */
+.about-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+/* Individual stack card */
+.about-stack-card {
+  --sc: var(--accent);         /* per-card colour set inline */
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  padding: .9rem 1.1rem;
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  cursor: none;
+  overflow: hidden;
+  transition:
+    border-color .3s var(--ease),
+    box-shadow   .3s var(--ease),
+    transform    .25s var(--ease);
+  /* initial opacity set by GSAP */
+  opacity: 0;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--sc) 50%, var(--rule));
+    box-shadow: 0 8px 24px -6px color-mix(in srgb, var(--sc) 20%, transparent);
+    transform: translateY(-3px);
+  }
+}
+
+/* accent glow in the corner */
+.asc-glow {
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--sc) 70%, transparent),
+    transparent 70%
+  );
+  opacity: .08;
+  pointer-events: none;
+  transition: opacity .3s;
+}
+.about-stack-card:hover .asc-glow { opacity: .2; }
+
+/* Icon bubble */
+.asc-icon {
+  font-size: 1.3rem;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--sc) 12%, var(--bg-3));
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--sc) 25%, var(--rule));
+  color: var(--sc);
+  font-style: normal;
+  transition: background .3s;
+}
+.about-stack-card:hover .asc-icon {
+  background: color-mix(in srgb, var(--sc) 20%, var(--bg-3));
+}
+
+/* Text */
+.asc-body {
+  display: flex;
+  flex-direction: column;
+  gap: .18rem;
+  min-width: 0;
+}
+.asc-cat {
+  font-family: var(--mono);
+  font-size: .52rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--sc);
+  opacity: .8;
+}
+.asc-label {
+  font-family: var(--sans);
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color .25s;
+}
+.about-stack-card:hover .asc-label { color: var(--sc); }
+
+/* Responsive: collapse to 2-col on narrow screens inside .about-right */
+@media (max-width: 768px) {
+  .about-stack-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .asc-label { font-size: .72rem; }
+}
+
 /* ═══════════════════════════════════════════════════════
    EXPERIENCE TIMELINE
+
    ═══════════════════════════════════════════════════════ */
 .timeline { margin-top: var(--s4); }
 .tl-item {
