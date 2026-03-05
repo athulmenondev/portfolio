@@ -6,11 +6,9 @@ import { ArrowUpRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ─────────────────────────────────────────────
+/* ─────────────────────────────────────────────────────────
    PROJECT DATA
-   Images in /assets/ (public folder).
-   Colour-coded placeholders for missing images.
-───────────────────────────────────────────── */
+───────────────────────────────────────────────────────── */
 const PROJECTS = [
   {
     num:   '01',
@@ -22,8 +20,8 @@ const PROJECTS = [
     tech:  ['Node.js', 'Supabase', 'MongoDB Atlas', 'React'],
     image: '/assets/hacknova.jpg',
     links: [
-      { label: 'Live Demo ↗', url: 'https://introtoctf.vercel.app', primary: true },
-      { label: 'GitHub ↗',    url: 'https://github.com/athulmenondev', primary: false },
+      { label: 'Live Demo', url: 'https://introtoctf.vercel.app', primary: true },
+      { label: 'GitHub',    url: 'https://github.com/athulmenondev', primary: false },
     ],
   },
   {
@@ -36,7 +34,7 @@ const PROJECTS = [
     tech:  ['Python', 'Flask', 'Firebase', 'Generative AI'],
     image: '/assets/aikudumbam.jpg',
     links: [
-      { label: 'GitHub ↗', url: 'https://github.com/athulmenondev', primary: true },
+      { label: 'GitHub', url: 'https://github.com/athulmenondev', primary: true },
     ],
   },
   {
@@ -45,11 +43,11 @@ const PROJECTS = [
     tag:   'Security',
     color: '#F59E0B',
     title: 'Phishing Detection Tool',
-    desc:  'End-to-end phishing detection solution: a custom browser extension that intercepts navigation events and a backend ML classifier that analyses URLs, DOM fingerprints and SSL signals in real-time.',
+    desc:  'End-to-end phishing detection: a browser extension that intercepts navigation events and a backend ML classifier that analyses URLs, DOM fingerprints and SSL signals in real-time.',
     tech:  ['JavaScript', 'Python', 'Chrome Extension API', 'Flask'],
     image: '/assets/revup.jpg',
     links: [
-      { label: 'GitHub ↗', url: 'https://github.com/athulmenondev', primary: true },
+      { label: 'GitHub', url: 'https://github.com/athulmenondev', primary: true },
     ],
   },
   {
@@ -62,202 +60,248 @@ const PROJECTS = [
     tech:  ['React', 'Next.js', 'Tailwind CSS'],
     image: '/assets/solasta.jpg',
     links: [
-      { label: 'Live Demo ↗', url: 'https://solastadev.live/', primary: true },
-      { label: 'GitHub ↗',    url: 'https://github.com/athulmenondev/solasta', primary: false },
+      { label: 'Live Demo', url: 'https://solastadev.live/', primary: true },
+      { label: 'GitHub',    url: 'https://github.com/athulmenondev/solasta', primary: false },
     ],
   },
 ];
 
-/* ─────────────────────────────────────────────
+/* ─────────────────────────────────────────────────────────
+   3-D TILT HELPERS  (mouse follow per card)
+───────────────────────────────────────────────────────── */
+const handleTiltMove = (e) => {
+  const card = e.currentTarget;
+  const { left, top, width, height } = card.getBoundingClientRect();
+  const x = ((e.clientX - left) / width  - 0.5) * 18;  /* deg */
+  const y = ((e.clientY - top)  / height - 0.5) * -18;
+  gsap.to(card, {
+    rotateX: y,
+    rotateY: x,
+    transformPerspective: 900,
+    ease: 'power1.out',
+    duration: 0.4,
+  });
+  /* Also shift the glare overlay */
+  const glare = card.querySelector('.wc-glare');
+  if (glare) {
+    const px = ((e.clientX - left) / width)  * 100;
+    const py = ((e.clientY - top)  / height) * 100;
+    glare.style.background = `radial-gradient(circle at ${px}% ${py}%, rgba(255,255,255,0.08) 0%, transparent 65%)`;
+  }
+};
+
+const handleTiltLeave = (e) => {
+  const card = e.currentTarget;
+  gsap.to(card, {
+    rotateX: 0, rotateY: 0,
+    ease: 'power2.out',
+    duration: 0.6,
+  });
+  const glare = card.querySelector('.wc-glare');
+  if (glare) glare.style.background = 'none';
+};
+
+/* ─────────────────────────────────────────────────────────
    COMPONENT
-───────────────────────────────────────────── */
+───────────────────────────────────────────────────────── */
 const Work = ({ data }) => {
-  const sectionRef  = useRef(null);
-  const trackRef    = useRef(null);
-  const imgRefs     = useRef([]);
+  const wrapRef  = useRef(null);  /* the tall scroll-proxy wrapper */
+  const pinRef   = useRef(null);  /* the pinned viewport panel     */
+  const trackRef = useRef(null);  /* the x-moving strip of cards   */
+  const imgRefs  = useRef([]);    /* one <img> per card            */
 
   useGSAP(() => {
-    const section = sectionRef.current;
-    const track   = trackRef.current;
-    if (!section || !track) return;
+    const wrap  = wrapRef.current;
+    const pin   = pinRef.current;
+    const track = trackRef.current;
+    if (!wrap || !pin || !track) return;
 
-    /* ── How far we need to scroll horizontally ── */
-    const getScrollAmount = () =>
-      -(track.scrollWidth - window.innerWidth);
+    /* ── Total horizontal distance to scroll ──
+       Each card is 520px wide + 20px gap = 540px.
+       We want the last card to stop flush at viewport right edge.
+       Use scrollWidth - pin clientWidth for the exact amount.        */
+    const getTotalX = () => -(track.scrollWidth - pin.clientWidth);
 
-    /* ── Pin + horizontal scroll ── */
-    const hmTween = gsap.to(track, {
-      x: getScrollAmount,
+    /* ── Main pin + horizontal scrub ── */
+    const mainTween = gsap.to(track, {
+      x:    getTotalX,
       ease: 'none',
       scrollTrigger: {
-        trigger:    section,
-        start:      'top top',
-        end:        () => `+=${track.scrollWidth}`,
-        pin:        true,
-        scrub:      1.2,
-        anticipatePin: 1,
+        trigger:             wrap,
+        pin:                 pin,
+        start:               'top top',
+        end:                 () => `+=${track.scrollWidth - pin.clientWidth}`,
+        scrub:               1,
+        anticipatePin:       1,
         invalidateOnRefresh: true,
+        /* Progress bar */
+        onUpdate: (self) => {
+          const bar = pin.querySelector('.wc-progress-fill');
+          if (bar) bar.style.width = `${self.progress * 100}%`;
+        },
       },
     });
 
-    /* ── Per-card image parallax ── */
-    imgRefs.current.forEach((img) => {
+    /* ── Per-image VERTICAL parallax (yPercent) ──
+       Image is 140% tall, starts at yPercent -20, ends at 0.
+       containerAnimation links it to the horizontal scrub.            */
+    imgRefs.current.forEach((img, i) => {
       if (!img) return;
-      gsap.fromTo(
-        img,
-        { x: '-8%' },
+      const card = img.closest('.work-card');
+      if (!card) return;
+
+      gsap.fromTo(img,
+        { yPercent: -20 },
         {
-          x: '8%',
-          ease: 'none',
+          yPercent: 10,
+          ease:     'none',
           scrollTrigger: {
-            trigger:             img.closest('.work-card'),
-            containerAnimation:  hmTween,
-            start:               'left right',
-            end:                 'right left',
-            scrub:               true,
+            trigger:            card,
+            containerAnimation: mainTween,
+            start:              'left right',
+            end:                'right left',
+            scrub:              true,
           },
         }
       );
     });
 
-    /* ── Card entrance stagger (fade + lift as they enter from the right) ── */
+    /* ── Card reveal: fade + slide up as each enters from the right ── */
     gsap.utils.toArray('.work-card').forEach((card) => {
-      gsap.fromTo(
-        card,
-        { opacity: 0, y: 40 },
+      const inner = card.querySelector('.wc-body-inner');
+      if (!inner) return;
+      gsap.fromTo(inner,
+        { opacity: 0, y: 36 },
         {
-          opacity: 1,
-          y:       0,
-          duration: 0.7,
-          ease:    'power3.out',
+          opacity:  1,
+          y:        0,
+          duration: 0.55,
+          ease:     'power2.out',
           scrollTrigger: {
-            trigger:           card,
-            containerAnimation: hmTween,
-            start:             'left 90%',
-            end:               'left 55%',
-            scrub:             false,
-            toggleActions:     'play none none reverse',
+            trigger:            card,
+            containerAnimation: mainTween,
+            start:              'left 78%',
+            toggleActions:      'play none none reverse',
           },
         }
       );
     });
-
-    /* ── Progress bar ── */
-    const progressBar = section.querySelector('.work-progress-bar');
-    if (progressBar) {
-      gsap.to(progressBar, {
-        width: '100%',
-        ease: 'none',
-        scrollTrigger: {
-          trigger:    section,
-          start:      'top top',
-          end:        () => `+=${track.scrollWidth}`,
-          scrub:      true,
-        },
-      });
-    }
 
     return () => {
       ScrollTrigger.getAll().forEach((st) => st.kill());
     };
-  }, { scope: sectionRef });
+  }, { scope: wrapRef });
 
   return (
-    <section id="work" ref={sectionRef} className="work-section">
+    /* ── Tall outer div: gives GSAP scroll room equal to track width ── */
+    <div ref={wrapRef} id="work" className="work-outer">
 
-      {/* ── sticky header (visible above the pinned panel) ── */}
-      <div className="work-header">
-        <div>
-          <p className="section-eyebrow">{data?.eyebrow ?? 'Selected Work'}</p>
-          <h2 className="section-heading">{data?.heading ?? 'Featured Projects'}</h2>
-        </div>
-        <span className="section-link">{data?.dateRange ?? '2023 – Present'}</span>
-      </div>
+      {/* ── Pinned panel: fills exactly 100vh ── */}
+      <div ref={pinRef} className="work-pin">
 
-      {/* ── horizontal track ── */}
-      <div className="work-track-outer">
-        <div className="work-track" ref={trackRef}>
-
-          {PROJECTS.map((proj, i) => (
-            <article
-              key={proj.num}
-              className="work-card"
-              style={{ '--card-accent': proj.color }}
-            >
-              {/* image with parallax child */}
-              <div className="wc-img-wrap">
-                <img
-                  ref={(el) => (imgRefs.current[i] = el)}
-                  src={proj.image}
-                  alt={proj.title}
-                  className="wc-img"
-                  loading="lazy"
-                />
-                {/* tinted overlay */}
-                <div className="wc-img-overlay" />
-              </div>
-
-              {/* card body */}
-              <div className="wc-body">
-                <div className="wc-meta">
-                  <span className="wc-tag" style={{ color: proj.color, borderColor: `${proj.color}55` }}>
-                    {proj.tag}
-                  </span>
-                  <span className="wc-num">{proj.num} / {String(PROJECTS.length).padStart(2, '0')}</span>
-                  <span className="wc-year">{proj.year}</span>
-                </div>
-
-                <h3 className="wc-title">{proj.title}</h3>
-                <p className="wc-desc">{proj.desc}</p>
-
-                <div className="wc-tech">
-                  {proj.tech.map((t) => (
-                    <span key={t} className="wc-tech-badge">{t}</span>
-                  ))}
-                </div>
-
-                <div className="wc-links">
-                  {proj.links.map((lnk, j) => (
-                    <a
-                      key={j}
-                      href={lnk.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={`wc-btn ${lnk.primary ? 'wc-btn--primary' : 'wc-btn--ghost'}`}
-                    >
-                      {lnk.label.replace('↗', '').trim()}
-                      <ArrowUpRight size={13} />
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* accent glow */}
-              <div className="wc-glow" />
-            </article>
-          ))}
-
-          {/* — end card — */}
-          <div className="work-end-card">
-            <p className="work-end-label">{'// more on GitHub'}</p>
-            <a
-              href="https://github.com/athulmenondev"
-              target="_blank"
-              rel="noreferrer"
-              className="work-end-link"
-            >
-              github.com/athulmenondev
-              <ArrowUpRight size={18} />
-            </a>
+        {/* header */}
+        <div className="work-hd">
+          <div>
+            <p className="section-eyebrow">{data?.eyebrow ?? 'Selected Work'}</p>
+            <h2 className="work-heading">{data?.heading ?? 'Featured Projects'}</h2>
           </div>
-
+          <div className="work-hd-right">
+            <span className="section-link">{data?.dateRange ?? '2023 – Present'}</span>
+            <span className="work-count">{PROJECTS.length} projects</span>
+          </div>
         </div>
+
+        {/* cards strip */}
+        <div className="work-track-wrap">
+          <div className="work-track" ref={trackRef}>
+
+            {PROJECTS.map((proj, i) => (
+              <article
+                key={proj.num}
+                className="work-card"
+                style={{ '--ac': proj.color }}
+                onMouseMove={handleTiltMove}
+                onMouseLeave={handleTiltLeave}
+              >
+                {/* ── image with parallax ── */}
+                <div className="wc-img-wrap">
+                  <img
+                    ref={(el) => { imgRefs.current[i] = el; }}
+                    src={proj.image}
+                    alt={proj.title}
+                    className="wc-img"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                  {/* bottom fade */}
+                  <div className="wc-img-fade" />
+                </div>
+
+                {/* glare layer for tilt effect */}
+                <div className="wc-glare" />
+
+                {/* ── text body (revealed by GSAP) ── */}
+                <div className="wc-body">
+                  <div className="wc-body-inner">
+                    <div className="wc-meta">
+                      <span className="wc-tag">{proj.tag}</span>
+                      <span className="wc-year">{proj.year}</span>
+                      <span className="wc-num">{proj.num} / 0{PROJECTS.length}</span>
+                    </div>
+
+                    <h3 className="wc-title">{proj.title}</h3>
+                    <p  className="wc-desc">{proj.desc}</p>
+
+                    <div className="wc-tech-row">
+                      {proj.tech.map((t) => <span key={t} className="wc-badge">{t}</span>)}
+                    </div>
+
+                    <div className="wc-links">
+                      {proj.links.map((lk, j) => (
+                        <a
+                          key={j}
+                          href={lk.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={`wc-btn ${lk.primary ? 'wc-btn--fill' : 'wc-btn--ghost'}`}
+                        >
+                          {lk.label}
+                          <ArrowUpRight size={13} />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* accent glow */}
+                <div className="wc-glow" />
+              </article>
+            ))}
+
+            {/* — end cta — */}
+            <div className="work-cta-card">
+              <p className="work-cta-mono">{'// see more'}</p>
+              <a
+                href="https://github.com/athulmenondev"
+                target="_blank"
+                rel="noreferrer"
+                className="work-cta-link"
+              >
+                github.com/<br />athulmenondev
+                <ArrowUpRight size={20} />
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        {/* progress bar */}
+        <div className="wc-progress">
+          <div className="wc-progress-fill" />
+        </div>
+
       </div>
-
-      {/* scroll-progress bar */}
-      <div className="work-progress-bar" id="work-progress" />
-
-    </section>
+    </div>
   );
 };
 
