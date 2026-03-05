@@ -4,7 +4,7 @@
 
 A modern, responsive portfolio website built with React to showcase my skills, experience, and the projects I've worked on.
 
-![Screenshot of the portfolio homepage](https://github.com/athulmenondev/portfolio/blob/master/screenshots/ss1.png)
+![Screenshot of the portfolio homepage](https://github.com/athulmenondev/portfolio/blob/master/screenshots/ss2.png)
 
 ---
 
