@@ -23,12 +23,23 @@ const Cursor = () => {
     /* Current represents the interpolated position for smooth trailing */
     let currentX = mouseX;
     let currentY = mouseY;
+    let hasMoved = false;
     let animationFrameId;
+
+    // Hide until first mouse move to avoid flash at (0,0)
+    outer.style.opacity = '0';
 
     // 2. High-performance mouse tracking (avoiding React state)
     const onMouseMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      if (!hasMoved) {
+        hasMoved = true;
+        // Snap to exact position on first move, then let lerp take over
+        currentX = mouseX;
+        currentY = mouseY;
+        outer.style.opacity = '1';
+      }
     };
 
     // 3. requestAnimationFrame loop
@@ -47,7 +58,7 @@ const Cursor = () => {
       if (e.target.closest('a, button, .hover-target')) {
         gsap.to(inner, {
           scale: 1.5,
-          backgroundColor: 'rgba(16, 185, 129, 0.18)', // Custom semi-transparent neon green fill
+          backgroundColor: 'rgba(16, 185, 129, 0.18)',
           duration: 0.35,
           ease: 'power3.out',
         });
@@ -76,7 +87,7 @@ const Cursor = () => {
 
     // Cleanup
     return () => {
-      document.body.style.cursor = 'auto'; // Restore default
+      document.body.style.cursor = 'auto';
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseover', onMouseOver);
       document.removeEventListener('mouseout', onMouseOut);
@@ -90,14 +101,29 @@ const Cursor = () => {
   return (
     <div
       ref={outerRef}
-      /* Outer wrapper controls translation to avoid conflict with GSAP scaling */
-      className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-screen"
-      style={{ willChange: 'transform' }}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        pointerEvents: 'none',
+        zIndex: 9999,
+        mixBlendMode: 'screen',
+        willChange: 'transform',
+        opacity: 0,
+        transition: 'opacity 0.2s ease',
+      }}
     >
       <div
         ref={innerRef}
-        /* Inner div centers itself natively via top/left offsets and handles the aesthetic */
-        className="absolute top-[-10px] left-[-10px] w-5 h-5 border-[1.5px] border-[#10B981] rounded-[3px]"
+        style={{
+          position: 'absolute',
+          top: '-10px',
+          left: '-10px',
+          width: '20px',
+          height: '20px',
+          border: '1.5px solid #10B981',
+          borderRadius: '3px',
+        }}
       />
     </div>
   );

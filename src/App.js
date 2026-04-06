@@ -63,21 +63,23 @@ function App() {
     document.body.classList.add('loaded');
   };
 
-  if (!data) return null;
-
   return (
     <>
-      <Loader onComplete={handleLoaderComplete} />
       <Cursor />
-      <Nav data={data.nav} />
-      <Hero data={data.hero} />
-      <Marquee data={data.marquee} />
-      <Activity data={data.activity} />
-      <Work data={data.work} />
-      <Services data={data.services} />
-      <About data={data.about} />
-      <Contact data={data.contact} />
-      <Footer data={data.footer} />
+      <Loader onComplete={handleLoaderComplete} />
+      {data && (
+        <>
+          <Nav data={data.nav} />
+          <Hero data={data.hero} />
+          <Marquee data={data.marquee} />
+          <Activity data={data.activity} />
+          <Work data={data.work} />
+          <Services data={data.services} />
+          <About data={data.about} />
+          <Contact data={data.contact} />
+          <Footer data={data.footer} />
+        </>
+      )}
     </>
   );
 }

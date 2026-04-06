@@ -70,97 +70,104 @@
     "heading": "Featured Projects",
     "dateRange": "2023 – Present",
     "featured": {
-  "label": "⭐ Featured Project · 2026",
-  "title": "Mini-CTF Platform",
-  "desc": "A premium, high-performance event platform for conducting CTF competitions. Features a 'cyber-elite' interactive UI, automated CTF single registration site.",
-  "stats": [
-    { "num": "100%", "label": "Responsive" },
-    { "num": "Fast", "label": "Load Time" },
-    { "num": "0", "label": "Errors" },
-    { "num": "99.9%", "label": "Uptime" }
-  ],
-  "tech": ["React", "Node.js", "MongoDB Atlas", "Tailwind CSS"],
-  "links": [
-    { "label": "Live Demo ↗", "url": "introtoctf.vercel.app", "primary": true },
-    { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/solasta", "primary": false }
-  ],
-  "image": "/assets/solasta.jpg",
-  "urlName": "solastadev.live"
-},
+      "year": "2026",
+      "tag": "AI Security / DLP",
+      "color": "#10B981",
+      "title": "PhishGuard",
+      "role": "Full-Stack & Machine Learning Developer",
+      "desc": "In an era where social engineering and accidental data exposure are leading causes of security breaches, PhishGuard acts as an active, contextual layer of defense living directly inside the user's email workflow — protecting against incoming phishing attacks and preventing outgoing confidential data leaks in real-time.",
+      "longDesc": "A machine learning-backed browser extension that automatically extracts and analyses email content and sender metadata. Incoming text is cleaned, normalised, and transformed via TF-IDF vectorisation before being evaluated by a customised Random Forest classifier — delivering an immediate security verdict and confidence score via a glassmorphism-styled React interface inside the browser.",
+      "tech": ["React", "SCSS", "Python", "Flask", "Scikit-learn", "Random Forest", "TF-IDF", "Chrome Extension APIs"],
+      "stats": [
+        { "num": "Real-Time", "label": "Threat Detection" },
+        { "num": "Dual", "label": "Model Architecture" },
+        { "num": "DLP", "label": "Outgoing Guard" },
+        { "num": "ML", "label": "Powered" }
+      ],
+      "links": [
+        { "label": "GitHub", "url": "https://github.com/athulmenondev/epds", "primary": true }
+      ],
+      "image": "/assets/epds.png",
+      "urlName": "https://epds-v1.vercel.app/",
+      "highlights": [
+        "Real-Time phishing probability scoring via Flask REST API + Scikit-learn",
+        "Data Loss Prevention — monitors outgoing compose windows for sensitive leaks",
+        "Dual-engine: Sender Analysis (spoofed domains) + Content Analysis (NLP signals)",
+        "Glassmorphism React UI with dark-mode aesthetics, non-intrusive security alerts"
+      ]
+    },
     "projects": [
       {
         "num": "02",
-        "tag": "Web App",
-        "tagColors": "amber",
-        "year": "2024",
-        "title": "AIKudumbam",
-        "desc": "AI Kudumbam is a delightfully web application that lovingly simulates a classic Keralite family gathering in the digital age.",
-        "tech": ["HTML", "CSS", "JavaScript", "React"],
+        "tag": "CTF Platform",
+        "tagColors": "purple",
+        "year": "2026",
+        "color": "#6B4CFF",
+        "title": "Mini-CTF Platform",
+        "desc": "A premium, high-performance event platform for conducting Capture-the-Flag competitions. Features a cyber-elite interactive UI, real-time leaderboard, automated flag-scoring engine and single-event registration — built end-to-end.",
+        "tech": ["React", "Node.js", "MongoDB Atlas", "Supabase", "Tailwind CSS"],
+        "image": "/assets/introtoctf.png",
         "links": [
-          { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/AIKudumbam", "primary": true }
+          { "label": "Live Demo", "url": "https://introtoctf.vercel.app", "primary": true },
+          { "label": "GitHub", "url": "https://github.com/athulmenondev/introtoctf", "primary": false }
         ]
       },
       {
         "num": "03",
-        "tag": "Frontend",
+        "tag": "AI / ML",
         "tagColors": "green",
-        "year": "2024",
-        "title": "Praganya Website",
-        "desc": "Collection of interactive web applications showcasing modern frontend development techniques and creative problem-solving.",
-        "tech": ["HTML", "CSS", "JavaScript", "React"],
+        "year": "2025",
+        "color": "#10B981",
+        "title": "AI Project Manager",
+        "desc": "Autonomous project assistant powered by Generative AI. Breaks down goals, assigns tasks, tracks progress and generates weekly reports via a Flask API.",
+        "tech": ["Python", "Flask", "Firebase", "Generative AI"],
+        "image": "/assets/springpath.png",
         "links": [
-          { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/praganya", "primary": true }
+          { "label": "GitHub", "url": "https://github.com/athulmenondev/SpringPath", "primary": true }
         ]
       },
       {
         "num": "04",
-        "tag": "Static Site",
-        "tagColors": "",
-        "year": "2023",
-        "title": "School Website",
-        "desc": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
-        "tech": ["HTML", "CSS", "JavaScript"],
+        "tag": "Frontend",
+        "tagColors": "purple",
+        "year": "2024",
+        "color": "#6B4CFF",
+        "title": "Solasta Tech Fest",
+        "desc": "Event management website for the annual CS-department tech fest. Handles registration, live result updates and 500+ concurrent visitors.",
+        "tech": ["React", "Next.js", "Tailwind CSS"],
+        "image": "/assets/solasta.jpg",
         "links": [
-          { "label": "Live ↗", "url": "https://nationalhss.in/", "primary": true },
-          { "label": "GitHub ↗", "url": "https://github.com/hxri-nxrxyxn/national-web", "primary": false }
+          { "label": "Live Demo", "url": "https://solastadev.live/", "primary": true },
+          { "label": "GitHub", "url": "https://github.com/athulmenondev/solasta", "primary": false }
         ]
       },
       {
         "num": "05",
         "tag": "Web App",
-        "tagColors": "green",
+        "tagColors": "amber",
         "year": "2024",
-        "title": "RevUp Website",
-        "desc": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
-        "tech": ["HTML", "CSS", "JavaScript"],
+        "color": "#F59E0B",
+        "title": "AIKudumbam",
+        "desc": "A delightfully interactive web application that lovingly simulates a classic Keralite family gathering in the digital age, powered by AI-generated characters.",
+        "tech": ["HTML", "CSS", "JavaScript", "React"],
+        "image": "/assets/aikudumbam.jpg",
         "links": [
-          { "label": "Live ↗", "url": "https://praganya.vercel.app/", "primary": true },
-          { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/RevUp", "primary": false }
+          { "label": "GitHub", "url": "https://github.com/athulmenondev/AIKudumbam", "primary": true }
         ]
       },
       {
         "num": "06",
-        "tag": "Web App",
-        "tagColors": "amber",
-        "year": "2024",
-        "title": "HackNova",
-        "desc": "A user-friendly static website for National Higher Secondary School designed to provide easy access to school information and resources.",
+        "tag": "Static Site",
+        "tagColors": "",
+        "year": "2023",
+        "color": "#6B4CFF",
+        "title": "School Website",
+        "desc": "A user-friendly static website for National Higher Secondary School providing easy access to school information and resources.",
         "tech": ["HTML", "CSS", "JavaScript"],
+        "image": "/assets/school.png",
         "links": [
-          { "label": "Live ↗", "url": "https://hack-nova.vercel.app/", "primary": true },
-          { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/HackNova", "primary": false }
-        ]
-      },
-      {
-        "num": "07",
-        "tag": "Frontend",
-        "tagColors": "green",
-        "year": "2026",
-        "title": "Solasta Website",
-        "desc": "website for the annual tech fest organized by the Computer Science department. Features event registration and real-time updates.",
-        "tech": ["HTML", "CSS", "JavaScript", "React"],
-        "links": [
-          { "label": "GitHub ↗", "url": "https://github.com/athulmenondev/solasta", "primary": true }
+          { "label": "Live", "url": "https://nationalhss.in/", "primary": true },
+          { "label": "GitHub", "url": "https://github.com/hxri-nxrxyxn/national-web", "primary": false }
         ]
       }
     ]
