@@ -12,6 +12,7 @@ import Services from './components/Services';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import AiTerminal from './components/AiTerminal';
 
 function App() {
   const [data, setData] = useState(null);
@@ -76,6 +77,7 @@ function App() {
           <Work data={data.work} />
           <Services data={data.services} />
           <About data={data.about} />
+          <AiTerminal/>
           <Contact data={data.contact} />
           <Footer data={data.footer} />
         </>
