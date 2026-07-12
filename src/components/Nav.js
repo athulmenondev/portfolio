@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Sun, Moon, ArrowRight, ArrowUp } from 'lucide-react';
+import { Sun, Moon, ArrowRight, ArrowUp, Download } from 'lucide-react';
 
 const Nav = ({ data }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -66,6 +66,10 @@ const Nav = ({ data }) => {
         </ul>
 
         <div className="nav-right">
+          <a className="btn-nav btn-nav--download" href="/Athul%20S%20Menon__July_26.pdf" download onClick={closeMenu}>
+            <Download size={14} />
+            Resume
+          </a>
           <a className="btn-nav" href="#contact" onClick={closeMenu}>
             {data.hireMe.replace('→', '').replace('↗', '')}
             <ArrowRight size={16} />

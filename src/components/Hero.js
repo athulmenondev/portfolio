@@ -290,8 +290,23 @@ const Hero = ({ data }) => {
           </p>
 
           <div className="hero-actions reveal">
-            {data.buttons.map((btn, i) =>
-              btn.primary ? (
+            {data.buttons.map((btn, i) => {
+              if (btn.download) {
+                return (
+                  <a
+                    key={i}
+                    className="btn-outline"
+                    href={btn.target}
+                    download
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <span>{btn.label}</span>
+                    <ArrowUpRight size={16} style={{ marginLeft: 4 }} />
+                  </a>
+                );
+              }
+              return btn.primary ? (
                 <button
                   key={i}
                   className="btn-primary"
@@ -313,8 +328,8 @@ const Hero = ({ data }) => {
                   <span>{btn.label}</span>
                   {btn.target === 'contact' && <ArrowUpRight size={16} style={{ marginLeft: 4 }} />}
                 </a>
-              )
-            )}
+              );
+            })}
           </div>
 
           <div className="hero-stack reveal d2">

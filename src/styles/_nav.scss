@@ -120,6 +120,18 @@ nav {
     box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 40%, transparent);
     transform: translateY(-1px);
   }
+
+  &--download {
+    background: transparent;
+    color: var(--ink-muted);
+    padding: 0.6rem 1rem;
+
+    &:hover {
+      background: color-mix(in srgb, var(--ink) 8%, transparent);
+      color: var(--ink);
+      box-shadow: none;
+    }
+  }
 }
 
 // ─── Mobile Menu Toggle (hamburger) ───────────────────────

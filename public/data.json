@@ -11,7 +11,7 @@
     "hireMe": "Hire Me →"
   },
   "hero": {
-    "badge": "available for opportunities",
+    "badge": "",
     "titleParts": [
       "I build,   ",
       "I break,   ",
@@ -25,7 +25,8 @@
     },
     "buttons": [
       { "label": "View Works", "target": "work", "primary": true },
-      { "label": "Get in Touch", "target": "contact", "primary": false }
+      { "label": "Get in Touch", "target": "contact", "primary": false },
+      { "label": "Download Resume", "target": "/Athul%20S%20Menon__July_26.pdf", "primary": false, "download": true }
     ],
     "stack": [
       "React", "Node", "JavaScript", "HTML/CSS", "Tailwind", "Git", "Linux"
@@ -62,13 +63,13 @@
     "stats": [
       { "num": "150+", "label": "Contributions" },
       { "num": "20", "label": "Repos" },
-      { "num": "-", "label": "Experience Yrs" }
+      { "num": "1 month", "label": "of Experience as an Intern" }
     ]
   },
   "work": {
-    "eyebrow": "Selected Work",
+    "eyebrow": "Works",
     "heading": "Featured Projects",
-    "dateRange": "2023 – Present",
+    "dateRange": "2023 – 2026",
     "featured": {
       "year": "2026",
       "tag": "AI Security / DLP",
@@ -180,7 +181,7 @@
       "icon": "Globe",
       "title": "Full-Stack Development",
       "desc": "Designing and building complete web applications from frontend to backend with clean architecture and production-ready standards.",
-      "skills": ["React & Modern JavaScript", "Node.js & Express", "MongoDB / MariaDB / PostgreSQL"]
+      "skills": ["React & Modern JavaScript", "Node.js / Express / Spring boot", "MongoDB / MariaDB / PostgreSQL"]
     },
     {
       "icon": "Server",
@@ -208,12 +209,12 @@
       { "key": "OS", "val": "<span class=\"hl\">Linux</span> / Debian" },
       { "key": "Editor", "val": "<span class=\"hl\">Antigravity</span> / VS Code" },
       { "key": "College", "val": "NSS College of Engineering" },
-      { "key": "CGPA", "val": "8.5 / 10.0" }
+      { "key": "CGPA", "val": "8.27 / 10.0" }
     ],
     "eyebrow": "About the Engineer",
     "quote": "\"From frontend interactions to backend architecture — I design systems, not just interfaces\"",
     "paragraphs": [
-      "I'm a dedicated Computer Science undergraduate at NSS College of Engineering with an 8.5 CGPA and a genuine passion for building interfaces that are as thoughtful as they are functional.",
+      "I'm a dedicated Computer Science undergraduate at NSS College of Engineering with an 8.27 CGPA and a genuine passion for building interfaces that are as thoughtful as they are functional.",
       "My coursework has given me a solid grounding in <code>Java</code>, <code>Python</code>, and <code>C++</code>, alongside web technologies like <code>HTML</code>, <code>CSS</code>, and <code>JavaScript</code>.",
       "My practical work spans collaborative projects — from building the Solasta tech-fest platform to designing static sites for schools. I bring strong problem-solving instincts, an eye for detail, and the kind of curiosity that keeps me reaching for the terminal long after the workday ends.",
       "I'm a quick learner who thrives in teams, adapts to new challenges fast, and is always looking for the next thing to build. Currently open to freelance work and internship opportunities."
@@ -228,24 +229,24 @@
     },
     "experience": [
       {
+        "date": "Jul 2026 – Present",
+        "role": "Software Engineering Intern",
+        "company": "Derexa Labs Pvt. Ltd.",
+        "desc": "Contributing to the enterprise intelligence platform — a graph-native, event-driven system that unifies ERP, logistics, finance, and operational data into a single real-time operational model.",
+        "active": true
+      },
+      {
         "date": "2024",
         "role": "Frontend Developer",
         "company": "Solasta — Tech Fest Website",
         "desc": "Built the annual CS department tech-fest platform with event registration and real-time updates.",
-        "active": true
+        "active": false
       },
       {
         "date": "2023",
         "role": "Web Developer",
         "company": "National Higher Secondary School",
         "desc": "Designed and developed a static website providing easy access to school information and resources.",
-        "active": false
-      },
-      {
-        "date": "2023",
-        "role": "CS Undergraduate",
-        "company": "NSS College of Engineering",
-        "desc": "Pursuing Computer Science with a strong foundation in algorithms, systems, and web technologies.",
         "active": false
       }
     ]

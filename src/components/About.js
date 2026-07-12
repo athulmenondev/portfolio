@@ -10,12 +10,14 @@ gsap.registerPlugin(ScrollTrigger);
    Each item has: label, icon (emoji/char), category colour
 ───────────────────────────────────────────────────────── */
 const STACK = [
-  { label: 'Dart',                        icon: '◆', cat: 'Mobile',    color: '#54C5F8' },
-  { label: 'Flutter',                     icon: '⬡', cat: 'Mobile',    color: '#54C5F8' },
-  { label: 'Python',                      icon: '🐍', cat: 'Backend',   color: '#10B981' },
-  { label: 'Node.js',                     icon: '◉', cat: 'Backend',   color: '#10B981' },
-  { label: 'Data Structures & Algorithms',icon: '∑', cat: 'CS Core',   color: '#F59E0B' },
-  { label: 'Web Exploitation / Crypto',   icon: '🔑', cat: 'Security',  color: '#EF4444' },
+  { label: 'Java',                         icon: '☕', cat: 'Languages',  color: '#F59E0B' },
+  { label: 'Python',                       icon: '🐍', cat: 'Languages',  color: '#F59E0B' },
+  { label: 'React.js',                     icon: '⚛️', cat: 'Frontend',   color: '#6B4CFF' },
+  { label: 'Node.js',                      icon: '◉', cat: 'Backend',    color: '#10B981' },
+  { label: 'MongoDB',                      icon: '🗄️', cat: 'Databases',  color: '#54C5F8' },
+  { label: 'Docker',                       icon: '🐳', cat: 'DevOps',     color: '#54C5F8' },
+  { label: 'Git & Linux',                  icon: '🔧', cat: 'Tools',      color: '#54C5F8' },
+  { label: 'Data Structures & Algorithms', icon: '∑', cat: 'CS Core',    color: '#EF4444' },
 ];
 
 /* ─────────────────────────────────────────────────────────
@@ -137,6 +139,29 @@ const About = ({ data }) => {
       );
     }
 
+    /* ── 7. Timeline items ── */
+    const timeline = section.querySelector('.timeline');
+    if (timeline) {
+      const tlItems = timeline.querySelectorAll('.tl-item');
+      if (tlItems.length) {
+        gsap.fromTo(
+          tlItems,
+          { y: 40, opacity: 0 },
+          {
+            y: 0, opacity: 1,
+            duration: 0.7,
+            ease: 'power3.out',
+            stagger: 0.15,
+            scrollTrigger: {
+              trigger: timeline,
+              start: 'top 88%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    }
+
     return () => ScrollTrigger.getAll().forEach((st) => st.kill());
   }, { scope: sectionRef });
 
@@ -190,8 +215,7 @@ const About = ({ data }) => {
 
         {/* ── GSAP paragraph ── */}
         <p className="about-gsap-para" ref={paraRef}>
-          I am a Computer Science student at NSS College of Engineering, specialising in
-          application development and cybersecurity.
+          I am a Computer Science student at NSS College of Engineering, trying to build usefull and intresting web apps.
         </p>
 
         {/* ── GSAP Stack Grid ── */}
@@ -267,6 +291,23 @@ const About = ({ data }) => {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Experience timeline */}
+        <div className="timeline" style={{ marginTop: 'var(--s5)' }}>
+          <p className="about-stack-label">{'// experience'}</p>
+          {data.experience.map((exp, i) => (
+            <div key={i} className={`tl-item${exp.active ? ' active' : ''}`}>
+              <div className="tl-date">{exp.date}</div>
+              <div>
+                {i < data.experience.length - 1 && <div className="tl-line" />}
+                <div className="tl-dot" />
+                <div className="tl-role">{exp.role}</div>
+                <div className="tl-company">{exp.company}</div>
+                <div className="tl-desc">{exp.desc}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

@@ -24,6 +24,7 @@ const Footer = ({ data }) => {
             <h4>Contact</h4>
             <ul>
               <li><a href="mailto:athulmenon@gmail.com">Email Me</a></li>
+              <li><a href="/Athul%20S%20Menon__July_26.pdf" download>Download Resume</a></li>
             </ul>
           </div>
         </div>
