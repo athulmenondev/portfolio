@@ -1,0 +1,373 @@
+// ═══════════════════════════════════════════════════════════
+// AI TERMINAL — Live chat interface with Gemini backend
+// ═══════════════════════════════════════════════════════════
+
+@use 'design-tokens' as *;
+
+#ai-agent {
+  padding: var(--s6) var(--s5);
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include respond-down('sm') {
+    padding: var(--s6) var(--s4);
+  }
+}
+
+.ai-section-inner {
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+}
+
+.ai-heading {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: var(--s2);
+}
+
+.ai-subtitle {
+  color: var(--ink-muted);
+  margin-bottom: var(--s5);
+  font-size: 0.9rem;
+  font-family: var(--mono);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  .k { color: var(--accent); }
+  .s { color: var(--green); }
+  .c { color: var(--ink-faint); font-style: italic; }
+
+  .cursor-blink {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: var(--accent);
+    vertical-align: middle;
+    margin-left: 2px;
+    animation: blink 0.7s step-end infinite;
+  }
+}
+
+// ── Terminal frame ──
+.ai-terminal-frame {
+  background: color-mix(in srgb, var(--bg-2) 70%, transparent);
+  backdrop-filter: blur(4px);
+  border: 1px solid color-mix(in srgb, var(--accent) 12%, var(--rule));
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 540px;
+  box-shadow:
+    0 24px 64px -16px rgba(0, 0, 0, 0.5),
+    0 0 0 1px color-mix(in srgb, var(--accent) 4%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--ink) 4%, transparent);
+  position: relative;
+  transition:
+    border-color 0.4s $ease-smooth,
+    box-shadow 0.4s $ease-smooth;
+  @include corner-glow(240px, var(--accent), 0.04);
+
+  &:focus-within {
+    border-color: color-mix(in srgb, var(--accent) 30%, var(--rule));
+    box-shadow:
+      0 24px 64px -16px rgba(0, 0, 0, 0.5),
+      0 0 0 1px color-mix(in srgb, var(--accent) 12%, transparent),
+      0 0 40px -16px color-mix(in srgb, var(--accent) 20%, transparent);
+
+    &::after { opacity: 0.07; }
+  }
+
+  @include respond-down('sm') {
+    height: 380px;
+    border-radius: 10px;
+  }
+}
+
+// ── Title bar ──
+.ai-term-bar {
+  padding: 0.6rem 1.1rem;
+  background: color-mix(in srgb, var(--bg-3) 80%, transparent);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  user-select: none;
+
+  @include respond-down('sm') {
+    padding: 0.5rem 0.85rem;
+  }
+
+  .ai-term-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .d {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .d-r { background: #FF5F57; }
+    .d-a { background: #FEBC2E; }
+    .d-g { background: #28C840; }
+  }
+
+  .ai-term-title {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 0.02em;
+
+    @include respond-down('sm') {
+      font-size: 0.65rem;
+    }
+
+    .ai-stat {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--green);
+
+      .pulse-dot {
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--green);
+        animation: pulse 2s ease-in-out infinite;
+      }
+    }
+  }
+
+  .ai-term-info {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--ink-faint);
+    opacity: 0.4;
+    letter-spacing: 0.05em;
+  }
+}
+
+// ── Message area ──
+.ai-term-body {
+  flex: 1;
+  padding: 1.25rem 1.1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  position: relative;
+  z-index: 1;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      color-mix(in srgb, var(--ink) 1.5%, transparent) 28px,
+      color-mix(in srgb, var(--ink) 1.5%, transparent) 29px
+    );
+  background-size: 100% 29px;
+  background-attachment: local;
+
+  @include respond-down('sm') {
+    padding: 1rem 0.85rem;
+    font-size: 0.76rem;
+  }
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: var(--rule);
+    border-radius: 2px;
+    &:hover { background: var(--ink-faint); }
+  }
+}
+
+// ── Messages ──
+.ai-msg {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  animation: msgSlideIn 0.35s ease-out both;
+  line-height: 1.6;
+
+  .ai-msg-prompt {
+    flex-shrink: 0;
+    user-select: none;
+    font-size: 0.75rem;
+    padding-top: 0.1rem;
+    font-weight: 500;
+
+    &.is-user  { color: #58a6ff; }
+    &.is-model { color: var(--green); }
+    &.is-error { color: var(--red); }
+  }
+
+  .ai-msg-text {
+    color: var(--ink);
+    white-space: pre-wrap;
+    word-break: break-word;
+
+    .hl-accent { color: var(--accent); }
+    .hl-green  { color: var(--green); }
+    .hl-faint  { color: var(--ink-faint); font-style: italic; }
+  }
+
+  &.is-user .ai-msg-text {
+    color: var(--ink-muted);
+  }
+}
+
+@keyframes msgSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+// ── Loading indicator ──
+.ai-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--ink-muted);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  animation: msgSlideIn 0.3s ease-out;
+  padding: 0.15rem 0;
+
+  .ai-loading-label {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .ai-loading-dots {
+    display: inline-flex;
+    gap: 4px;
+
+    span {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: dotBounce 1.2s ease-in-out infinite;
+
+      &:nth-child(2) { animation-delay: 0.15s; background: var(--green); }
+      &:nth-child(3) { animation-delay: 0.3s; background: var(--accent); }
+    }
+  }
+}
+
+@keyframes dotBounce {
+  0%, 80%, 100% { transform: scale(0.5); opacity: 0.3; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+// ── Input area ──
+.ai-term-input-wrap {
+  padding: 0.7rem 1.1rem;
+  border-top: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--bg-3) 70%, transparent);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  transition: background 0.25s;
+
+  @include respond-down('sm') {
+    padding: 0.6rem 0.85rem;
+  }
+
+  &:focus-within {
+    background: color-mix(in srgb, var(--bg-3) 85%, transparent);
+  }
+
+  .ai-inp-prompt {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--green);
+    user-select: none;
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+
+  .ai-inp-field {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    outline: none;
+    caret-color: var(--green);
+    padding: 0.25rem 0;
+
+    &::placeholder {
+      color: var(--ink-faint);
+      font-style: italic;
+      font-size: 0.78rem;
+    }
+  }
+
+  .ai-inp-btn {
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--ink-faint);
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    @include flex-center;
+    cursor: none;
+    transition: all 0.25s $ease-smooth;
+    flex-shrink: 0;
+
+    &:hover:not(:disabled) {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 10%, transparent);
+      transform: scale(1.05);
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.92);
+    }
+
+    &:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    &.inp-active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+  }
+}

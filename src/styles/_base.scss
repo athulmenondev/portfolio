@@ -1,0 +1,102 @@
+// ═══════════════════════════════════════════════════════════
+// BASE — Reset, global defaults, typography
+// ═══════════════════════════════════════════════════════════
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  cursor: none;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+// ─── Smooth theme transitions ────────────────────────────
+html,
+body {
+  transition:
+    background-color 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+    color 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+    border-color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+* {
+  transition:
+    background-color 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+    border-color 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+    color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+// ─── Link reset ───────────────────────────────────────────
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// ─── Image defaults ───────────────────────────────────────
+img {
+  display: block;
+  max-width: 100%;
+}
+
+// ─── List reset ───────────────────────────────────────────
+ul,
+ol {
+  list-style: none;
+}
+
+// ─── Button reset ─────────────────────────────────────────
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: none;
+  color: inherit;
+}
+
+// ─── Focus ring (accessible) ─────────────────────────────
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+// ─── Selection ───────────────────────────────────────────
+::selection {
+  background: color-mix(in srgb, var(--accent) 40%, transparent);
+  color: var(--ink);
+}
+
+// ─── Scrollbar ───────────────────────────────────────────
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--rule);
+  border-radius: 3px;
+
+  &:hover {
+    background: var(--ink-faint);
+  }
+}

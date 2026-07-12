@@ -1,0 +1,75 @@
+// ═══════════════════════════════════════════════════════════
+// LOADER — Terminal-style boot sequence
+// ═══════════════════════════════════════════════════════════
+
+@use 'design-tokens' as *;
+
+.loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 8000;
+  @include flex-center;
+  flex-direction: column;
+  gap: var(--s3);
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+
+  &.done {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  &-terminal {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--green);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 280px;
+  }
+
+  &-line {
+    opacity: 0;
+    animation: loaderFadeIn 0.3s ease forwards;
+
+    @for $i from 1 through 4 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{0.1 + ($i - 1) * 0.4}s;
+      }
+    }
+
+    &:nth-child(3) { color: var(--accent); }
+    &:nth-child(4) { color: var(--ink-muted); }
+  }
+
+  &-cursor-blink {
+    display: inline-block;
+    animation: blink 0.7s step-end infinite;
+  }
+
+  &-bar-wrap {
+    width: 280px;
+    height: 2px;
+    background: var(--rule);
+    overflow: hidden;
+    margin-top: var(--s2);
+  }
+
+  &-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--green));
+    width: 0;
+    animation: loadBar 1.4s $ease-out-expo forwards;
+    animation-delay: 0.1s;
+  }
+}
+
+@keyframes loaderFadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes loadBar {
+  to { width: 100%; }
+}

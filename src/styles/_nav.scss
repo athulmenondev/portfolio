@@ -1,0 +1,305 @@
+// ═══════════════════════════════════════════════════════════
+// NAV — Glass-morphism floating nav bar
+// ═══════════════════════════════════════════════════════════
+
+@use 'design-tokens' as *;
+
+// ─── Container ────────────────────────────────────────────
+nav {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  padding: 0.3rem 0.3rem 0.3rem 1rem;
+  @include flex-between;
+  gap: 1rem;
+  @include glass-bg(0.6, var(--bg-2));
+  border: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+  border-radius: 100px;
+  box-shadow:
+    0 20px 40px -10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 color-mix(in srgb, var(--ink) 10%, transparent);
+  transition: all 0.4s $ease-smooth;
+  width: max-content;
+  max-width: 90%;
+
+  // ── Scrolled state ──
+  &.scrolled {
+    top: 1rem;
+    padding: 0.25rem 0.25rem 0.25rem 0.85rem;
+    background: color-mix(in srgb, var(--bg-2) 85%, transparent);
+    box-shadow:
+      0 10px 30px -5px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 color-mix(in srgb, var(--ink) 5%, transparent);
+    border-color: color-mix(in srgb, var(--ink) 4%, transparent);
+  }
+
+  [data-theme='light'] & {
+    box-shadow:
+      0 20px 40px -10px rgba(0, 0, 0, 0.06),
+      inset 0 1px 0 color-mix(in srgb, white 80%, transparent);
+  }
+}
+
+// ─── Brand ────────────────────────────────────────────────
+.nav-brand {
+  @include flex-center;
+  gap: 0.5rem;
+  padding-right: 1.5rem;
+  border-right: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  transition: padding 0.4s $ease-smooth;
+
+  nav.scrolled & {
+    padding-right: 1.25rem;
+  }
+}
+
+.nav-name {
+  font-family: var(--alt);
+  font-size: 0.95rem;
+  color: var(--ink);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition: font-size 0.4s $ease-smooth;
+
+  nav.scrolled & {
+    font-size: 0.85rem;
+  }
+}
+
+// ─── Links ────────────────────────────────────────────────
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+
+  li {
+    @include flex-center;
+  }
+
+  a {
+    font-family: var(--alt);
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 100px;
+    transition: all 0.25s $ease-smooth;
+    font-weight: 500;
+    position: relative;
+
+    &:hover {
+      color: var(--ink);
+      background: color-mix(in srgb, var(--ink) 8%, transparent);
+    }
+  }
+}
+
+// ─── Right / CTA ─────────────────────────────────────────
+.nav-right {
+  @include flex-center;
+}
+
+.btn-nav {
+  background: var(--ink);
+  color: var(--bg);
+  text-decoration: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 100px;
+  font-family: var(--alt);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.3s $ease-smooth;
+  @include flex-center;
+  gap: 4px;
+
+  &:hover {
+    background: var(--accent);
+    color: var(--bg);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 40%, transparent);
+    transform: translateY(-1px);
+  }
+}
+
+// ─── Mobile Menu Toggle (hamburger) ───────────────────────
+.menu-toggle {
+  display: none;                    // hidden on desktop
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: none;
+  padding: 4px;
+  z-index: 210;
+
+  span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: all 0.3s $ease-smooth;
+    transform-origin: center;
+  }
+
+  // Animate to X when open
+  &.open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  &.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  &.open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+}
+
+// ─── Mobile Overlay Backdrop ──────────────────────────────
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 150;
+  opacity: 0;
+  transition: opacity 0.4s $ease-smooth;
+  pointer-events: none;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// ─── Responsive: mobile menu ───────────────────────────────
+@include respond-down('lg') {
+  .menu-toggle {
+    display: flex;                 // show hamburger
+  }
+
+  .mobile-overlay {
+    display: block;                // show overlay
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: 100%;                      // hidden off-screen right
+    width: 75%;
+    max-width: 320px;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-2);
+    border-left: 1px solid var(--rule);
+    z-index: 160;
+    transition: left 0.4s $ease-out-expo;
+
+    &.mobile-open {
+      left: 25%;                     // visible: right 75% of screen
+    }
+
+    li {
+      width: 100%;
+    }
+
+    a {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 1.15rem;
+      padding: 1rem 2rem;
+      border-radius: 0;
+      font-weight: 600;
+
+      &:hover {
+        background: color-mix(in srgb, var(--ink) 6%, transparent);
+      }
+    }
+  }
+
+  // Adjust nav container on mobile
+  nav {
+    gap: 0.5rem;
+  }
+
+  .nav-brand {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .nav-right {
+    flex: 0;
+  }
+
+  .btn-nav {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+// ─── Floating Actions ─────────────────────────────────────
+.floating-actions {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 200;
+}
+
+.theme-floating-btn,
+.scroll-top-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: var(--ink);
+  @include flex-center;
+  cursor: none;
+  transition: all 0.4s $ease-smooth;
+
+  [data-theme='light'] & {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+}
+
+.scroll-top-btn {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+
+    &:hover {
+      transform: scale(1.1) translateY(0);
+    }
+  }
+}

@@ -1,0 +1,621 @@
+// ═══════════════════════════════════════════════════════════
+// ABOUT — Profile card, story, stack grid, timeline
+// ═══════════════════════════════════════════════════════════
+
+@use 'design-tokens' as *;
+
+// ─── 3D Spinning Cube ─────────────────────────────────────
+.cube-container {
+  width: 120px;
+  height: 120px;
+  perspective: 1000px;
+  margin: 0 auto;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: spinCube 16s infinite linear;
+
+  &-face {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: color-mix(in srgb, var(--accent) 15%, var(--bg-2));
+    backdrop-filter: blur(4px);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--rule));
+    @include flex-center;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--ink);
+    box-shadow: inset 0 0 15px color-mix(in srgb, var(--accent) 30%, transparent);
+
+    &.front  { transform: rotateY(0deg) translateZ(60px); }
+    &.back   { transform: rotateY(180deg) translateZ(60px); }
+    &.right  { transform: rotateY(90deg) translateZ(60px); }
+    &.left   { transform: rotateY(-90deg) translateZ(60px); }
+    &.top    { transform: rotateX(90deg) translateZ(60px); }
+    &.bottom { transform: rotateX(-90deg) translateZ(60px); }
+  }
+}
+
+@keyframes spinCube {
+  0%   { transform: rotateX(0deg) rotateY(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+// ─── Main layout ──────────────────────────────────────────
+#about {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+
+  @include respond-down('lg') {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ─── Story row ────────────────────────────────────────────
+.about-body-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4rem;
+}
+
+.about-text-col {
+  flex: 1 1 300px;
+  max-width: 60ch;
+}
+
+.about-cube-col {
+  @include flex-center;
+  flex: 1;
+  gap: 3rem;
+  position: relative;
+}
+
+.cube-decor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  border-left: 1px solid var(--rule);
+  padding-left: 2rem;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -3px;
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: -3px;
+    width: 5px;
+    height: 5px;
+    background: var(--rule);
+    border-radius: 50%;
+  }
+}
+
+.cd-title {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.cd-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cd-badge {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  background: var(--bg-3);
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  transition: all 0.3s ease;
+  cursor: none;
+
+  &:hover {
+    color: var(--ink);
+    border-color: var(--accent);
+  }
+}
+
+// ─── LEFT: Profile card ──────────────────────────────────
+.about-left {
+  padding: var(--s6) var(--s5);
+  border-right: 1px solid var(--rule);
+  position: sticky;
+  top: 6rem;
+  height: fit-content;
+
+  @include respond-down('lg') {
+    position: relative;
+    top: 0;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+  }
+}
+
+.profile-card {
+  background: color-mix(in srgb, var(--bg-2) 60%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid color-mix(in srgb, var(--rule) 50%, transparent);
+  border-radius: 12px;
+  padding: var(--s5);
+  margin-bottom: var(--s4);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include corner-glow(150px, var(--accent), 0.05);
+
+  [data-theme='light'] & {
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--bg-3) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--rule) 50%, transparent);
+  @include flex-center;
+  font-family: var(--sans);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: var(--s4);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 15%, transparent),
+      transparent
+    );
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.profile-name {
+  font-family: var(--sans);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.profile-handle {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+.profile-bio {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-top: var(--s2);
+  padding-top: var(--s2);
+  border-top: 1px solid var(--rule);
+  text-align: justify;
+}
+
+// ── Status ──
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--green);
+  margin-top: var(--s2);
+  background: color-mix(in srgb, var(--green) 10%, transparent);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+// ── Info list ──
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.info-item {
+  @include flex-between;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--rule);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.info-key {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.info-val {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  text-align: right;
+
+  .hl { color: var(--accent); }
+}
+
+// ─── RIGHT: Content ──────────────────────────────────────
+.about-right {
+  padding: var(--s6) var(--s5);
+}
+
+.about-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--ink);
+  border-left: 2px solid var(--accent);
+  padding-left: var(--s4);
+  margin-bottom: var(--s5);
+}
+
+.about-text {
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  line-height: 1.9;
+  font-weight: 300;
+  max-width: 60ch;
+  margin-bottom: var(--s3);
+
+  strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  code {
+    font-family: var(--mono);
+    font-size: 0.8em;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+  }
+}
+
+// ── GSAP headings ──
+.about-heading-wrap {
+  overflow: hidden;
+  margin: var(--s4) 0 var(--s2);
+}
+
+.about-gsap-heading {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--ink);
+  opacity: 0;
+}
+
+.about-gsap-para {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--ink-muted);
+  font-weight: 300;
+  max-width: 58ch;
+  margin-bottom: var(--s5);
+  opacity: 0;
+}
+
+// ── Stack section ──
+.about-stack-section {
+  margin-bottom: var(--s5);
+}
+
+.about-stack-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: var(--s3);
+}
+
+.about-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+
+  @include respond-down('md') {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.about-stack-card {
+  --sc: var(--accent);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  cursor: none;
+  overflow: hidden;
+  transition:
+    border-color 0.3s $ease-smooth,
+    box-shadow 0.3s $ease-smooth,
+    transform 0.25s $ease-smooth;
+  opacity: 0;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--sc) 50%, var(--rule));
+    box-shadow: 0 8px 24px -6px color-mix(in srgb, var(--sc) 20%, transparent);
+    transform: translateY(-3px);
+  }
+}
+
+.asc-glow {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--sc) 70%, transparent),
+    transparent 70%
+  );
+  opacity: 0.08;
+  pointer-events: none;
+  transition: opacity 0.3s;
+
+  .about-stack-card:hover & {
+    opacity: 0.2;
+  }
+}
+
+.asc-icon {
+  font-size: 1.3rem;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--sc) 12%, var(--bg-3));
+  border-radius: 6px;
+  border: 1px solid color-mix(in srgb, var(--sc) 25%, var(--rule));
+  color: var(--sc);
+  font-style: normal;
+  transition: background 0.3s;
+
+  .about-stack-card:hover & {
+    background: color-mix(in srgb, var(--sc) 20%, var(--bg-3));
+  }
+}
+
+.asc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  min-width: 0;
+}
+
+.asc-cat {
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sc);
+  opacity: 0.8;
+}
+
+.asc-label {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.25s;
+
+  .about-stack-card:hover & {
+    color: var(--sc);
+  }
+}
+
+// ── Terminal skills box ──
+.skills-terminal {
+  margin-top: var(--s5);
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.st-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: var(--bg-4);
+  border-bottom: 1px solid var(--rule);
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+  }
+}
+
+.st-title {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--ink-faint);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.st-body {
+  padding: var(--s3) var(--s4);
+}
+
+.st-line {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 2;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  .prompt {
+    color: var(--green);
+    user-select: none;
+  }
+}
+
+.st-cmd {
+  color: var(--accent);
+}
+
+.st-output {
+  color: var(--ink-muted);
+}
+
+.st-divider {
+  height: 1px;
+  background: var(--rule);
+  margin: var(--s2) 0;
+}
+
+// ═══════════════════════════════════════════════════════════
+// EXPERIENCE TIMELINE
+// ═══════════════════════════════════════════════════════════
+.timeline {
+  margin-top: var(--s4);
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0 var(--s4);
+  padding: var(--s4) 0;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &.active .tl-dot {
+    background: var(--green);
+  }
+}
+
+.tl-date {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  padding-top: 0.2rem;
+  line-height: 1.6;
+}
+
+.tl-dot {
+  position: absolute;
+  left: 108px;
+  top: calc(var(--s4) + 0.4rem);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rule);
+  border: 2px solid var(--bg);
+  z-index: 1;
+}
+
+.tl-line {
+  position: absolute;
+  left: 111px;
+  top: calc(var(--s4) + 1.2rem);
+  bottom: -1px;
+  width: 1px;
+  background: var(--rule);
+}
+
+.tl-role {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.tl-company {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.tl-desc {
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+  line-height: 1.7;
+  font-weight: 300;
+}

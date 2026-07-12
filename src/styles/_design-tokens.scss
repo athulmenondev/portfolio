@@ -1,0 +1,192 @@
+// ═══════════════════════════════════════════════════════════
+// DESIGN TOKENS — Theme variables, fonts, spacing scale
+// ═══════════════════════════════════════════════════════════
+
+@use 'sass:map';
+
+// ─── Font stacks ──────────────────────────────────────────
+$font-serif: 'Space Grotesk', serif;
+$font-sans: 'Asul', system-ui, sans-serif;
+$font-mono: 'Fira Code', 'JetBrains Mono', monospace;
+$font-alt: 'Montserrat', system-ui, sans-serif;
+
+// ─── Spacing scale ───────────────────────────────────────-
+$spacing: (
+  '1': 0.5rem,
+  '2': 1rem,
+  '3': 1.5rem,
+  '4': 2rem,
+  '5': 3rem,
+  '6': 5rem,
+  '7': 8rem,
+);
+
+// ─── Easing curves ────────────────────────────────────────
+$ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+$ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
+$ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+$ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+
+// ─── Dark theme map ───────────────────────────────────────
+$dark-theme: (
+  'bg': #0B0B0C,
+  'bg-2': #111114,
+  'bg-3': #18181C,
+  'bg-4': #212126,
+  'ink': #F0F0F5,
+  'ink-muted': #8E8E98,
+  'ink-faint': #40404C,
+  'accent': #6B4CFF,
+  'accent-dim': #231B4D,
+  'green': #10B981,
+  'amber': #F59E0B,
+  'red': #EF4444,
+  'rule': #2A2A35,
+);
+
+// ─── Light theme map ──────────────────────────────────────
+$light-theme: (
+  'bg': #FAFAFA,
+  'bg-2': #F2F2F5,
+  'bg-3': #E8E8ED,
+  'bg-4': #DDDDE4,
+  'ink': #121216,
+  'ink-muted': #5A5A66,
+  'ink-faint': #B5B5C1,
+  'accent': #5236DB,
+  'accent-dim': #E3E0F8,
+  'green': #059669,
+  'amber': #D97706,
+  'red': #DC2626,
+  'rule': #D3D3DD,
+);
+
+// ─── Responsive breakpoints ───────────────────────────────
+$breakpoints: (
+  'sm': 640px,
+  'md': 768px,
+  'lg': 960px,
+  'xl': 1100px,
+  'xxl': 1280px,
+);
+
+// ─── Mixin: generate CSS custom properties from a map ─────
+@mixin define-theme($map) {
+  @each $key, $value in $map {
+    --#{$key}: #{$value};
+  }
+}
+
+// ─── Mixin: responsive queries ────────────────────────────
+@mixin respond-up($bp) {
+  @if map.has-key($breakpoints, $bp) {
+    @media (min-width: map.get($breakpoints, $bp)) { @content; }
+  }
+}
+
+@mixin respond-down($bp) {
+  @if map.has-key($breakpoints, $bp) {
+    @media (max-width: map.get($breakpoints, $bp)) { @content; }
+  }
+}
+
+// ─── Utility mixins ───────────────────────────────────────
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin terminal-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    &.red   { background: #FF5F57; }
+    &.amber { background: #FEBC2E; }
+    &.green { background: #28C840; }
+  }
+}
+
+@mixin glass-bg($opacity: 0.6, $mix: var(--bg-2)) {
+  background: color-mix(in srgb, $mix #{$opacity * 100%}, transparent);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+
+@mixin glow-edge($color: var(--accent), $size: 1px, $opacity: 0.08) {
+  border: $size solid color-mix(in srgb, $color #{$opacity * 100%}, transparent);
+  box-shadow: $size 0 0 color-mix(in srgb, $color #{$opacity * 50%}, transparent);
+}
+
+@mixin text-gradient($from: var(--accent), $to: var(--green)) {
+  background: linear-gradient(135deg, $from, $to);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ─── Button base ──────────────────────────────────────────
+@mixin btn-base($font: $font-mono, $size: 0.78rem) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: $font;
+  font-size: $size;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: none;
+  transition: all 0.4s $ease-out-expo;
+  text-decoration: none;
+}
+
+// ─── Corner glow pseudo ───────────────────────────────────
+@mixin corner-glow($size: 200px, $color: var(--accent), $opacity: 0.06) {
+  &::after {
+    content: '';
+    position: absolute;
+    top: -$size * 0.3;
+    right: -$size * 0.3;
+    width: $size;
+    height: $size;
+    background: radial-gradient(circle, $color 0%, transparent 70%);
+    opacity: $opacity;
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: 0;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// THEME DEFINITION (injected into :root via main.scss)
+// ═══════════════════════════════════════════════════════════
+:root {
+  @include define-theme($dark-theme);
+  --serif: #{$font-serif};
+  --sans: #{$font-sans};
+  --mono: #{$font-mono};
+  --alt: #{$font-alt};
+
+  @each $key, $value in $spacing {
+    --s#{$key}: #{$value};
+  }
+
+  --ease: #{$ease-smooth};
+  --ease2: #{$ease-in-out};
+}
+
+[data-theme='light'] {
+  @include define-theme($light-theme);
+}

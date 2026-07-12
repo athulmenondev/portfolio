@@ -1,0 +1,141 @@
+// ═══════════════════════════════════════════════════════════
+// RESPONSIVE — Breakpoint overrides across all sections
+// ═══════════════════════════════════════════════════════════
+
+@use 'design-tokens' as *;
+
+// ─── Large screens (≤960px) ───────────────────────────────
+@include respond-down('lg') {
+  // Hero
+  .hero-inner-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-right {
+    display: none;
+  }
+
+  .hero-left {
+    padding: var(--s6) var(--s4) var(--s5);
+    min-height: 100vh;
+    justify-content: center;
+  }
+
+  .hero-canvas-wrap {
+    opacity: 0.75;
+  }
+
+  // Work
+  .proj-featured-body {
+    grid-template-columns: 1fr;
+    padding: var(--s4);
+    gap: var(--s4);
+  }
+
+  .proj-featured-img {
+    padding: var(--s2) var(--s2) 0 var(--s2);
+    aspect-ratio: auto;
+    min-height: 250px;
+  }
+
+  .browser-mockup {
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+  }
+
+  .featured-actions {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: var(--s2);
+  }
+
+  // Nav — handled in _nav.scss mobile menu block
+
+  // About
+  #about {
+    grid-template-columns: 1fr;
+  }
+
+  .about-left {
+    position: relative;
+    top: 0;
+    border-right: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .about-body-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+    text-align: center;
+  }
+
+  .about-cube-col {
+    margin: var(--s4) auto;
+  }
+
+  // Services
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  // Activity
+  .activity-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .activity-body {
+    flex-direction: column;
+  }
+
+  .activity-right {
+    flex: none;
+    width: 100%;
+  }
+
+  // Timeline
+  .timeline::before {
+    display: none;
+  }
+}
+
+// ─── Small screens (≤640px) ──────────────────────────────
+@include respond-down('sm') {
+  // Hero — hide heavy canvas
+  .hero-canvas-wrap {
+    display: none;
+  }
+
+  #hero::before {
+    display: block;
+  }
+
+  // Services — single column
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  // Work grid — single column (already handled in _work.scss)
+  .work-proj-grid {
+    grid-template-columns: 1fr;
+  }
+
+  // AI terminal — tighter padding (already handled in _ai-terminal.scss)
+
+  // Footer — single column
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}

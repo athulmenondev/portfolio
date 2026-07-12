@@ -1,0 +1,110 @@
+// ═══════════════════════════════════════════════════════════
+// UTILITIES — Animations, reveal helpers, shared keyframes
+// ═══════════════════════════════════════════════════════════
+
+@use 'design-tokens' as *;
+
+// ─── Blink animation ──────────────────────────────────────
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+// ─── Pulse animation ─────────────────────────────────────
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.4);
+  }
+}
+
+// ─── Scroll reveal ───────────────────────────────────────-
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.75s $ease-smooth,
+    transform 0.75s $ease-smooth;
+
+  &.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &.d1 { transition-delay: 0.08s; }
+  &.d2 { transition-delay: 0.16s; }
+  &.d3 { transition-delay: 0.24s; }
+}
+
+// ─── Word reveal ──────────────────────────────────────────
+.wr {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.wi {
+  display: inline-block;
+  transform: translateY(105%);
+  transition: transform 0.85s $ease-smooth;
+}
+
+.loaded .wi {
+  transform: translateY(0);
+}
+
+// ─── Staggered word reveal delays ─────────────────────────
+@for $i from 2 through 10 {
+  .wr:nth-child(#{$i}) .wi {
+    transition-delay: #{($i - 1) * 0.07}s;
+  }
+}
+
+// ─── Section shared ───────────────────────────────────────
+.section-wrap {
+  padding: var(--s6) var(--s5);
+  border-top: 1px solid var(--rule);
+}
+
+.section-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: var(--s5);
+}
+
+.section-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.section-heading {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.section-link {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  letter-spacing: 0.08em;
+  @include flex-center;
+  gap: 0.4rem;
+  transition: color 0.25s;
+  cursor: none;
+
+  &:hover {
+    color: var(--accent);
+  }
+}

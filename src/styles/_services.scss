@@ -1,0 +1,102 @@
+// ═══════════════════════════════════════════════════════════
+// SERVICES — Grid of service cards
+// ═══════════════════════════════════════════════════════════
+
+@use 'design-tokens' as *;
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: var(--s2);
+
+  @include respond-down('md') {
+    grid-template-columns: 1fr;
+  }
+}
+
+.service-card {
+  background: var(--bg-2);
+  padding: var(--s5);
+  cursor: none;
+  transition:
+    background 0.3s $ease-smooth,
+    transform 0.3s $ease-smooth;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    background: var(--bg-3);
+  }
+
+  // Top accent bar
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s $ease-smooth;
+  }
+
+  &:hover::before {
+    transform: scaleX(1);
+  }
+}
+
+.service-icon {
+  @include flex-center;
+  width: 48px;
+  height: 48px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-radius: 8px;
+  margin-bottom: var(--s4);
+}
+
+.service-title {
+  font-family: var(--sans);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: var(--s3);
+}
+
+.service-desc {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
+  font-weight: 300;
+  margin-bottom: var(--s4);
+}
+
+.service-skills {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  li {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &::before {
+      content: '→';
+      color: var(--accent);
+    }
+  }
+}
