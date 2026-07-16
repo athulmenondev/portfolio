@@ -4,7 +4,20 @@
 
 @use 'design-tokens' as *;
 
-// ─── Large screens (≤960px) ───────────────────────────────
+// ─── Large screens (≤1100px) ──────────────────────────────
+@include respond-down('xl') {
+  // Work grid: 3 → 2 columns
+  .work-proj-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  // Reduce featured image padding
+  .work-feat-img-wrap {
+    padding: 1.5rem 2.5rem 0;
+  }
+}
+
+// ─── Tablet / medium screens (≤960px) ─────────────────────
 @include respond-down('lg') {
   // Hero
   .hero-inner-grid {
@@ -25,7 +38,7 @@
     opacity: 0.75;
   }
 
-  // Work
+  // Work — featured
   .proj-featured-body {
     grid-template-columns: 1fr;
     padding: var(--s4);
@@ -49,8 +62,6 @@
     margin-top: var(--s2);
   }
 
-  // Nav — handled in _nav.scss mobile menu block
-
   // About
   #about {
     grid-template-columns: 1fr;
@@ -64,13 +75,31 @@
   }
 
   .about-body-row {
-    grid-template-columns: 1fr;
-    gap: 0;
+    flex-direction: column;
+    gap: var(--s4);
     text-align: center;
+  }
+
+  .about-text-col {
+    max-width: 100%;
   }
 
   .about-cube-col {
     margin: var(--s4) auto;
+  }
+
+  .cube-decor {
+    align-items: center;
+    border-left: none;
+    border-top: 1px solid var(--rule);
+    padding-left: 0;
+    padding-top: 1.5rem;
+    width: 100%;
+
+    &::before,
+    &::after {
+      display: none;
+    }
   }
 
   // Services
@@ -84,45 +113,175 @@
     align-items: flex-start;
   }
 
-  .activity-body {
-    flex-direction: column;
+  // Section layout
+  .section-wrap {
+    padding: var(--s5) var(--s4);
   }
 
-  .activity-right {
-    flex: none;
-    width: 100%;
+  .section-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .section-link {
+    align-self: flex-start;
   }
 
   // Timeline
   .timeline::before {
     display: none;
   }
+
+  // Contact
+  #contact {
+    padding: var(--s6) var(--s4);
+  }
 }
 
-// ─── Small screens (≤640px) ──────────────────────────────
-@include respond-down('sm') {
-  // Hero — hide heavy canvas
-  .hero-canvas-wrap {
-    display: none;
+// ─── Small screens (≤768px) ───────────────────────────────
+@include respond-down('md') {
+  // General padding reduction
+  .section-wrap {
+    padding: var(--s5) var(--s3);
   }
 
-  #hero::before {
-    display: block;
+  // Hero
+  .hero-left {
+    padding: var(--s5) var(--s3) var(--s5);
   }
 
-  // Services — single column
-  .services-grid {
+  .hero-title {
+    font-size: clamp(2.4rem, 8vw, 3.5rem) !important;
+  }
+
+  .hero-tagline {
+    font-size: 0.8rem;
+  }
+
+  .hero-stack {
+    gap: 0.5rem;
+  }
+
+  // Work
+  .work-v2-inner {
+    padding: 0 var(--s3);
+  }
+
+  .work-v2-hd {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .work-v2-hd-right {
+    align-items: flex-start;
+  }
+
+  .work-featured {
+    margin-bottom: var(--s4);
+  }
+
+  .work-feat-img-wrap {
+    padding: 1rem 1.5rem 0;
+  }
+
+  .work-feat-body {
+    grid-template-columns: 1fr;
+    padding: var(--s3);
+    gap: var(--s3);
+  }
+
+  .work-feat-stats {
+    border-left: none;
+    border-top: 1px solid var(--rule);
+    padding-left: 0;
+    padding-top: var(--s3);
+    grid-template-columns: repeat(4, 1fr);
+    min-width: unset;
+  }
+
+  .work-feat-desc {
+    font-size: 0.82rem;
+  }
+
+  .work-proj-card {
+    --ac: var(--accent);
+  }
+
+  // About
+  #about {
     grid-template-columns: 1fr;
   }
 
-  // Work grid — single column (already handled in _work.scss)
-  .work-proj-grid {
-    grid-template-columns: 1fr;
+  .about-left {
+    padding: var(--s5) var(--s3);
   }
 
-  // AI terminal — tighter padding (already handled in _ai-terminal.scss)
+  .about-right {
+    padding: var(--s5) var(--s3);
+  }
 
-  // Footer — single column
+  .profile-card {
+    padding: var(--s4) var(--s3);
+  }
+
+  .about-stack-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .st-body {
+    padding: var(--s2) var(--s3);
+  }
+
+  // Timeline responsive
+  .tl-item {
+    grid-template-columns: 100px 1fr;
+    gap: var(--s2);
+    padding: var(--s3) 0;
+  }
+
+  .tl-dot {
+    left: 88px;
+    top: calc(var(--s3) + 0.4rem);
+  }
+
+  .tl-line {
+    left: 91px;
+    top: calc(var(--s3) + 1.2rem);
+  }
+
+  // Contact
+  #contact {
+    padding: var(--s5) var(--s3);
+  }
+
+  .contact-heading {
+    font-size: clamp(2rem, 7vw, 3rem);
+  }
+
+  .contact-sub {
+    font-size: 0.85rem;
+    margin: var(--s4) auto;
+  }
+
+  .contact-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  // Services
+  .service-card {
+    padding: var(--s4) var(--s3);
+  }
+
+  // Footer
+  footer {
+    padding: var(--s5) var(--s3);
+    gap: var(--s4);
+  }
+
   .footer-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -137,5 +296,509 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+  }
+}
+
+// ─── Small screens (≤640px) ───────────────────────────────
+@include respond-down('sm') {
+  // Hero — hide heavy canvas
+  .hero-canvas-wrap {
+    display: none;
+  }
+
+  #hero::before {
+    display: block;
+  }
+
+  .hero-left {
+    padding: var(--s5) var(--s2);
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 10vw, 2.8rem) !important;
+    line-height: 0.92;
+  }
+
+  .hero-terminal-badge {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.7rem;
+  }
+
+  .hero-glitch-block {
+    font-size: 0.68rem;
+    min-height: 3.8rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--s2);
+  }
+
+  .btn-primary,
+  .btn-outline {
+    justify-content: center;
+    text-align: center;
+  }
+
+  // Work grid — single column
+  .work-proj-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .work-feat-img-wrap {
+    padding: 0.75rem 1rem 0;
+    aspect-ratio: auto;
+    min-height: 200px;
+  }
+
+  .work-feat-browser {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+  }
+
+  .work-feat-title {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+  }
+
+  .work-feat-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .work-feat-stat-num {
+    font-size: 1.2rem;
+  }
+
+  .work-v2-hd-right {
+    display: none;
+  }
+
+  // Services
+  .services-grid {
+    grid-template-columns: 1fr;
+    margin-top: 0;
+  }
+
+  // About
+  .about-quote {
+    font-size: 1.1rem;
+    padding-left: var(--s3);
+  }
+
+  .about-gsap-heading {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+  }
+
+  .about-gsap-para {
+    font-size: 0.88rem;
+  }
+
+  .about-stack-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-stack-card {
+    padding: 0.7rem 0.9rem;
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+
+  .profile-name {
+    font-size: 1.3rem;
+  }
+
+  // Timeline
+  .tl-item {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    padding: var(--s2) 0;
+  }
+
+  .tl-date {
+    font-size: 0.65rem;
+    padding-top: 0;
+    margin-bottom: 0.25rem;
+  }
+
+  .tl-dot {
+    display: none;
+  }
+
+  .tl-line {
+    display: none;
+  }
+
+  .tl-role {
+    font-size: 0.95rem;
+  }
+
+  // Activity
+  .activity-body {
+    flex-direction: column;
+  }
+
+  .activity-right {
+    flex: none;
+    width: 100%;
+  }
+
+  .hm-grid {
+    min-width: unset;
+    overflow-x: auto;
+  }
+
+  .activity-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .act-stat-num {
+    font-size: 1.2rem;
+  }
+
+  // Contact
+  .contact-email {
+    font-size: 0.85rem;
+    padding: 0.85rem 1.5rem;
+  }
+
+  #contact .btn-primary {
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  // AI Terminal
+  .ai-heading {
+    font-size: clamp(1.4rem, 6vw, 1.8rem);
+  }
+
+  // Marquee
+  .marquee-item {
+    font-size: 1.1rem;
+    padding: 0 1.5rem;
+  }
+
+  .marquee-strip {
+    padding: 1rem 0;
+  }
+
+  .marquee-strip::before,
+  .marquee-strip::after {
+    width: 40px;
+  }
+
+  // Footer
+  .fb-divider {
+    display: none;
+  }
+}
+
+// ─── Extra-small screens (≤480px) ─────────────────────────
+@media (max-width: 480px) {
+  // General
+  .section-wrap {
+    padding: var(--s4) var(--s2);
+  }
+
+  .section-heading {
+    font-size: clamp(1.4rem, 7vw, 1.8rem);
+  }
+
+  // Hero
+  .hero-left {
+    padding: var(--s4) var(--s2);
+  }
+
+  .hero-title {
+    font-size: clamp(1.7rem, 12vw, 2.2rem) !important;
+  }
+
+  .hero-tagline {
+    font-size: 0.75rem;
+  }
+
+  .hero-terminal-badge {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .hero-glitch-block {
+    font-size: 0.6rem;
+    min-height: 3rem;
+  }
+
+  .stack-badge {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.45rem;
+  }
+
+  // Work
+  .work-v2-inner {
+    padding: 0 var(--s2);
+  }
+
+  .work-v2-heading {
+    font-size: clamp(1.3rem, 6vw, 1.6rem);
+  }
+
+  .work-feat-img-wrap {
+    padding: 0.5rem 0.5rem 0;
+    min-height: 150px;
+  }
+
+  .work-feat-body {
+    padding: var(--s2);
+  }
+
+  .work-feat-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .work-feat-title {
+    font-size: 1.1rem;
+  }
+
+  .work-feat-stat-num {
+    font-size: 1rem;
+  }
+
+  .work-feat-desc {
+    font-size: 0.78rem;
+  }
+
+  .work-proj-body {
+    padding: 1rem 1.1rem;
+  }
+
+  // About
+  .about-left {
+    padding: var(--s4) var(--s2);
+  }
+
+  .about-right {
+    padding: var(--s4) var(--s2);
+  }
+
+  .profile-card {
+    padding: var(--s3) var(--s2);
+  }
+
+  .profile-bio {
+    font-size: 0.8rem;
+  }
+
+  .info-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+
+  .info-val {
+    text-align: left;
+  }
+
+  .about-stack-card {
+    padding: 0.6rem 0.8rem;
+    gap: 0.7rem;
+  }
+
+  .asc-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+  }
+
+  .asc-label {
+    font-size: 0.72rem;
+  }
+
+  .st-body {
+    padding: var(--s2);
+  }
+
+  .st-line {
+    font-size: 0.7rem;
+    gap: 0.5rem;
+  }
+
+  // Services
+  .service-card {
+    padding: var(--s3) var(--s2);
+  }
+
+  .service-title {
+    font-size: 1.05rem;
+  }
+
+  .service-desc {
+    font-size: 0.82rem;
+  }
+
+  // Contact
+  #contact {
+    padding: var(--s5) var(--s2);
+  }
+
+  .contact-heading {
+    font-size: clamp(1.6rem, 9vw, 2.2rem);
+  }
+
+  .contact-sub {
+    font-size: 0.78rem;
+  }
+
+  .contact-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .contact-email {
+    font-size: 0.78rem;
+    padding: 0.75rem 1.2rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  // Activity
+  .act-stat {
+    padding: 0.75rem;
+  }
+
+  .act-stat-num {
+    font-size: 1rem;
+  }
+
+  .activity-focus {
+    padding: 0.85rem;
+  }
+
+  // AI terminal
+  #ai-agent {
+    padding: var(--s5) var(--s2);
+  }
+
+  .ai-terminal-frame {
+    height: 340px;
+  }
+
+  .ai-term-body {
+    padding: 0.85rem 0.7rem;
+    font-size: 0.72rem;
+  }
+
+  .ai-term-input-wrap {
+    padding: 0.5rem 0.7rem;
+  }
+
+  // Footer
+  footer {
+    padding: var(--s4) var(--s2);
+    gap: var(--s3);
+  }
+
+  .footer-col a {
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.65rem;
+  }
+
+  // Marquee
+  .marquee-item {
+    font-size: 0.95rem;
+    padding: 0 1rem;
+  }
+
+  .marquee-strip::before,
+  .marquee-strip::after {
+    width: 25px;
+  }
+
+  // Floating actions — smaller, repositioned
+  .floating-actions {
+    bottom: 1rem;
+    right: 1rem;
+    gap: 0.5rem;
+  }
+
+  .theme-floating-btn,
+  .scroll-top-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  // Nav — consistently right-drawer, tighter sizing
+  .nav-links {
+    width: 85%;
+    max-width: 300px;
+
+    &.mobile-open {
+      left: 15%;
+    }
+
+    a {
+      font-size: 1rem;
+      padding: 0.85rem 1.5rem;
+    }
+  }
+
+  .mobile-overlay {
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+  }
+
+  .btn-nav {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .nav-name {
+    font-size: 0.8rem;
+  }
+
+  // Hero glitch — prevent potential overflow on tiny screens
+  .hero-glitch-line {
+    font-size: 0.55rem;
+  }
+
+  // Heatmap panel — allow horizontal scroll
+  .heatmap-panel {
+    overflow-x: auto;
+  }
+
+  // About section inline styles — override any hardcoded margins
+  .skills-terminal {
+    margin-top: var(--s3) !important;
+  }
+
+  .timeline {
+    margin-top: var(--s4) !important;
+  }
+
+  .work-feat-highlights {
+    padding: 0.5rem 0.6rem;
+  }
+
+  .work-feat-highlight-item {
+    font-size: 0.72rem;
+  }
+
+  .work-proj-meta {
+    flex-wrap: wrap;
+  }
+
+  .wfv2-btn {
+    font-size: 0.6rem;
+    padding: 0.35rem 0.75rem;
+  }
+
+  // Nav right section
+  .nav-right {
+    gap: 0.25rem;
   }
 }
