@@ -37,7 +37,7 @@ const AiTerminal = () => {
 
     try {
       const response = await fetch(
-        'https://portfolio-bot-backend-813017623672.us-central1.run.app/api/chat',
+        'https://portfolio-bot-backend-yin7.onrender.com/api/chat',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
