@@ -35,9 +35,12 @@ const AiTerminal = () => {
     setMessages((prev) => [...prev, { role: 'user', text: userMessage }]);
     setIsLoading(true);
 
+  
+
+
     try {
       const response = await fetch(
-        'https://portfolio-bot-backend-yin7.onrender.com/api/chat',
+        'https://portfolio-bot-backend-yin7.onrender.com/api/chat', 
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
