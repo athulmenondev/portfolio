@@ -170,6 +170,21 @@
           { "label": "Live", "url": "https://nationalhss.in/", "primary": true },
           { "label": "GitHub", "url": "https://github.com/hxri-nxrxyxn/national-web", "primary": false }
         ]
+      },
+      {
+        "num": "07",
+        "tag": "Utility tool",
+        "tagColors": "blue",
+        "year": "2026",
+        "color": "#6B4CFF",
+        "title": "Eshare Text",
+        "desc": "a simple online clipboard for text and documents",
+        "tech": ["React", "Node.js", "Firestore","Tailwind CSS"],
+        "image": "/assets/eshare.png",
+        "links": [
+          { "label": "Live", "url": "https://esharetext.duckdns.org", "primary": true },
+          { "label": "GitHub", "url": "https://github.com/athulmenondev/eshare", "primary": false }
+        ]
       }
     ]
   },

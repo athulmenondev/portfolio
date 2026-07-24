@@ -193,6 +193,9 @@ nav {
   }
 }
 
+// ─── Hide mobile download link on desktop, hide desktop download on mobile ──
+.nav-dl-mobile { display: none; }
+
 // ─── Responsive: mobile menu ───────────────────────────────
 @include respond-down('lg') {
   .menu-toggle {
@@ -201,6 +204,15 @@ nav {
 
   .mobile-overlay {
     display: block;                // show overlay
+  }
+
+  .nav-dl-desktop { display: none; }
+
+  .nav-dl-mobile {
+    display: block;
+    border-top: 1px solid var(--rule);
+    margin-top: 1rem;
+    padding-top: 0.5rem;
   }
 
   .nav-links {

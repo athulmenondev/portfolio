@@ -63,10 +63,15 @@ const Nav = ({ data }) => {
               </a>
             </li>
           ))}
+          <li className="nav-dl-mobile">
+            <a href="/Athul%20S%20Menon__July_26.pdf" download onClick={closeMenu}>
+              <Download size={14} /> Resume
+            </a>
+          </li>
         </ul>
 
         <div className="nav-right">
-          <a className="btn-nav btn-nav--download" href="/Athul%20S%20Menon__July_26.pdf" download onClick={closeMenu}>
+          <a className="btn-nav btn-nav--download nav-dl-desktop" href="/Athul%20S%20Menon__July_26.pdf" download onClick={closeMenu}>
             <Download size={14} />
             Resume
           </a>
