@@ -4,6 +4,11 @@
 
 @use 'design-tokens' as *;
 
+// ─── Global overflow guard ────────────────────────────────
+body {
+  overflow-x: hidden;
+}
+
 // ─── Large screens (≤1100px) ──────────────────────────────
 @include respond-down('xl') {
   // Work grid: 3 → 2 columns
@@ -254,6 +259,7 @@
   // Contact
   #contact {
     padding: var(--s5) var(--s3);
+    min-height: auto;
   }
 
   .contact-heading {
@@ -339,6 +345,7 @@
   .btn-outline {
     justify-content: center;
     text-align: center;
+    width: 100%;
   }
 
   // Work grid — single column
@@ -437,7 +444,7 @@
     font-size: 0.95rem;
   }
 
-  // Activity
+  // Activity — heatmap scrollable
   .activity-body {
     flex-direction: column;
   }
@@ -448,8 +455,14 @@
   }
 
   .hm-grid {
-    min-width: unset;
+    min-width: 0;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .activity-stats {
@@ -733,7 +746,7 @@
     height: 40px;
   }
 
-  // Nav — consistently right-drawer, tighter sizing
+  // Nav — tighten layout
   .nav-links {
     width: 85%;
     max-width: 300px;
@@ -764,11 +777,6 @@
   // Hero glitch — prevent potential overflow on tiny screens
   .hero-glitch-line {
     font-size: 0.55rem;
-  }
-
-  // Heatmap panel — allow horizontal scroll
-  .heatmap-panel {
-    overflow-x: auto;
   }
 
   // About section inline styles — override any hardcoded margins

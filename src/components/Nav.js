@@ -44,17 +44,6 @@ const Nav = ({ data }) => {
           <span className="nav-name">{data.name}</span>
         </div>
 
-        <button
-          className={`menu-toggle ${menuOpen ? 'open' : ''}`}
-          onClick={() => setMenuOpen((prev) => !prev)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-
         <ul className={`nav-links${menuOpen ? ' mobile-open' : ''}`}>
           {data.links.map((link) => (
             <li key={link.id}>
@@ -63,14 +52,24 @@ const Nav = ({ data }) => {
               </a>
             </li>
           ))}
-          <li className="nav-dl-mobile">
+          {/* <li className="nav-dl-mobile">
             <a href="/Athul%20S%20Menon__July_26.pdf" download onClick={closeMenu}>
               <Download size={14} /> Resume
             </a>
-          </li>
+          </li> */}
         </ul>
 
         <div className="nav-right">
+          <button
+            className={`menu-toggle ${menuOpen ? 'open' : ''}`}
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
           <a className="btn-nav btn-nav--download nav-dl-desktop" href="/Athul%20S%20Menon__July_26.pdf" download onClick={closeMenu}>
             <Download size={14} />
             Resume

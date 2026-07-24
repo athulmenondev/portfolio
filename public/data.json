@@ -25,8 +25,7 @@
     },
     "buttons": [
       { "label": "View Works", "target": "work", "primary": true },
-      { "label": "Get in Touch", "target": "contact", "primary": false },
-      { "label": "Download Resume", "target": "/Athul%20S%20Menon__July_26.pdf", "primary": false, "download": true }
+      { "label": "Get in Touch", "target": "contact", "primary": false }
     ],
     "stack": [
       "React", "Node", "JavaScript", "HTML/CSS", "Tailwind", "Git", "Linux"

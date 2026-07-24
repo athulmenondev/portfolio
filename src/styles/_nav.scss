@@ -42,6 +42,9 @@ nav {
   }
 }
 
+// ─── Hide mobile download link on desktop ──────────────────
+.nav-dl-mobile { display: none; }
+
 // ─── Brand ────────────────────────────────────────────────
 .nav-brand {
   @include flex-center;
@@ -193,19 +196,18 @@ nav {
   }
 }
 
-// ─── Hide mobile download link on desktop, hide desktop download on mobile ──
-.nav-dl-mobile { display: none; }
-
 // ─── Responsive: mobile menu ───────────────────────────────
 @include respond-down('lg') {
+  // Show hamburger
   .menu-toggle {
-    display: flex;                 // show hamburger
+    display: flex;
   }
 
   .mobile-overlay {
-    display: block;                // show overlay
+    display: block;
   }
 
+  // Hide desktop-only download, show mobile-only in menu
   .nav-dl-desktop { display: none; }
 
   .nav-dl-mobile {
@@ -213,12 +215,45 @@ nav {
     border-top: 1px solid var(--rule);
     margin-top: 1rem;
     padding-top: 0.5rem;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
   }
 
+  // Nav container — full-width, straight edges
+  nav {
+    width: calc(100% - 1.5rem);
+    max-width: none;
+    border-radius: 12px;
+    padding: 0.35rem 0.5rem 0.35rem 0.85rem;
+    gap: 0;
+
+    &.scrolled {
+      padding: 0.25rem 0.4rem 0.25rem 0.7rem;
+    }
+  }
+
+  // Brand
+  .nav-brand {
+    border-right: none;
+    padding-right: 0;
+    flex-shrink: 0;
+  }
+
+  .nav-name {
+    font-size: 0.85rem;
+  }
+
+  // Hide desktop nav links (they become the slide-out)
   .nav-links {
     position: fixed;
     top: 0;
-    left: 100%;                      // hidden off-screen right
+    right: 0;
+    left: auto;
     width: 75%;
     max-width: 320px;
     height: 100vh;
@@ -231,10 +266,11 @@ nav {
     background: var(--bg-2);
     border-left: 1px solid var(--rule);
     z-index: 160;
-    transition: left 0.4s $ease-out-expo;
+    transform: translateX(100%);
+    transition: transform 0.4s $ease-out-expo;
 
     &.mobile-open {
-      left: 25%;                     // visible: right 75% of screen
+      transform: translateX(0);
     }
 
     li {
@@ -245,34 +281,42 @@ nav {
       display: block;
       width: 100%;
       text-align: center;
-      font-size: 1.15rem;
-      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      padding: 0.9rem 2rem;
       border-radius: 0;
       font-weight: 600;
 
-      &:hover {
+      &:hover,
+      &:active {
         background: color-mix(in srgb, var(--ink) 6%, transparent);
       }
     }
   }
 
-  // Adjust nav container on mobile
-  nav {
-    gap: 0.5rem;
-  }
-
-  .nav-brand {
-    border-right: none;
-    padding-right: 0;
-  }
-
+  // Nav right — hamburger + CTA
   .nav-right {
-    flex: 0;
+    flex: 0 0 auto;
+    gap: 0.35rem;
+    margin-left: auto;
+    align-items: center;
+  }
+
+  .menu-toggle {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    padding: 2px;
+    margin-right: 0.15rem;
+
+    span {
+      width: 16px;
+      height: 2px;
+    }
   }
 
   .btn-nav {
-    font-size: 0.75rem;
-    padding: 0.5rem 1rem;
+    font-size: 0.72rem;
+    padding: 0.45rem 0.85rem;
   }
 }
 
