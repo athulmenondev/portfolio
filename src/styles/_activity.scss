@@ -39,24 +39,31 @@
 }
 
 .hm-grid {
+  display: grid;
+  grid-template-columns: repeat(52, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 3px;
+  width: 100%;
+  min-width: 500px;
+}
+
+// Fallback: old DOM-based grid uses flex columns
+.hm-grid.flex-mode {
   display: flex;
   flex-direction: row;
   gap: 3px;
-  width: 100%;
-  min-width: 600px;
-  flex-shrink: 0;
-}
 
-.hm-col {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+  .hm-col {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
 }
 
 .hm-cell {
   width: 100%;
-  padding-top: 100%;
+  aspect-ratio: 1;
   border-radius: 3px;
   background: var(--bg-3);
   transition: transform 0.15s, opacity 0.12s;
@@ -72,6 +79,13 @@
   &.l2 { background: color-mix(in srgb, var(--accent) 40%, var(--bg-3)); }
   &.l3 { background: color-mix(in srgb, var(--accent) 65%, var(--bg-3)); }
   &.l4 { background: var(--accent); }
+
+  // Today indicator — subtle accent ring
+  &.hm-today {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    z-index: 1;
+  }
 }
 
 // ── Legend ──
@@ -170,16 +184,141 @@
   margin: 0;
 }
 
-// ── Legacy activity classes (for backward compat) ──
-.activity-stats-legacy {
-  display: flex;
-  gap: var(--s5);
-  margin-top: var(--s3);
-  flex-wrap: wrap;
+// ═══════════════════════════════════════════════════════════
+// MOBILE BAR CHART — terminal-style weekly activity
+// ═══════════════════════════════════════════════════════════
+
+.act-bars {
+  display: none; // hidden on desktop, shown via responsive
 }
 
-.act-stat-legacy {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+@include respond-down('md') {
+  .heatmap-panel {
+    display: none;
+  }
+
+  .act-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    background: var(--bg-2);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1rem 1.1rem 0.85rem;
+    overflow: hidden;
+  }
+
+  .act-bars-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+
+  .act-bars-title {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .act-bars-total {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+
+  // ── Chart grid ──
+  .act-bars-chart {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 6px;
+    align-items: end;
+    height: 140px;
+    padding: 0 2px;
+  }
+
+  .act-bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    height: 100%;
+    justify-content: flex-end;
+  }
+
+  .act-bar-count {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--ink-faint);
+    height: 0.7rem;
+    line-height: 0.7rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    .act-bar-col:hover & {
+      opacity: 1;
+    }
+  }
+
+  .act-bar-track {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+  }
+
+  .act-bar-fill {
+    width: 100%;
+    border-radius: 3px 3px 1px 1px;
+    transition: height 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    position: relative;
+
+    // Intensity levels (matching heatmap palette)
+    &.l0 { background: var(--bg-3); }
+    &.l1 { background: color-mix(in srgb, var(--accent) 25%, var(--bg-3)); }
+    &.l2 { background: color-mix(in srgb, var(--accent) 45%, var(--bg-3)); }
+    &.l3 { background: color-mix(in srgb, var(--accent) 70%, var(--bg-3)); }
+    &.l4 { background: var(--accent); }
+  }
+
+  .act-bar-label {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  // ── Legend ──
+  .act-bars-legend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: flex-end;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--rule);
+    margin-top: 0.25rem;
+
+    span {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      color: var(--ink-muted);
+    }
+  }
+
+  // ── Activity body stacks vertically ──
+  .activity-body {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .activity-right {
+    flex: none;
+    width: 100%;
+  }
 }
