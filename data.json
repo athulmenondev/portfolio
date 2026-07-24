@@ -25,8 +25,7 @@
     },
     "buttons": [
       { "label": "View Works", "target": "work", "primary": true },
-      { "label": "Get in Touch", "target": "contact", "primary": false },
-      { "label": "Download Resume", "target": "/Athul%20S%20Menon__July_26.pdf", "primary": false, "download": true }
+      { "label": "Get in Touch", "target": "contact", "primary": false }
     ],
     "stack": [
       "React", "Node", "JavaScript", "HTML/CSS", "Tailwind", "Git", "Linux"
@@ -62,7 +61,7 @@
     },
     "stats": [
       { "num": "150+", "label": "Contributions" },
-      { "num": "20", "label": "Repos" },
+      { "num": "40+", "label": "Repos" },
       { "num": "1 month", "label": "of Experience as an Intern" }
     ]
   },
@@ -169,6 +168,21 @@
         "links": [
           { "label": "Live", "url": "https://nationalhss.in/", "primary": true },
           { "label": "GitHub", "url": "https://github.com/hxri-nxrxyxn/national-web", "primary": false }
+        ]
+      },
+      {
+        "num": "07",
+        "tag": "Utility tool",
+        "tagColors": "blue",
+        "year": "2026",
+        "color": "#6B4CFF",
+        "title": "Eshare Text",
+        "desc": "a simple online clipboard for text and documents",
+        "tech": ["React", "Node.js", "Firestore","Tailwind CSS"],
+        "image": "/assets/eshare.png",
+        "links": [
+          { "label": "Live", "url": "https://esharetext.duckdns.org", "primary": true },
+          { "label": "GitHub", "url": "https://github.com/athulmenondev/eshare", "primary": false }
         ]
       }
     ]
