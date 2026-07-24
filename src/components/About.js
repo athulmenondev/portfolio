@@ -172,9 +172,9 @@ const About = ({ data }) => {
           LEFT — profile card + info list
       ══════════════════════════════════════════════ */}
       <div className="about-left">
-        <div className="profile-card" style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div className="profile-avatar" style={{ border: 'none' }}>
-            <img src="/athulsmenon.jpg" alt="Athul Menon" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <div className="profile-card">
+          <div className="profile-avatar">
+            <img src="/athulsmenon.jpg" alt="Athul Menon" />
           </div>
           <div className="profile-name">{data.profile.name}</div>
           <div className="profile-handle">{data.profile.handle}</div>
@@ -270,7 +270,7 @@ const About = ({ data }) => {
         </div>
 
         {/* Terminal skills */}
-        <div className="skills-terminal" style={{ marginTop: 'var(--s4)' }} ref={termRef}>
+        <div className="skills-terminal" ref={termRef}>
           <div className="st-bar">
             <div className="dot red" />
             <div className="dot amber" />
@@ -294,7 +294,7 @@ const About = ({ data }) => {
         </div>
 
         {/* Experience timeline */}
-        <div className="timeline" style={{ marginTop: 'var(--s5)' }}>
+        <div className="timeline">
           <p className="about-stack-label">{'// experience'}</p>
           {data.experience.map((exp, i) => (
             <div key={i} className={`tl-item${exp.active ? ' active' : ''}`}>

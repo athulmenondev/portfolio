@@ -1,53 +1,13 @@
 // ═══════════════════════════════════════════════════════════
 // GITHUB ACTIVITY — Contribution heatmap + stats
 // ═══════════════════════════════════════════════════════════
+//
+// Note: .section-wrap, .section-top, .section-eyebrow,
+// .section-heading, .section-link live in _utilities.scss
+//
+// ═══════════════════════════════════════════════════════════
 
 @use 'design-tokens' as *;
-
-// ─── Section header ───────────────────────────────────────
-.section-wrap {
-  padding: var(--s6) var(--s5);
-  border-top: 1px solid var(--rule);
-}
-
-.section-top {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: var(--s5);
-}
-
-.section-eyebrow {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.5rem;
-}
-
-.section-heading {
-  font-family: var(--serif);
-  font-size: clamp(1.8rem, 3.5vw, 3rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1;
-}
-
-.section-link {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  color: var(--ink-muted);
-  letter-spacing: 0.08em;
-  @include flex-center;
-  gap: 0.4rem;
-  transition: color 0.25s;
-  cursor: none;
-
-  &:hover {
-    color: var(--accent);
-  }
-}
 
 // ─── Activity body ────────────────────────────────────────
 .activity-body {

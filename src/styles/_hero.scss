@@ -61,6 +61,10 @@
     rgba(0, 0, 0, 0.08) 3px,
     rgba(0, 0, 0, 0.08) 4px
   );
+
+  [data-theme='light'] & {
+    opacity: 0.3;
+  }
 }
 
 .hero-vignette {
@@ -240,6 +244,11 @@
     border-color: var(--accent);
     color: var(--accent);
   }
+}
+
+// ── Icon margin inside buttons ──
+.btn-icon {
+  margin-left: 4px;
 }
 
 // ── Tech stack badges ──

@@ -43,30 +43,6 @@ body {
     opacity: 0.75;
   }
 
-  // Work — featured
-  .proj-featured-body {
-    grid-template-columns: 1fr;
-    padding: var(--s4);
-    gap: var(--s4);
-  }
-
-  .proj-featured-img {
-    padding: var(--s2) var(--s2) 0 var(--s2);
-    aspect-ratio: auto;
-    min-height: 250px;
-  }
-
-  .browser-mockup {
-    width: 100%;
-    border-radius: 4px 4px 0 0;
-  }
-
-  .featured-actions {
-    flex-direction: column;
-    align-items: stretch;
-    margin-top: var(--s2);
-  }
-
   // About
   #about {
     grid-template-columns: 1fr;
@@ -157,7 +133,7 @@ body {
   }
 
   .hero-title {
-    font-size: clamp(2.4rem, 8vw, 3.5rem) !important;
+    font-size: clamp(2.4rem, 8vw, 3.5rem);
   }
 
   .hero-tagline {
@@ -321,7 +297,7 @@ body {
   }
 
   .hero-title {
-    font-size: clamp(2rem, 10vw, 2.8rem) !important;
+    font-size: clamp(2rem, 10vw, 2.8rem);
     line-height: 0.92;
   }
 
@@ -479,11 +455,6 @@ body {
     padding: 0.85rem 1.5rem;
   }
 
-  #contact .btn-primary {
-    padding: 0.85rem 1.5rem;
-    font-size: 1rem;
-  }
-
   // AI Terminal
   .ai-heading {
     font-size: clamp(1.4rem, 6vw, 1.8rem);
@@ -527,7 +498,7 @@ body {
   }
 
   .hero-title {
-    font-size: clamp(1.7rem, 12vw, 2.2rem) !important;
+    font-size: clamp(1.7rem, 12vw, 2.2rem);
   }
 
   .hero-tagline {
@@ -761,13 +732,13 @@ body {
     font-size: 0.55rem;
   }
 
-  // About section inline styles — override any hardcoded margins
+  // About section margins
   .skills-terminal {
-    margin-top: var(--s3) !important;
+    margin-top: var(--s3);
   }
 
   .timeline {
-    margin-top: var(--s4) !important;
+    margin-top: var(--s4);
   }
 
   .work-feat-highlights {

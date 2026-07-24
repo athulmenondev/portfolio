@@ -11,7 +11,7 @@ const Contact = ({ data }) => {
           <span className="c-comment">{data.sub.comment2}</span>
         </p>
         <div className="contact-actions">
-          <a className="btn-primary contact-email" href={`mailto:${data.email}`}>
+          <a className="contact-email" href={`mailto:${data.email}`}>
             {data.email} <ArrowUpRight size={20} />
           </a>
         </div>

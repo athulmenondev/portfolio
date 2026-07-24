@@ -36,7 +36,31 @@ body {
     border-color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-* {
+// ─── Theme-aware transitions (targeted, not wildcard) ──────
+// Only elements that change color with theme get smooth transitions.
+// The old `* { transition: ... }` caused perf issues and animation interference.
+.theme-transition,
+section,
+nav,
+footer,
+.service-card,
+.work-featured,
+.work-proj-card,
+.profile-card,
+.ai-terminal-frame,
+.marquee-strip,
+.hero-stack,
+.btn-primary,
+.btn-outline,
+.btn-nav,
+.stack-badge,
+.cd-badge,
+.info-item,
+ tl-item,
+.status-row,
+.activity-stats,
+.act-stat,
+.activity-focus {
   transition:
     background-color 0.5s cubic-bezier(0.25, 1, 0.5, 1),
     border-color 0.5s cubic-bezier(0.25, 1, 0.5, 1),

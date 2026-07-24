@@ -1,13 +1,13 @@
 // ═══════════════════════════════════════════════════════════
-// FOOTER — Dark full-width footer with grid columns
+// FOOTER — Full-width footer with grid columns
 // ═══════════════════════════════════════════════════════════
 
 @use 'design-tokens' as *;
 
 footer {
-  background: #0D0D0E;
-  color: #E4E2DD;
-  border-top: 1px solid #1E1E21;
+  background: var(--bg-3);
+  color: var(--ink-muted);
+  border-top: 1px solid var(--rule);
   padding: var(--s6) var(--s5);
   display: flex;
   flex-direction: column;
@@ -26,9 +26,10 @@ footer {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+  color: var(--ink);
 
   span {
-    color: #6B4CFF;
+    color: var(--accent);
   }
 }
 
@@ -43,7 +44,7 @@ footer {
     font-family: var(--mono);
     font-size: 0.75rem;
     text-transform: uppercase;
-    color: #8A8A8F;
+    color: var(--ink-faint);
     margin-bottom: 1.5rem;
     letter-spacing: 0.12em;
   }
@@ -59,13 +60,13 @@ footer {
 
   a {
     font-size: 0.95rem;
-    color: #E4E2DD;
+    color: var(--ink-muted);
     transition: color 0.25s $ease-smooth;
     font-family: var(--sans);
     font-weight: 400;
 
     &:hover {
-      color: #6B4CFF;
+      color: var(--accent);
     }
   }
 }
@@ -77,17 +78,17 @@ footer {
   flex-wrap: wrap;
   gap: 1rem;
   padding-top: 2rem;
-  border-top: 1px solid #1E1E21;
+  border-top: 1px solid var(--rule);
   font-family: var(--mono);
   font-size: 0.75rem;
-  color: #8A8A8F;
+  color: var(--ink-faint);
 
   span {
-    color: #6B4CFF;
+    color: var(--accent);
   }
 }
 
 .fb-divider {
   margin: 0 0.5rem;
-  color: #3A3A40 !important;
+  color: var(--ink-faint);
 }

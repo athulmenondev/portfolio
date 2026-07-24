@@ -87,6 +87,12 @@
     &::after { opacity: 0.07; }
   }
 
+  [data-theme='light'] & {
+    box-shadow:
+      0 24px 64px -16px rgba(0, 0, 0, 0.1),
+      0 0 0 1px color-mix(in srgb, var(--accent) 4%, transparent);
+  }
+
   @include respond-down('sm') {
     height: 380px;
     border-radius: 10px;

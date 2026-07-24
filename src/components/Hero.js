@@ -232,18 +232,10 @@ const Hero = ({ data }) => {
   };
 
   return (
-    <section id="hero" ref={sectionRef} className="relative w-full overflow-hidden">
+    <section id="hero" ref={sectionRef}>
 
       {/* ── 3D canvas background ── */}
-      <div
-        className="hero-canvas-wrap"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: 'none',
-        }}
-      >
+      <div className="hero-canvas-wrap">
         {/* scanline overlay */}
         <div className="hero-scanlines" />
         {/* radial vignette */}
@@ -265,7 +257,7 @@ const Hero = ({ data }) => {
       <div className="hero-inner-grid">
 
         {/* LEFT: text */}
-        <div className="hero-left" style={{ position: 'relative', zIndex: 2 }}>
+        <div className="hero-left">
 
           {/* glitch terminal overlay */}
           <div className="hero-glitch-block" ref={glitchRef} aria-label="Hero intro text">
@@ -285,7 +277,7 @@ const Hero = ({ data }) => {
 
           <p className="hero-tagline reveal">
             <span className="c-comment">{data.tagline.comment}</span><br />
-            <span className="c-key">const</span> stack = [<span className="c-s">"TypeScript"</span>, <span className="c-s">"Rust"</span>, <span className="c-s">"Python"</span>];<br />
+            <span className="c-key">const</span> stack = [<span className="c-s">{data.tagline.codeLine1.split('["')[1]?.split('"]')[0] || '"React", "Node", "JS"'}</span>];<br />
             <span className="c-fn">buildThingsThat</span>(<span className="c-s">"scale"</span> + <span className="c-s">"delight"</span>);
           </p>
 
@@ -302,7 +294,7 @@ const Hero = ({ data }) => {
                     onMouseLeave={handleMouseLeave}
                   >
                     <span>{btn.label}</span>
-                    <ArrowUpRight size={16} style={{ marginLeft: 4 }} />
+                    <ArrowUpRight size={16} className="btn-icon" />
                   </a>
                 );
               }
@@ -326,7 +318,7 @@ const Hero = ({ data }) => {
                   onMouseLeave={handleMouseLeave}
                 >
                   <span>{btn.label}</span>
-                  {btn.target === 'contact' && <ArrowUpRight size={16} style={{ marginLeft: 4 }} />}
+                  {btn.target === 'contact' && <ArrowUpRight size={16} className="btn-icon" />}
                 </a>
               );
             })}
@@ -341,7 +333,7 @@ const Hero = ({ data }) => {
         </div>
 
         {/* RIGHT: code window kept, but floated on top of canvas */}
-        <div className="hero-right" style={{ position: 'relative', zIndex: 2 }}>
+        <div className="hero-right">
           <div className="code-window">
             <div className="window-bar">
               <div className="dot red" />
