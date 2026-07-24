@@ -746,25 +746,7 @@ body {
     height: 40px;
   }
 
-  // Nav — tighten layout
-  .nav-links {
-    width: 85%;
-    max-width: 300px;
-
-    &.mobile-open {
-      left: 15%;
-    }
-
-    a {
-      font-size: 1rem;
-      padding: 0.85rem 1.5rem;
-    }
-  }
-
-  .mobile-overlay {
-    background: color-mix(in srgb, var(--bg) 85%, transparent);
-  }
-
+  // Nav right section
   .btn-nav {
     font-size: 0.7rem;
     padding: 0.4rem 0.75rem;

@@ -44,19 +44,15 @@ const Nav = ({ data }) => {
           <span className="nav-name">{data.name}</span>
         </div>
 
-        <ul className={`nav-links${menuOpen ? ' mobile-open' : ''}`}>
+        {/* Desktop links */}
+        <ul className="nav-links-desktop">
           {data.links.map((link) => (
             <li key={link.id}>
-              <a href={`#${link.id}`} onClick={closeMenu}>
+              <a href={`#${link.id}`}>
                 {link.label}
               </a>
             </li>
           ))}
-          {/* <li className="nav-dl-mobile">
-            <a href="/Athul%20S%20Menon__July_26.pdf" download onClick={closeMenu}>
-              <Download size={14} /> Resume
-            </a>
-          </li> */}
         </ul>
 
         <div className="nav-right">
@@ -70,23 +66,76 @@ const Nav = ({ data }) => {
             <span />
             <span />
           </button>
-          <a className="btn-nav btn-nav--download nav-dl-desktop" href="/Athul%20S%20Menon__July_26.pdf" download onClick={closeMenu}>
+          <a className="btn-nav btn-nav--download nav-dl-desktop" href="/Athul%20S%20Menon__July_26.pdf" download>
             <Download size={14} />
             Resume
           </a>
-          <a className="btn-nav" href="#contact" onClick={closeMenu}>
+          <a className="btn-nav" href="#contact">
             {data.hireMe.replace('→', '').replace('↗', '')}
             <ArrowRight size={16} />
           </a>
         </div>
       </nav>
 
-      {/* Mobile overlay backdrop */}
-      <div
-        className={`mobile-overlay ${menuOpen ? 'visible' : ''}`}
-        onClick={closeMenu}
-        aria-hidden="true"
-      />
+      {/* ── Mobile terminal overlay ── */}
+      <div className={`mobile-overlay ${menuOpen ? 'visible' : ''}`} onClick={closeMenu} aria-hidden="true" />
+
+      <div className={`mobile-term ${menuOpen ? 'open' : ''}`} role="dialog" aria-label="Navigation menu">
+        {/* Scanline atmosphere */}
+        <div className="mobile-term-scanlines" />
+
+        {/* Terminal header bar */}
+        <div className="mobile-term-bar">
+          <div className="terminal-dots-row">
+            <span className="dot red" />
+            <span className="dot amber" />
+            <span className="dot green" />
+          </div>
+          <span className="mobile-term-title">nav.sh</span>
+          <button className="mobile-term-close" onClick={closeMenu} aria-label="Close menu">
+            ✕
+          </button>
+        </div>
+
+        {/* Command list */}
+        <div className="mobile-term-body">
+          {data.links.map((link, i) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              className="mobile-term-link"
+              onClick={closeMenu}
+              style={{ transitionDelay: menuOpen ? `${0.1 + i * 0.06}s` : '0s' }}
+            >
+              <span className="mt-prompt">$</span>
+              <span className="mt-num">{String(i + 1).padStart(2, '0')}.</span>
+              <span className="mt-label">{link.label}</span>
+              <span className="mt-line" />
+            </a>
+          ))}
+
+          {/* Resume download */}
+          <a
+            href="/Athul%20S%20Menon__July_26.pdf"
+            download
+            className="mobile-term-link mt-resume"
+            onClick={closeMenu}
+            style={{ transitionDelay: menuOpen ? `${0.1 + data.links.length * 0.06}s` : '0s' }}
+          >
+            <span className="mt-prompt">$</span>
+            <span className="mt-num">↗</span>
+            <span className="mt-label">Resume</span>
+            <Download size={13} className="mt-icon" />
+          </a>
+        </div>
+
+        {/* Footer */}
+        <div className="mobile-term-footer">
+          <span className="mt-footer-line" />
+          <span className="mt-footer-name">{data.name}</span>
+          <span className="mt-footer-line" />
+        </div>
+      </div>
 
       <div className="floating-actions">
         <button className={`scroll-top-btn ${scrolled ? 'visible' : ''}`} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Scroll to top">
