@@ -114,19 +114,7 @@ const Nav = ({ data }) => {
             </a>
           ))}
 
-          {/* Resume download */}
-          <a
-            href="/Athul%20S%20Menon__July_26.pdf"
-            download
-            className="mobile-term-link mt-resume"
-            onClick={closeMenu}
-            style={{ transitionDelay: menuOpen ? `${0.1 + data.links.length * 0.06}s` : '0s' }}
-          >
-            <span className="mt-prompt">$</span>
-            <span className="mt-num">↗</span>
-            <span className="mt-label">Resume</span>
-            <Download size={13} className="mt-icon" />
-          </a>
+          {/* Resume download removed from mobile menu */}
         </div>
 
         {/* Footer */}

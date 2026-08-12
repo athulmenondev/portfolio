@@ -191,6 +191,11 @@ nav {
     display: none;
   }
 
+  // ── Hide desktop resume button ──
+  .nav-dl-desktop {
+    display: none;
+  }
+
   // ── Hamburger shown ──
   .menu-toggle {
     display: flex;
