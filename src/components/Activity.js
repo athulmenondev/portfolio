@@ -71,7 +71,6 @@ async function fetchContributions() {
 /* ── Mock data generator (fallback) ────────────────────── */
 function generateMockHeatmap() {
   const cells = [];
-  const today = new Date();
   for (let w = 0; w < 52; w++) {
     for (let d = 0; d < 7; d++) {
       const l = Math.random() < 0.35 ? 0 : LEVELS[Math.floor(Math.random() * LEVELS.length)];
@@ -173,7 +172,6 @@ const Activity = ({ data }) => {
   const [heatmapCells, setHeatmapCells] = useState(() => generateMockHeatmap());
   const [weeklyData, setWeeklyData] = useState(() => generateMockWeekly());
   const [totalContributions, setTotalContributions] = useState(null);
-  const [isRealData, setIsRealData] = useState(false);
 
   // ── Detect mobile ──
   useEffect(() => {
@@ -195,7 +193,6 @@ const Activity = ({ data }) => {
       setHeatmapCells(calendarToHeatmap(calendarDays));
       setWeeklyData(calendarToWeekly(calendarDays));
       setTotalContributions(calendarDays.reduce((s, d) => s + d.contributionCount, 0));
-      setIsRealData(true);
     })();
 
     return () => { cancelled = true; };

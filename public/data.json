@@ -20,7 +20,7 @@
     ],
     "tagline": {
       "comment": "// Fullstack Developer · Kerala, India",
-      "codeLine1": "const stack = [\"MongoDB\", \"Express\", \"React\", \"Node.js\"];",
+      "codeLine1": "const stack = [\"MongoDB\", \"React\", \"Node.js\"];",
       "codeLine2": "buildThingsThat(\"scale\" + \"delight\" + \"solves\" + \"problems\");"
     },
     "buttons": [
@@ -177,7 +177,7 @@
         "year": "2026",
         "color": "#6B4CFF",
         "title": "Eshare Text",
-        "desc": "a simple online clipboard for text and documents",
+        "desc": "a simple online clipboard for text and zuments",
         "tech": ["React", "Node.js", "Firestore","Tailwind CSS"],
         "image": "/assets/eshare.png",
         "links": [
@@ -219,7 +219,7 @@
       "bio": "CS undergraduate building full-stack systems with a focus on security, performance, and clean architecture. Writes React for clarity, engineers backends for scale, and believes software should be fast, correct — and occasionally beautiful."
     },
     "info": [
-      { "key": "Location", "val": "Thrissur,Kerala, India" },
+      { "key": "Location", "val": "Thrissur, Kerala, India" },
       { "key": "OS", "val": "<span class=\"hl\">Linux</span> / Debian" },
       { "key": "Editor", "val": "<span class=\"hl\">Antigravity</span> / VS Code" },
       { "key": "College", "val": "NSS College of Engineering" },
@@ -236,8 +236,8 @@
     "skills": {
       "title": "skills.sh",
       "lines": [
-        { "cmd": "cat languages.txt", "out": "  JavaScript · Python · Java · C++ · HTML · CSS" },
-        { "cmd": "cat tools.txt", "out": "  React · Next.js · Git · Linux · Tailwind" },
+        { "cmd": "cat languages.txt", "out": "  JavaScript(basic) · Python · Java · C++ · HTML · CSS" },
+        { "cmd": "cat tools.txt", "out": "  React · Node.js · Git · Linux · Tailwind" },
         { "cmd": "whoami", "out": "  Athul S Menon" }
       ]
     },
@@ -296,7 +296,7 @@
   },
   "footer": {
     "name": "© 2026 Athul Menon",
-    "builtWith": "Built with <span>React,js, Tailwind CSS</span>",
+    "builtWith": "Built with <span>React.js, Tailwind CSS</span>",
     "location": "Thrissur, IN · UTC<span>+5:30</span>"
   }
 }
