@@ -66,7 +66,7 @@ const Nav = ({ data }) => {
             <span />
             <span />
           </button>
-          <a className="btn-nav btn-nav--download nav-dl-desktop" href="/Athul%20S%20Menon__July_26.pdf" download>
+          <a className="btn-nav btn-nav--download nav-dl-desktop" href="/Athul_Resume_Aug_2026.pdf" download>
             <Download size={14} />
             Resume
           </a>
