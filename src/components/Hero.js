@@ -266,7 +266,7 @@ const Hero = ({ data }) => {
             <span className="hero-glitch-line">{''}</span>
           </div>
 
-          <div className="hero-terminal-badge">{data.badge}</div>
+          {/* <div className="hero-terminal-badge">{data.badge}</div> */}
 
           <h1 className="hero-title">
             <span className="wr"><span className="wi">{data.titleParts[0]}</span></span><br />
