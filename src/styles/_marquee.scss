@@ -1,0 +1,71 @@
+// ═══════════════════════════════════════════════════════════
+// MARQUEE — Infinite scrolling tech strip
+// ═══════════════════════════════════════════════════════════
+
+@use 'design-tokens' as *;
+
+.marquee-strip {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 1.5rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--bg-2);
+  display: flex;
+  position: relative;
+
+  // ── Edge fade ──
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-2), transparent);
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-2), transparent);
+  }
+}
+
+.marquee-inner {
+  display: inline-flex;
+  animation: marqueeScroll 28s linear infinite;
+  padding-left: 100%;
+}
+
+.marquee-item {
+  font-family: var(--alt);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink-faint);
+  padding: 0 3rem;
+  transition: color 0.4s $ease-smooth;
+
+  .marquee-strip:hover & {
+    color: var(--ink);
+  }
+
+  &.sep {
+    color: var(--accent);
+    opacity: 1;
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+}
+
+@keyframes marqueeScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}

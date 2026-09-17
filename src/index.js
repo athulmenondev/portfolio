@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
+import './styles/main.scss';
+// Legacy index.scss kept for reference — new styles are in styles/
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

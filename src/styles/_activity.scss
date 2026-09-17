@@ -1,0 +1,324 @@
+// ═══════════════════════════════════════════════════════════
+// GITHUB ACTIVITY — Contribution heatmap + stats
+// ═══════════════════════════════════════════════════════════
+//
+// Note: .section-wrap, .section-top, .section-eyebrow,
+// .section-heading, .section-link live in _utilities.scss
+//
+// ═══════════════════════════════════════════════════════════
+
+@use 'design-tokens' as *;
+
+// ─── Activity body ────────────────────────────────────────
+.activity-body {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  width: 100%;
+
+  @include respond-down('md') {
+    flex-direction: column;
+  }
+}
+
+// ── Heatmap panel ──
+.heatmap-panel {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.hm-grid {
+  display: grid;
+  grid-template-columns: repeat(52, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 3px;
+  width: 100%;
+  min-width: 500px;
+}
+
+// Fallback: old DOM-based grid uses flex columns
+.hm-grid.flex-mode {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+
+  .hm-col {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+}
+
+.hm-cell {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 3px;
+  background: var(--bg-3);
+  transition: transform 0.15s, opacity 0.12s;
+  cursor: default;
+  position: relative;
+
+  &:hover {
+    transform: scale(1.3);
+    opacity: 0.8;
+  }
+
+  &.l1 { background: color-mix(in srgb, var(--accent) 20%, var(--bg-3)); }
+  &.l2 { background: color-mix(in srgb, var(--accent) 40%, var(--bg-3)); }
+  &.l3 { background: color-mix(in srgb, var(--accent) 65%, var(--bg-3)); }
+  &.l4 { background: var(--accent); }
+
+  // Today indicator — subtle accent ring
+  &.hm-today {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    z-index: 1;
+  }
+}
+
+// ── Legend ──
+.heatmap-legend {
+  @include flex-center;
+  gap: 4px;
+  justify-content: flex-end;
+
+  span {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--ink-muted);
+  }
+}
+
+.legend-cell {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+// ── Right panel ──
+.activity-right {
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @include respond-down('md') {
+    flex: none;
+    width: 100%;
+  }
+}
+
+.activity-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.act-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 1rem 1.1rem;
+  background: var(--bg-2);
+
+  &.full {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--rule);
+  }
+}
+
+.act-stat-num {
+  font-family: var(--mono);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.act-stat-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.activity-focus {
+  padding: 1.1rem 1.2rem;
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+
+.focus-label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.55rem;
+}
+
+.focus-text {
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+// ═══════════════════════════════════════════════════════════
+// MOBILE BAR CHART — terminal-style weekly activity
+// ═══════════════════════════════════════════════════════════
+
+.act-bars {
+  display: none; // hidden on desktop, shown via responsive
+}
+
+@include respond-down('md') {
+  .heatmap-panel {
+    display: none;
+  }
+
+  .act-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    background: var(--bg-2);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1rem 1.1rem 0.85rem;
+    overflow: hidden;
+  }
+
+  .act-bars-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+
+  .act-bars-title {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .act-bars-total {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+
+  // ── Chart grid ──
+  .act-bars-chart {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 6px;
+    align-items: end;
+    height: 140px;
+    padding: 0 2px;
+  }
+
+  .act-bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    height: 100%;
+    justify-content: flex-end;
+  }
+
+  .act-bar-count {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--ink-faint);
+    height: 0.7rem;
+    line-height: 0.7rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    .act-bar-col:hover & {
+      opacity: 1;
+    }
+  }
+
+  .act-bar-track {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+  }
+
+  .act-bar-fill {
+    width: 100%;
+    border-radius: 3px 3px 1px 1px;
+    transition: height 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    position: relative;
+
+    // Intensity levels (matching heatmap palette)
+    &.l0 { background: var(--bg-3); }
+    &.l1 { background: color-mix(in srgb, var(--accent) 25%, var(--bg-3)); }
+    &.l2 { background: color-mix(in srgb, var(--accent) 45%, var(--bg-3)); }
+    &.l3 { background: color-mix(in srgb, var(--accent) 70%, var(--bg-3)); }
+    &.l4 { background: var(--accent); }
+  }
+
+  .act-bar-label {
+    font-family: var(--mono);
+    font-size: 0.5rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  // ── Legend ──
+  .act-bars-legend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: flex-end;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--rule);
+    margin-top: 0.25rem;
+
+    span {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      color: var(--ink-muted);
+    }
+  }
+
+  // ── Activity body stacks vertically ──
+  .activity-body {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .activity-right {
+    flex: none;
+    width: 100%;
+  }
+}

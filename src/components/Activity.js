@@ -1,275 +1,251 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
-const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=DM+Sans:wght@400;600;700&display=swap');
-
-  .activity-section {
-    width: 100%;
-    padding: 3rem 0;
-    font-family: 'DM Sans', sans-serif;
-    box-sizing: border-box;
-  }
-
-  /* ── Header ── */
-  .activity-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .activity-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--accent, #5b8def);
-    margin-bottom: 0.35rem;
-  }
-
-  .activity-heading {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 700;
-    color: var(--ink, #e8e8e8);
-    margin: 0;
-    line-height: 1.2;
-  }
-
-  .activity-link {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--accent, #5b8def);
-    text-decoration: none;
-    border: 1px solid var(--accent, #5b8def);
-    padding: 0.4rem 0.9rem;
-    border-radius: 4px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: background 0.18s, color 0.18s;
-  }
-  .activity-link:hover {
-    background: var(--accent, #5b8def);
-    color: #fff;
-  }
-
-  /* ── Body ── */
-  .activity-body {
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  /* Left: heatmap fills remaining space */
-  .heatmap-panel {
-    flex: 1 1 0;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .heatmap-panel::-webkit-scrollbar { display: none; }
-
-  /* The actual heatmap: 52 columns of 7 square cells each */
-  .hm-grid {
-    display: flex;
-    flex-direction: row;
-    gap: 3px;
-    width: 100%;
-    min-width: 600px;
-  }
-
-  .hm-col {
-    flex: 1 1 0;           /* each column takes equal width */
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-
-  /* Square cells using padding-top trick */
-  .hm-cell {
-    width: 100%;
-    padding-top: 100%;     /* makes height == width → perfect square */
-    border-radius: 2px;
-    background: var(--hm-0, #1a1f2e);
-    transition: opacity 0.12s;
-    cursor: default;
-    position: relative;
-  }
-  .hm-cell:hover { opacity: 0.7; }
-  .hm-cell.l1 { background: #1c3461; }
-  .hm-cell.l2 { background: #1d4ed8; }
-  .hm-cell.l3 { background: #3b82f6; }
-  .hm-cell.l4 { background: #60a5fa; }
-
-  /* Legend */
-  .heatmap-legend {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    justify-content: flex-end;
-  }
-  .heatmap-legend span {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    color: var(--ink-muted, #555e72);
-  }
-  .legend-cell {
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-    flex-shrink: 0;
-  }
-
-  /* Right panel */
-  .activity-right {
-    flex: 0 0 260px;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .activity-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--rule, #252b3b);
-    border: 1px solid var(--rule, #252b3b);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .act-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding: 1rem 1.1rem;
-    background: var(--bg-2, #10141f);
-  }
-
-  /* Stat spanning full width (odd one out) */
-  .act-stat.full {
-    grid-column: 1 / -1;
-    border-top: 1px solid var(--rule, #252b3b);
-  }
-
-  .act-stat-num {
-    font-size: 1.55rem;
-    font-weight: 700;
-    color: var(--ink, #e8e8e8);
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-
-  .act-stat-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    color: var(--ink-muted, #555e72);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .activity-focus {
-    padding: 1.1rem 1.2rem;
-    background: var(--bg-2, #10141f);
-    border: 1px solid var(--rule, #252b3b);
-    border-radius: 8px;
-  }
-
-  .focus-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    color: var(--accent, #5b8def);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.55rem;
-  }
-
-  .focus-text {
-    font-size: 0.8rem;
-    color: var(--ink-muted, #555e72);
-    line-height: 1.65;
-    margin: 0;
-  }
-
-  /* ── Mobile ── */
-  @media (max-width: 700px) {
-    .activity-top {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .activity-body {
-      flex-direction: column;
-    }
-    .activity-right {
-      flex: none;
-      width: 100%;
-    }
-  }
-`;
+const GITHUB_USER = 'athulmenondev';
+const CACHE_KEY = 'gh_contributions';
+const CACHE_TTL = 60 * 60 * 1000; // 1 hour
 
 const LEGEND = ['#1a1f2e', '#1c3461', '#1d4ed8', '#3b82f6', '#60a5fa'];
 const LEVELS  = [0, 0, 0, 1, 1, 1, 2, 2, 3, 4];
 
-const Activity = ({ data = {
-  eyebrow: 'Github Activity',
-  heading: 'Shipping <em>daily.</em>',
-  link: { url: 'https://github.com', label: 'github.com/athuulmenondev ↗' },
-  stats: [
-    { num: '150+', label: 'Contributions' },
-    { num: '17',   label: 'Repos' },
-    { num: '3',    label: 'Experience yrs' },
-  ]
-} }) => {
-  const gridRef = useRef(null);
-
-  useEffect(() => {
-    const hm = gridRef.current;
-    if (!hm) return;
-    hm.innerHTML = '';
-    for (let w = 0; w < 52; w++) {
-      const col = document.createElement('div');
-      col.className = 'hm-col';
-      for (let d = 0; d < 7; d++) {
-        const cell = document.createElement('div');
-        const l = Math.random() < 0.35 ? 0 : LEVELS[Math.floor(Math.random() * LEVELS.length)];
-        cell.className = `hm-cell${l > 0 ? ' l' + l : ''}`;
-        col.appendChild(cell);
+/* ── GraphQL query ─────────────────────────────────────── */
+const QUERY = `{
+  user(login: "${GITHUB_USER}") {
+    contributionsCollection {
+      contributionCalendar {
+        totalContributions
+        weeks {
+          contributionDays {
+            date
+            contributionCount
+          }
+        }
       }
-      hm.appendChild(col);
     }
+  }
+}`;
+
+/* ── Fetch real contribution data ──────────────────────── */
+async function fetchContributions() {
+  // Check cache first
+  try {
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const { data, ts } = JSON.parse(cached);
+      if (Date.now() - ts < CACHE_TTL) return data;
+    }
+  } catch { /* ignore */ }
+
+  const token = process.env.REACT_APP_GITHUB_TOKEN;
+  if (!token) return null;
+
+  try {
+    const res = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        Authorization: `bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query: QUERY }),
+    });
+
+    if (!res.ok) return null;
+
+    const json = await res.json();
+    const cal = json?.data?.user?.contributionsCollection?.contributionCalendar;
+    if (!cal) return null;
+
+    // Flatten all days
+    const allDays = cal.weeks.flatMap(w => w.contributionDays);
+
+    // Cache result
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ data: allDays, ts: Date.now() }));
+    } catch { /* ignore */ }
+
+    return allDays;
+  } catch {
+    return null;
+  }
+}
+
+/* ── Mock data generator (fallback) ────────────────────── */
+function generateMockHeatmap() {
+  const cells = [];
+  for (let w = 0; w < 52; w++) {
+    for (let d = 0; d < 7; d++) {
+      const l = Math.random() < 0.35 ? 0 : LEVELS[Math.floor(Math.random() * LEVELS.length)];
+      cells.push({ level: l, isToday: false });
+    }
+  }
+  return cells;
+}
+
+function generateMockWeekly() {
+  const labels = ['W1','W2','W3','W4','W5','W6','W7','W8','W9','W10','W11','W12'];
+  return labels.map((label, i) => {
+    const recency = (i + 1) / labels.length;
+    const base = Math.random() * 0.6 + recency * 0.4;
+    const level = base < 0.15 ? 0 : base < 0.35 ? 1 : base < 0.55 ? 2 : base < 0.78 ? 3 : 4;
+    const count = level === 0 ? 0 : Math.floor(Math.random() * 8 * level) + level;
+    return { label, level, count };
+  });
+}
+
+/* ── Convert real calendar data to heatmap levels ───────── */
+function calendarToHeatmap(calendarDays) {
+  if (!calendarDays?.length) return generateMockHeatmap();
+
+  // Find max contributions for level mapping
+  const maxCount = Math.max(...calendarDays.map(d => d.contributionCount), 1);
+  const today = new Date().toISOString().slice(0, 10);
+
+  // Pad to fill 52×7 grid (start from the Monday 51 weeks ago)
+  const start = new Date();
+  start.setDate(start.getDate() - (52 * 7 - 1));
+  start.setDate(start.getDate() - start.getDay()); // align to Sunday
+
+  const dayMap = {};
+  calendarDays.forEach(d => { dayMap[d.date] = d.contributionCount; });
+
+  const cells = [];
+  for (let i = 0; i < 52 * 7; i++) {
+    const d = new Date(start);
+    d.setDate(d.getDate() + i);
+    const dateStr = d.toISOString().slice(0, 10);
+    const count = dayMap[dateStr] ?? 0;
+
+    let level;
+    if (count === 0) level = 0;
+    else if (count <= maxCount * 0.25) level = 1;
+    else if (count <= maxCount * 0.5) level = 2;
+    else if (count <= maxCount * 0.75) level = 3;
+    else level = 4;
+
+    cells.push({ level, isToday: dateStr === today });
+  }
+
+  return cells;
+}
+
+/* ── Convert real calendar data to weekly bars ──────────── */
+function calendarToWeekly(calendarDays) {
+  if (!calendarDays?.length) return generateMockWeekly();
+
+  // Group by ISO week
+  const weekMap = {};
+  calendarDays.forEach(d => {
+    const date = new Date(d.date);
+    const yearStart = new Date(date.getFullYear(), 0, 1);
+    const weekNum = Math.ceil(((date - yearStart) / 86400000 + yearStart.getDay() + 1) / 7);
+    const key = `${date.getFullYear()}-W${String(weekNum).padStart(2, '0')}`;
+    if (!weekMap[key]) weekMap[key] = { count: 0, label: '' };
+    weekMap[key].count += d.contributionCount;
+  });
+
+  // Take the most recent 12 weeks
+  const sorted = Object.entries(weekMap)
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .slice(-12);
+
+  const maxCount = Math.max(...sorted.map(([, w]) => w.count), 1);
+
+  return sorted.map(([key, w], i) => {
+    const level =
+      w.count === 0 ? 0 :
+      w.count <= maxCount * 0.25 ? 1 :
+      w.count <= maxCount * 0.5 ? 2 :
+      w.count <= maxCount * 0.75 ? 3 : 4;
+
+    return {
+      label: `W${i + 1}`,
+      level,
+      count: w.count,
+    };
+  });
+}
+
+/* ═════════════════════════════════════════════════════════
+   COMPONENT
+   ═══════════════════════════════════════════════════════ */
+const Activity = ({ data }) => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [heatmapCells, setHeatmapCells] = useState(() => generateMockHeatmap());
+  const [weeklyData, setWeeklyData] = useState(() => generateMockWeekly());
+  const [totalContributions, setTotalContributions] = useState(null);
+
+  // ── Detect mobile ──
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    setIsMobile(mq.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
   }, []);
 
+  // ── Fetch real data on mount ──
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      const calendarDays = await fetchContributions();
+      if (cancelled || !calendarDays) return;
+
+      setHeatmapCells(calendarToHeatmap(calendarDays));
+      setWeeklyData(calendarToWeekly(calendarDays));
+      setTotalContributions(calendarDays.reduce((s, d) => s + d.contributionCount, 0));
+    })();
+
+    return () => { cancelled = true; };
+  }, []);
+
+  // Max count for bar height scaling
+  const maxCount = Math.max(...weeklyData.map(w => w.count), 1);
+
+  const heading = data.heading || 'Shipping <em style="font-style:italic;color:var(--ink-muted)">daily.</em>';
+  const link = data.link || { url: 'https://github.com/athulmenondev', label: 'github.com/athulmenondev ↗' };
+  const stats = data.stats || [
+    { num: '150+', label: 'Contributions' },
+    { num: '20', label: 'Repos' },
+    { num: '1 month', label: 'of Experience as an Intern' },
+  ];
+
+  // Override first stat with real total if available
+  const displayStats = stats.map((s, i) =>
+    i === 0 && totalContributions != null
+      ? { ...s, num: `${totalContributions}+` }
+      : s
+  );
+
   return (
-    <>
-      <style>{styles}</style>
-      <div className="activity-section" id="activity">
-
-        {/* Header */}
-        <div className="activity-top">
-          <div>
-            <div className="activity-eyebrow">{data.eyebrow}</div>
-            <h2
-              className="activity-heading"
-              dangerouslySetInnerHTML={{ __html: data.heading }}
-            />
-          </div>
-          <a className="activity-link" href={data.link.url} target="_blank" rel="noreferrer">
-            {data.link.label}
-          </a>
+    <div className="section-wrap" id="activity">
+      {/* Header */}
+      <div className="section-top">
+        <div>
+          <div className="section-eyebrow">{data.eyebrow}</div>
+          <h2
+            className="section-heading"
+            dangerouslySetInnerHTML={{ __html: heading }}
+          />
         </div>
+        <a className="section-link" href={link.url} target="_blank" rel="noreferrer">
+          {link.label}
+        </a>
+      </div>
 
-        {/* Body */}
-        <div className="activity-body">
+      {/* Body */}
+      <div className="activity-body">
 
-          {/* Heatmap */}
+        {/* ── Desktop: full heatmap ── */}
+        {!isMobile && (
           <div className="heatmap-panel">
-            <div className="hm-grid" ref={gridRef} />
+            <div className="hm-grid">
+              {heatmapCells.map((cell, i) => (
+                <div
+                  key={i}
+                  className={`hm-cell${cell.level > 0 ? ' l' + cell.level : ''}${cell.isToday ? ' hm-today' : ''}`}
+                />
+              ))}
+            </div>
             <div className="heatmap-legend">
               <span>Less</span>
               {LEGEND.map((bg, i) => (
@@ -278,32 +254,64 @@ const Activity = ({ data = {
               <span>More</span>
             </div>
           </div>
+        )}
 
-          {/* Stats + Focus */}
-          <div className="activity-right">
-            <div className="activity-stats">
-              {data.stats.map((s, i) => (
-                <div
-                  key={i}
-                  className={`act-stat${data.stats.length % 2 !== 0 && i === data.stats.length - 1 ? ' full' : ''}`}
-                >
-                  <span className="act-stat-num">{s.num}</span>
-                  <span className="act-stat-label">{s.label}</span>
+        {/* ── Mobile: terminal bar chart ── */}
+        {isMobile && (
+          <div className="act-bars">
+            <div className="act-bars-header">
+              <span className="act-bars-title">weekly_activity.log</span>
+              <span className="act-bars-total">
+                {totalContributions != null ? `${totalContributions} contributions` : 'fetching...'}
+              </span>
+            </div>
+            <div className="act-bars-chart">
+              {weeklyData.map((week, i) => (
+                <div key={i} className="act-bar-col">
+                  <span className="act-bar-count">{week.count || ''}</span>
+                  <div className="act-bar-track">
+                    <div
+                      className={`act-bar-fill l${week.level}`}
+                      style={{ height: week.count ? `${Math.max((week.count / maxCount) * 100, 8)}%` : '0%' }}
+                    />
+                  </div>
+                  <span className="act-bar-label">{week.label}</span>
                 </div>
               ))}
             </div>
-            <div className="activity-focus">
-              <div className="focus-label">Current Focus</div>
-              <p className="focus-text">
-                Deep diving into scalable UI architectures, experimenting with
-                cutting‑edge CSS, and pushing code daily to maintain an unbroken streak.
-              </p>
+            <div className="act-bars-legend">
+              <span>Less</span>
+              {LEGEND.map((bg, i) => (
+                <div key={i} className="legend-cell" style={{ background: bg }} />
+              ))}
+              <span>More</span>
             </div>
           </div>
+        )}
 
+        {/* Stats + Focus */}
+        <div className="activity-right">
+          <div className="activity-stats">
+            {displayStats.map((s, i) => (
+              <div
+                key={i}
+                className={`act-stat${displayStats.length % 2 !== 0 && i === displayStats.length - 1 ? ' full' : ''}`}
+              >
+                <span className="act-stat-num">{s.num}</span>
+                <span className="act-stat-label">{s.label}</span>
+              </div>
+            ))}
+          </div>
+          <div className="activity-focus">
+            <div className="focus-label">Current Focus</div>
+            <p className="focus-text">
+              Deep diving into scalable UI architectures, experimenting with
+              cutting‑edge CSS, and pushing code daily to maintain an unbroken streak.
+            </p>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

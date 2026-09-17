@@ -14,7 +14,7 @@ const Work = ({ data }) => {
   };
 
   return (
-    <div className="work-v2-outer section-wrap" id="work" style={{ paddingTop: 0 }}>
+    <div className="work-v2-outer" id="work">
       <div className="work-v2-inner">
         {/* Header */}
         <div className="work-v2-hd reveal">
@@ -84,7 +84,7 @@ const Work = ({ data }) => {
                     onMouseLeave={handleMouseLeave}
                   >
                     {link.label.replace('↗', '').replace('→', '')}
-                    {link.label.includes('↗') ? <ArrowUpRight size={14} className="ml-1" /> : <ArrowRight size={14} className="ml-1" />}
+                    {link.label.includes('↗') ? <ArrowUpRight size={14} className="btn-icon" /> : <ArrowRight size={14} className="btn-icon" />}
                   </a>
                 ))}
               </div>
@@ -138,7 +138,7 @@ const Work = ({ data }) => {
                       onMouseLeave={handleMouseLeave}
                     >
                       {link.label.replace('↗', '').replace('→', '')}
-                      {link.label.includes('↗') ? <ArrowUpRight size={14} className="ml-1" /> : <ArrowRight size={14} className="ml-1" />}
+                      {link.label.includes('↗') ? <ArrowUpRight size={14} className="btn-icon" /> : <ArrowRight size={14} className="btn-icon" />}
                     </a>
                   ))}
                 </div>

@@ -1,0 +1,42 @@
+// ═══════════════════════════════════════════════════════════
+// MAIN — Entry point: imports all partials in order
+// ═══════════════════════════════════════════════════════════
+//
+// Architecture:
+//   0. Fonts          → @font-face declarations
+//   1. Design tokens  → theme variables, mixins, functions
+//   2. Base           → reset, global defaults
+//   3. Sections       → each page section (named by component)
+//   4. Utilities      → shared animations, reveal helpers
+//   5. Responsive     → breakpoint overrides
+//
+// ═══════════════════════════════════════════════════════════
+
+// ─── 0. Font Face Declarations ──────────────────────────
+@use 'fonts';
+
+// ─── 1. Tokens + Variables ───────────────────────────────
+@use 'design-tokens';
+
+// ─── 2. Base Styles ──────────────────────────────────────
+@use 'base';
+
+// ─── 3. Section Styles ───────────────────────────────────
+@use 'loader';
+@use 'cursor';
+@use 'nav';
+@use 'hero';
+@use 'marquee';
+@use 'activity';
+@use 'work';
+@use 'services';
+@use 'about';
+@use 'ai-terminal';
+@use 'contact';
+@use 'footer';
+
+// ─── 4. Utilities & Animations ───────────────────────────
+@use 'utilities';
+
+// ─── 5. Responsive Overrides ─────────────────────────────
+@use 'responsive';
