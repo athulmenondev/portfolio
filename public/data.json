@@ -196,8 +196,8 @@
         "tech": ["React", "Node.js", "Firestore","Tailwind CSS"],
         "image": "/assets/esharetext.png",
         "links": [
-          { "label": "Live", "url": "https://esharetext.duckdns.org", "primary": true },
-          { "label": "GitHub", "url": "https://github.com/athulmenondev/eshare", "primary": false }
+          { "label": "Live", "url": "https://publicnote.pages.dev/", "primary": true },
+          { "label": "GitHub", "url": "", "primary": false }
         ]
       }
     ]
