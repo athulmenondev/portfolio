@@ -184,6 +184,21 @@
           { "label": "Live", "url": "https://esharetext.duckdns.org", "primary": true },
           { "label": "GitHub", "url": "https://github.com/athulmenondev/eshare", "primary": false }
         ]
+      },
+      {
+        "num": "08",
+        "tag": "Utility tool(updated)",
+        "tagColors": "blue",
+        "year": "2026",
+        "color": "#6B4CFF",
+        "title": "Eshare Text -v2",
+        "desc": "a simple online clipboard for text and small files",
+        "tech": ["React", "Node.js", "Firestore","Tailwind CSS"],
+        "image": "/assets/esharetext.png",
+        "links": [
+          { "label": "Live", "url": "https://esharetext.duckdns.org", "primary": true },
+          { "label": "GitHub", "url": "https://github.com/athulmenondev/eshare", "primary": false }
+        ]
       }
     ]
   },
